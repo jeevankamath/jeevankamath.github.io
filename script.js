@@ -5,10 +5,10 @@ const CONFIG = {
   consulting: { href: "https://calendar.app.google/WUWmh8HrbW56DnaH7", todo: false },  // same booking page for now
   socials: [
     { key: "instagram", label: "Instagram", href: "https://www.instagram.com/g1.mov/", todo: false },
-    { key: "linkedin",  label: "LinkedIn",  href: "#", todo: true }, // TODO
+    { key: "linkedin",  label: "LinkedIn",  href: "https://www.linkedin.com/in/jeevan-kamath-802820140/", todo: false },
     { key: "x",         label: "X",         href: "#", todo: true }, // TODO
-    { key: "youtube",   label: "YouTube",   href: "#", todo: true }, // TODO
-    { key: "threads",   label: "Threads",   href: "#", todo: true }, // TODO
+    { key: "youtube",   label: "YouTube",   href: "https://www.youtube.com/@Jeevankamath71", todo: false },
+    { key: "threads",   label: "Threads",   href: "https://www.threads.com/@jeevankamath71", todo: false },
   ],
 };
 
