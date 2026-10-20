@@ -1,12 +1,12 @@
 /* ===== SITE CONFIG: swap links here =====
    TODO: replace every "#" below. Items with todo:true are unknown/placeholder. */
 const CONFIG = {
-  booking:    { href: "https://calendar.app.google/WUWmh8HrbW56DnaH7", todo: false },  // Google Calendar appointment schedule
+  booking:    { href: "https://calendar.app.google/WUWmh8HrbW56DnaH7", todo: false },  // Google Calendar appointment schedule (1:1 mentoring)
   consulting: { href: "https://calendar.app.google/WUWmh8HrbW56DnaH7", todo: false },  // same booking page for now
   socials: [
     { key: "instagram", label: "Instagram", href: "https://www.instagram.com/g1.mov/", todo: false },
     { key: "linkedin",  label: "LinkedIn",  href: "https://www.linkedin.com/in/jeevan-kamath-802820140/", todo: false },
-    { key: "x",         label: "X",         href: "#", todo: true }, // TODO
+    { key: "x",         label: "X",         href: "#", todo: true, hidden: true }, // TODO: X handle unknown. Add href and set hidden:false to show the icon
     { key: "youtube",   label: "YouTube",   href: "https://www.youtube.com/@Jeevankamath71", todo: false },
     { key: "threads",   label: "Threads",   href: "https://www.threads.com/@jeevankamath71", todo: false },
   ],
@@ -33,7 +33,7 @@ document.querySelectorAll("[data-link]").forEach(el => {
 });
 
 document.querySelectorAll("[data-socials]").forEach(box => {
-  CONFIG.socials.forEach(s => {
+  CONFIG.socials.filter(s => !s.hidden).forEach(s => {
     const a = document.createElement("a");
     a.setAttribute("aria-label", s.label); a.title = s.label;
     a.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICONS[s.key]}</svg>`;
