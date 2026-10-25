@@ -41,3 +41,79 @@ document.querySelectorAll("[data-socials]").forEach(box => {
   });
 });
 document.getElementById("yr").textContent = new Date().getFullYear();
+document.documentElement.classList.add("js");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* Path quiz */
+const LABELS = { new: "Your path: New rep. Start with free SDR mentoring.", sdr: "Your path: SDR. Start with free SDR mentoring.", lead: "Your path: Team lead. Let's talk about your SDR function." };
+document.querySelectorAll("#quiz .chip").forEach(btn => {
+  btn.setAttribute("aria-pressed", "false");
+  btn.addEventListener("click", () => {
+    const p = btn.dataset.path;
+    document.querySelectorAll("#quiz .chip").forEach(b => b.setAttribute("aria-pressed", String(b === btn)));
+    document.getElementById("quiz-result").textContent = LABELS[p];
+    document.querySelectorAll("#paths .path").forEach(a => a.classList.toggle("pick", a.dataset.for.split(" ").includes(p)));
+  });
+});
+
+/* Scroll progress + floating pill */
+const bar = document.getElementById("progress"), fab = document.getElementById("fab"), hero = document.getElementById("top");
+function onScroll() {
+  const h = document.documentElement.scrollHeight - innerHeight;
+  bar.style.width = (h > 0 ? (scrollY / h) * 100 : 0) + "%";
+  fab.classList.toggle("show", scrollY > hero.offsetHeight - 80);
+}
+addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
+/* Flip cards */
+document.querySelectorAll(".flip").forEach(f => f.addEventListener("click", () =>
+  f.setAttribute("aria-pressed", String(f.getAttribute("aria-pressed") !== "true"))));
+
+/* Discovery checklist */
+const boxes = [...document.querySelectorAll("#checklist input")];
+boxes.forEach(b => b.addEventListener("change", () => { document.getElementById("unlock").hidden = !boxes.every(x => x.checked); }));
+
+/* Onboarding level map: 4 phases x 5 modules */
+const phases = document.getElementById("phases");
+for (let p = 1; p <= 4; p++) {
+  const li = document.createElement("li"); li.className = "phase";
+  li.innerHTML = `<b>Phase ${p}</b><div class="dots">` +
+    [1,2,3,4,5].map(m => { const n = (p - 1) * 5 + m; return `<button type="button" class="dot" aria-label="Module ${n}: page, video, SOP and self-check">${n}</button>`; }).join("") + "</div>";
+  phases.appendChild(li);
+}
+
+/* Principle cards */
+const pcs = [...document.querySelectorAll(".pcard")]; let pi = 0;
+function showP(i) { pi = (i + pcs.length) % pcs.length; pcs.forEach((c, k) => c.classList.toggle("active", k === pi)); }
+document.getElementById("pprev").addEventListener("click", () => showP(pi - 1));
+document.getElementById("pnext").addEventListener("click", () => showP(pi + 1));
+let sx = null; const pbox = document.getElementById("principles");
+pbox.addEventListener("touchstart", e => sx = e.touches[0].clientX, { passive: true });
+pbox.addEventListener("touchend", e => { if (sx === null) return; const d = e.changedTouches[0].clientX - sx; if (Math.abs(d) > 40) showP(pi + (d < 0 ? 1 : -1)); sx = null; });
+pbox.addEventListener("click", () => showP(pi + 1));
+
+/* FAQ: one open at a time */
+const dets = [...document.querySelectorAll("#faq details")];
+dets.forEach(d => d.addEventListener("toggle", () => { if (d.open) dets.forEach(o => { if (o !== d) o.open = false; }); }));
+
+/* Reveal, active nav, section badges (localStorage only) */
+const KEY = "jk-seen";
+let seen = []; try { seen = JSON.parse(localStorage.getItem(KEY) || "[]"); } catch (e) {}
+const markSeen = id => { const a = document.querySelector(`.nav nav a[data-sec="${id}"]`); if (a) a.classList.add("seen"); };
+seen.forEach(markSeen);
+if ("IntersectionObserver" in window) {
+  const rev = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); rev.unobserve(e.target); } }), { threshold: 0.08 });
+  document.querySelectorAll(".reveal").forEach(el => reduce ? el.classList.add("in") : rev.observe(el));
+  const act = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    document.querySelectorAll(".nav nav a").forEach(a => a.classList.toggle("active", a.dataset.sec === e.target.id));
+  }), { rootMargin: "-45% 0px -50% 0px" });
+  const badge = new IntersectionObserver(es => es.forEach(e => {
+    if (scrollY > 0 && (e.intersectionRatio >= 0.6 || (e.isIntersecting && e.intersectionRect.height >= innerHeight * 0.6))) {
+      const id = e.target.id;
+      if (!seen.includes(id)) { seen.push(id); try { localStorage.setItem(KEY, JSON.stringify(seen)); } catch (x) {} }
+      markSeen(id);
+    }
+  }), { threshold: [0.6, 0.3] });
+  document.querySelectorAll("section[id]").forEach(s => { act.observe(s); badge.observe(s); });
+} else document.querySelectorAll(".reveal").forEach(el => el.classList.add("in"));
