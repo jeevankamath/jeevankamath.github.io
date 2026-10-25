@@ -65,33 +65,6 @@ function onScroll() {
 }
 addEventListener("scroll", onScroll, { passive: true }); onScroll();
 
-/* Flip cards */
-document.querySelectorAll(".flip").forEach(f => f.addEventListener("click", () =>
-  f.setAttribute("aria-pressed", String(f.getAttribute("aria-pressed") !== "true"))));
-
-/* Discovery checklist */
-const boxes = [...document.querySelectorAll("#checklist input")];
-boxes.forEach(b => b.addEventListener("change", () => { document.getElementById("unlock").hidden = !boxes.every(x => x.checked); }));
-
-/* Onboarding level map: 4 phases x 5 modules */
-const phases = document.getElementById("phases");
-for (let p = 1; p <= 4; p++) {
-  const li = document.createElement("li"); li.className = "phase";
-  li.innerHTML = `<b>Phase ${p}</b><div class="dots">` +
-    [1,2,3,4,5].map(m => { const n = (p - 1) * 5 + m; return `<button type="button" class="dot" aria-label="Module ${n}: page, video, SOP and self-check">${n}</button>`; }).join("") + "</div>";
-  phases.appendChild(li);
-}
-
-/* Principle cards */
-const pcs = [...document.querySelectorAll(".pcard")]; let pi = 0;
-function showP(i) { pi = (i + pcs.length) % pcs.length; pcs.forEach((c, k) => c.classList.toggle("active", k === pi)); }
-document.getElementById("pprev").addEventListener("click", () => showP(pi - 1));
-document.getElementById("pnext").addEventListener("click", () => showP(pi + 1));
-let sx = null; const pbox = document.getElementById("principles");
-pbox.addEventListener("touchstart", e => sx = e.touches[0].clientX, { passive: true });
-pbox.addEventListener("touchend", e => { if (sx === null) return; const d = e.changedTouches[0].clientX - sx; if (Math.abs(d) > 40) showP(pi + (d < 0 ? 1 : -1)); sx = null; });
-pbox.addEventListener("click", () => showP(pi + 1));
-
 /* FAQ: one open at a time */
 const dets = [...document.querySelectorAll("#faq details")];
 dets.forEach(d => d.addEventListener("toggle", () => { if (d.open) dets.forEach(o => { if (o !== d) o.open = false; }); }));

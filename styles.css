@@ -48,37 +48,6 @@ h3{font-size:1.15rem;margin:.3em 0}
 .badge.done{color:#fff;background:var(--acc2)}
 .more{display:inline-block;margin-top:12px;font-weight:650;color:var(--acc);text-decoration:none}
 .thumb{aspect-ratio:16/9;max-height:200px;width:100%;border-radius:12px;background:linear-gradient(135deg,#1f3a5f,#e8572a);margin-bottom:12px}
-/* flips */
-.flip{font:inherit;color:inherit;position:relative;height:150px;border:0;padding:0;background:none;cursor:pointer;perspective:900px;border-radius:var(--r)}
-.face{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:18px;border-radius:var(--r);backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform 400ms ease}
-.front{background:#fff;border:1px solid var(--line)}.front b{font-size:1.6rem}.front small{color:var(--muted)}
-.back{background:var(--acc2);color:#fff;transform:rotateY(180deg);text-align:center}
-.flip[aria-pressed="true"] .front{transform:rotateY(-180deg)}
-.flip[aria-pressed="true"] .back{transform:rotateY(0)}
-.flip:focus-visible{outline:3px solid var(--acc2);outline-offset:3px}
-/* checklist */
-.checklist{margin-top:24px}
-.checklist ul{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:8px}
-.checklist label{display:flex;align-items:center;gap:10px;min-height:44px;padding:6px 12px;border:1px solid var(--line);border-radius:12px;cursor:pointer;flex-wrap:wrap}
-.checklist input{width:20px;height:20px;accent-color:var(--acc2)}
-.checklist .hint{color:var(--muted);opacity:0;max-width:0;overflow:hidden;white-space:nowrap;transition:opacity 200ms}
-.checklist input:checked~.hint{opacity:1;max-width:none}
-.checklist label:has(input:checked){border-color:var(--acc2);background:#e8eef6}
-.unlock{margin-top:14px}
-/* level map */
-.levelmap{margin-top:16px}
-.phases{list-style:none;padding:0;margin:18px 0 0;display:grid;grid-template-columns:1fr;gap:14px;counter-reset:ph}
-.phase{position:relative;padding:14px 16px;border-radius:12px;background:var(--band)}
-.phase b{display:block;margin-bottom:8px}
-.dots{display:flex;gap:8px;flex-wrap:wrap}
-.dot{width:30px;height:30px;border-radius:999px;border:2px solid var(--acc);background:#fff;font:600 12px/1 inherit;color:var(--ink);cursor:pointer;position:relative}
-.dot:hover,.dot:focus-visible{background:var(--acc);color:#fff;outline:none}
-.dot:hover::after,.dot:focus-visible::after{content:"page · video · SOP · self-check";position:absolute;bottom:120%;left:50%;transform:translateX(-50%);white-space:nowrap;background:var(--ink);color:#fff;font-size:12px;padding:4px 8px;border-radius:6px;z-index:5}
-/* principles */
-.principles{position:relative;min-height:130px;margin-top:16px}
-.pcard{margin:0;position:absolute;inset:0;display:flex;align-items:center;padding:24px 28px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--line);border-radius:var(--r);font-size:clamp(1.2rem,2.4vw,1.6rem);font-weight:700;opacity:0;transform:translateY(8px);transition:opacity 250ms,transform 250ms}
-.pcard.active{opacity:1;transform:scale(1.02);border-left-color:var(--acc);z-index:2}
-.pnav{display:flex;gap:8px;margin-top:20px}
 /* faq */
 details{border-bottom:1px solid var(--line);padding:6px 0}
 summary{cursor:pointer;font-weight:650;padding:12px 32px 12px 0;list-style:none;position:relative;min-height:44px}
@@ -114,12 +83,11 @@ footer{padding:28px 0;border-top:1px solid var(--line)}
 .foot{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}.foot p{margin:0;color:var(--muted)}
 .socials{display:flex;gap:10px}.socials a{color:var(--ink);display:inline-grid;place-items:center;width:44px;height:44px}.socials svg{width:22px;height:22px}
 @media (max-width:899px){.nav nav{display:none}}
-@media (min-width:600px){.paths{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr 1fr}.phases{grid-template-columns:1fr 1fr}}
-@media (min-width:900px){.grid3{grid-template-columns:repeat(3,1fr)}.phases{grid-template-columns:repeat(4,1fr)}.fab{display:none}section{padding:96px 0}}
+@media (min-width:600px){.paths{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr 1fr}}
+@media (min-width:900px){.grid3{grid-template-columns:repeat(3,1fr)}.fab{display:none}section{padding:96px 0}}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;scroll-snap-type:none}
   *,*::before,*::after{transition-property:opacity!important;animation:none!important}
   .js .reveal{opacity:1;transform:none}
   .btn:hover,.chip:hover,.path:hover{transform:none}
-  .face{transition:none}.pcard,.pcard.active{transform:none}
 }
