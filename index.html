@@ -19,6 +19,7 @@
 <meta name="twitter:description" content="AI generalist, SDR mentor and sales leader sharing what works in prospecting and leading SDR teams.">
 <meta name="theme-color" content="#e8572a">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="bangalore.css">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
 {"@type":"Person","@id":"https://jeevankamath.github.io/#person","name":"Jeevan Kamath","jobTitle":"SDR mentor and sales leader","description":"AI generalist, SDR mentor and sales leader based in Bangalore, India.","url":"https://jeevankamath.github.io/",
@@ -35,8 +36,10 @@
 ]}]}
 </script>
 </head>
-<body>
+<body data-stage="1">
+<div class="scene" aria-hidden="true"><img class="scene-bg on" data-bg="cubbon-park" src="art/bg-cubbon-park.svg" alt="" width="160" height="90"><img class="scene-bg" data-bg="town-hall" src="art/bg-town-hall.svg" alt="" width="160" height="90"><img class="scene-bg" data-bg="mg-road" src="art/bg-mg-road.svg" alt="" width="160" height="90"><img class="scene-bg" data-bg="metro-station" src="art/bg-metro-station.svg" alt="" width="160" height="90"><img class="scene-bg" data-bg="vidhana-soudha" src="art/bg-vidhana-soudha.svg" alt="" width="160" height="90"><img class="scene-bg" data-bg="nandi-hills" src="art/bg-nandi-hills.svg" alt="" width="160" height="90"><img class="scene-bg" data-bg="it-park" src="art/bg-it-park.svg" alt="" width="160" height="90"><img class="scene-lights" src="art/bg-it-park-lights.svg" alt="" width="160" height="90"><div class="tint"></div></div><div class="ground" aria-hidden="true"></div><div class="road" aria-hidden="true"></div><div class="traffic" id="traffic" aria-hidden="true"></div><div class="rider-dock" aria-hidden="true"><div class="rider" id="rider" data-rider="child-bicycle"></div></div>
 <a class="skip" href="#main">Skip to content</a>
+<div class="hud" id="hud"><p class="hud-label" id="hud-label" aria-live="polite"><span class="hud-n">Stop 1</span><span class="hud-name"> · Cubbon Park</span></p><ol class="hud-stops"><li><a href="#top" aria-label="Stop 1: Cubbon Park" data-stop="1"><img src="art/bg-cubbon-park.svg" alt="" width="16" height="16"></a></li><li><a href="#about" aria-label="Stop 2: Town Hall" data-stop="2"><img src="art/bg-town-hall.svg" alt="" width="16" height="16"></a></li><li><a href="#mentoring" aria-label="Stop 3: MG Road" data-stop="3"><img src="art/bg-mg-road.svg" alt="" width="16" height="16"></a></li><li><a href="#experiments" aria-label="Stop 4: Metro station" data-stop="4"><img src="art/bg-metro-station.svg" alt="" width="16" height="16"></a></li><li><a href="#library" aria-label="Stop 5: Vidhana Soudha" data-stop="5"><img src="art/bg-vidhana-soudha.svg" alt="" width="16" height="16"></a></li><li><a href="#faq" aria-label="Stop 6: Nandi Hills" data-stop="6"><img src="art/bg-nandi-hills.svg" alt="" width="16" height="16"></a></li><li><a href="#teams" aria-label="Stop 7: IT park" data-stop="7"><img src="art/bg-it-park.svg" alt="" width="16" height="16"></a></li><li><a href="#journey-end" aria-label="Stop 8: Skyline at dusk" data-stop="8"><img src="art/bg-it-park.svg" alt="" width="16" height="16"></a></li></ol></div>
 <div class="progress" aria-hidden="true"><span id="progress"></span></div>
 <header class="nav">
   <div class="wrap nav-in">
@@ -52,7 +55,7 @@
 </header>
 
 <main id="main">
-<section class="hero snap" id="top">
+<section class="hero snap" id="top" data-scene="cubbon-park" data-rider="child-bicycle" data-stage="1" data-stop="1">
   <div class="wrap">
     <p class="eyebrow">AI generalist · SDR mentor · Sales leader · Bangalore, India</p>
     <h1>SDR mentor and sales leader, helping reps book more meetings.</h1>
@@ -74,14 +77,14 @@
   </div>
 </section>
 
-<section class="band snap reveal" id="about" data-badge="About">
+<section class="band snap reveal" id="about" data-scene="town-hall" data-rider="child-bicycle" data-stage="1" data-stop="2" data-badge="About">
   <div class="wrap narrow">
     <h2>Who is Jeevan Kamath?</h2>
     <p>I'm an SDR mentor and sales leader based in Bangalore, and an AI generalist at heart. I started as an SDR and spent three years on the phones and in the inbox. Then I moved into building and leading SDR teams, and I share what I've learned along the way.</p>
   </div>
 </section>
 
-<section class="snap reveal" id="mentoring" data-badge="Mentoring">
+<section class="snap reveal" id="mentoring" data-scene="mg-road" data-rider="teen-bicycle" data-stage="2" data-stop="3" data-badge="Mentoring">
   <div class="wrap">
     <p class="eyebrow">SDR mentoring</p>
     <h2>How do I get my first SDR job, and get good at it?</h2>
@@ -94,7 +97,7 @@
   </div>
 </section>
 
-<section class="band snap reveal" id="experiments" data-badge="Experiments">
+<section class="band snap reveal" id="experiments" data-scene="metro-station" data-rider="student-walk" data-stage="3" data-stop="4" data-badge="Experiments">
   <div class="wrap">
     <p class="eyebrow">Experiments</p>
     <h2>What am I experimenting with right now?</h2>
@@ -108,7 +111,7 @@
 </section>
 
 
-<section class="band snap reveal" id="library" data-badge="Library">
+<section class="band snap reveal" id="library" data-scene="vidhana-soudha" data-rider="young-professional-walk" data-stage="4" data-stop="5" data-badge="Library">
   <div class="wrap">
     <p class="eyebrow">Library</p>
     <h2>Free sales development resources</h2>
@@ -138,7 +141,7 @@
   </div>
 </section>
 
-<section class="snap reveal" id="faq" data-badge="FAQ">
+<section class="snap reveal" id="faq" data-scene="nandi-hills" data-rider="young-professional-walk" data-stage="4" data-stop="6" data-badge="FAQ">
   <div class="wrap narrow">
     <p class="eyebrow">FAQ</p>
     <h2>Frequently asked questions</h2>
@@ -150,7 +153,7 @@
   </div>
 </section>
 
-<section class="band snap reveal" id="teams" data-badge="Teams">
+<section class="band snap reveal" id="teams" data-scene="it-park" data-rider="young-professional-walk" data-stage="4" data-stop="7" data-badge="Teams">
   <div class="wrap narrow">
     <h2>Building an SDR function?</h2>
     <p>Setting up or rebuilding a sales development team? If you'd like an experienced sounding board on process, onboarding or messaging, I'm happy to chat.</p>
@@ -158,7 +161,7 @@
   </div>
 </section>
 
-<section class="closing snap reveal">
+<section class="closing snap reveal" id="journey-end" data-scene="dusk" data-rider="man-suit-car" data-stage="5" data-stop="8">
   <div class="wrap narrow center">
     <h2>Stuck on something? Let's sort it out.</h2>
     <p>A focused 1:1 mentoring conversation about your real problem.</p>
@@ -176,5 +179,6 @@
   </div>
 </footer>
 <script src="script.js"></script>
+<script src="bangalore.js"></script>
 </body>
 </html>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none" shape-rendering="crispEdges">
+<polygon points="0,0 100,42 100,100 0,100" fill="#4a4f5a"/>
+<polygon points="0,0 100,42 100,47 0,9" fill="#d9d0bc"/>
+<polygon points="0,9 100,47 100,49 0,12" fill="#14213a" opacity=".35"/>
+<line x1="0" y1="55" x2="100" y2="73" stroke="#ffc23d" stroke-width="3" stroke-dasharray="6 6" vector-effect="non-scaling-stroke"/>
+<rect x="0" y="96" width="100" height="4" fill="#3a3e47"/>
+</svg>

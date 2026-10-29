@@ -1,0 +1,126 @@
+/* Bangalore journey theme, layered over styles.css. Follows design-spec.md (Designer) and brand-kit-v1.md.
+   Palette: navy #1f3a5f, paper #fbfaf7, ink #14213a, yellow #ffc23d (decor / behind ink only),
+   orange #e8572a (decoration only, never behind text), buttons #a14127 with white text. No purple, no gold. */
+@font-face{font-family:"Pixelify Sans";font-weight:600;font-display:swap;src:url(assets/fonts/pixelify-sans-600.woff2) format("woff2")}
+@font-face{font-family:"Plus Jakarta Sans";font-display:swap;src:url(assets/fonts/plus-jakarta-sans-latin.woff2) format("woff2")}
+:root{--ink:#14213a;--muted:#4f5462;--bg:#fbfaf7;--acc:#a14127;--acc-d:#8a3720;--acc2:#1f3a5f;--deco:#e8572a;--sun:#ffc23d;--sky:#cfe8ff}
+body{background:var(--bg);color:var(--ink);font-family:"Plus Jakarta Sans",system-ui,sans-serif;font-size:17px;line-height:28px}
+h1,h2,.hud-label{font-family:"Pixelify Sans","Plus Jakarta Sans",system-ui,sans-serif;font-weight:600;letter-spacing:0}
+h1{font-size:32px;line-height:40px}h2{font-size:28px;line-height:36px}
+@media(min-width:900px){h1{font-size:48px;line-height:56px}h2{font-size:36px;line-height:44px}}
+
+/* scene layer: sky colour + faint landmark, crossfaded */
+.scene{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;background:var(--sky);transition:background-color .6s ease}
+body[data-sky="sunrise"]{--sky:#ffe2b8}body[data-sky="afternoon"]{--sky:#ffd6a5}body[data-sky="dusk"]{--sky:#1f3a5f}
+.scene-bg{position:absolute;left:0;right:0;bottom:32px;width:100%;height:calc(100% - 32px);object-fit:cover;object-position:center bottom;opacity:0;transition:opacity .6s ease;image-rendering:pixelated}
+.scene-bg.on{opacity:.6}
+body[data-sky="dusk"] .scene-bg.on{opacity:.18}
+.ground{position:fixed;left:0;right:0;bottom:0;height:32px;z-index:-1;pointer-events:none;
+  background:#e9e3d4 repeating-linear-gradient(90deg,#ddd5c3 0 4px,transparent 4px 32px),#e9e3d4;border-top:4px solid #d9d0bc}
+
+/* sections and paper cards (8px base unit) */
+main,footer{position:relative}
+section{background:transparent!important;min-height:100svh;padding:64px 0 136px;display:flex;align-items:center}
+section>.wrap{width:100%;max-width:1080px;padding:24px 20px;background:#fbfaf7;border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);border-radius:0;margin:0 16px}
+@media(min-width:1112px){section>.wrap{margin:0 auto}}
+section>.wrap.narrow{max-width:760px}
+.closing>.wrap{background:var(--ink);color:#fff;border-color:#fbfaf7;box-shadow:4px 4px 0 #fbfaf7}
+.closing h2{color:#fff}
+.wrap>p,.wrap>h2,.wrap>h1{max-width:68ch}
+.card,.path,.chip,details{background:#fff;border-radius:0}
+.card{border:2px solid #d9d4c6;box-shadow:4px 4px 0 rgba(20,33,58,.15)}
+.btn,.badge,.tag{border-radius:0}
+.grid2,.grid3{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:720px){.grid2{grid-template-columns:repeat(2,1fr)}.grid3{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:720px){section>.wrap{padding:32px 24px}}
+.eyebrow,.more,.path strong,.badge,summary::after{color:var(--acc)}
+.eyebrow::before{content:"";display:inline-block;width:8px;height:8px;background:var(--deco);margin-right:8px;vertical-align:1px}
+.badge{background:#fdebe3}
+.progress{display:none}
+.btn-primary,.btn-primary:visited{background:#a14127!important;color:#fff!important;border-color:#a14127!important}
+.btn-primary:hover{background:#8a3720!important}
+.btn-secondary{color:var(--acc2);border:2px solid var(--acc2);background:#fff}
+footer{background:#fbfaf7;border-top:2px solid var(--ink)}
+
+/* HUD under the nav */
+.hud{position:sticky;top:64px;z-index:49;height:48px;display:flex;align-items:center;gap:8px;padding:0 12px;background:#fbfaf7;border-bottom:2px solid var(--ink)}
+.hud-label{margin:0;font-size:15px;white-space:nowrap;color:var(--ink)}
+@media(max-width:599px){.hud-name{display:none}}
+.hud-stops{list-style:none;display:flex;margin:0 0 0 auto;padding:0}
+.hud-stops a{display:grid;place-items:center;width:48px;height:48px}
+.hud-stops img{width:16px;height:16px;object-fit:cover;background:#cfe8ff;border:2px solid var(--ink);image-rendering:pixelated;box-sizing:content-box}
+.hud-stops a.passed img{border-color:var(--deco);background:var(--deco)}
+@media(max-width:439px){.hud-stops a{width:36px}}
+html{scroll-padding-top:120px}
+
+/* rider */
+.rider-dock{position:fixed;left:16px;bottom:36px;z-index:-1;pointer-events:none}
+@media(min-width:900px){.rider-dock{left:8vw}}
+.rider{height:96px;aspect-ratio:var(--ar,20/22);background-repeat:no-repeat;background-size:calc(var(--n,4)*100%) 100%;image-rendering:pixelated;background-position:0 0}
+@media(min-width:900px){.rider{height:128px}}
+body.moving .rider{animation:cycle .5s steps(var(--n,4),jump-none) infinite}
+@keyframes cycle{from{background-position:0 0}to{background-position:100% 0}}
+.rider.pop{animation:pop .25s ease-out}
+@keyframes pop{50%{transform:scale(1.15)}}
+.rider[data-rider="child-bicycle"]{background-image:url(art/rider-child-bicycle.svg);--ar:28/32}
+.rider[data-rider="teen-bicycle"]{background-image:url(art/rider-teen-bicycle.svg);--ar:28/32}
+.rider[data-rider="student-walk"]{background-image:url(art/rider-student-walk.svg);--ar:14/32}
+.rider[data-rider="young-professional-walk"]{background-image:url(art/rider-young-professional-walk.svg);--ar:14/32}
+.rider[data-rider="man-suit-car"]{background-image:url(art/rider-man-suit-car.svg);--n:2;--ar:42/32}
+body[data-stage="5"] .rider-dock{animation:carin .6s ease-out 1 both}
+@keyframes carin{from{transform:translateX(60vw)}to{transform:none}}
+.fab{z-index:40}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{scroll-behavior:auto!important}
+  .scene,.scene-bg{transition:none}
+  .rider,body.moving .rider,.rider.pop,body[data-stage="5"] .rider-dock{animation:none!important;transform:none}
+  .rider{transition:opacity .15s linear}
+}
+
+/* mobile/small screens: rider rides a clear, opaque ground strip above the content so cards never hide it */
+@media(max-width:899px){
+  body{padding-bottom:76px}
+  .ground{z-index:30;height:76px;box-shadow:0 -2px 0 var(--ink);background:#e9e3d4 repeating-linear-gradient(90deg,#ddd5c3 0 4px,#e9e3d4 4px 32px)!important;opacity:1!important}
+  .rider-dock{z-index:31;left:12px;bottom:10px}
+  .rider{height:60px}
+}
+
+/* ---- Day cycle + busier road (vars driven by bangalore.js from scroll position) ---- */
+:root{--rh:96px;--rd:40px;--px:4px;--sky-top:#f2b766;--sky-bot:#ffe0a3;--tint:#ffd9a0;--lo:.6;--night:0;--rb:1}
+.scene{background:linear-gradient(var(--sky-top),var(--sky-bot))!important;transition:none}
+.scene-bg,.scene-lights,.tint{bottom:calc(var(--rh) - var(--rd));height:calc(100% - var(--rh) + var(--rd))}
+body[data-sky] .scene-bg.on{opacity:var(--lo)}
+.scene-lights{position:absolute;left:0;width:100%;object-fit:cover;object-position:center bottom;image-rendering:pixelated;opacity:0}
+body[data-bg="it-park"] .scene-lights{opacity:var(--night)}
+.tint{position:absolute;left:0;right:0;background:var(--tint);mix-blend-mode:multiply;
+  -webkit-mask:var(--tint-mask) center bottom/cover no-repeat;mask:var(--tint-mask) center bottom/cover no-repeat}
+.ground{display:none}
+.road{position:fixed;left:0;right:0;bottom:0;height:var(--rh);z-index:-1;pointer-events:none;background:url(art/road-perspective.svg) 0 0/100% 100% no-repeat;filter:brightness(var(--rb))}
+.traffic{position:fixed;left:0;right:0;bottom:0;height:calc(var(--rh) + 160px);z-index:-1;pointer-events:none;overflow:hidden}
+.rider-dock{bottom:calc(var(--rh)*.28)}
+.veh{position:absolute;left:0;bottom:calc(var(--f)*var(--rh));width:calc(var(--w)*var(--px)*var(--s));height:calc(32*var(--px)*var(--s));
+  background:var(--img) 0 0/100% 100% no-repeat;image-rendering:pixelated;opacity:0;transition:opacity 1.2s ease;
+  animation:drive var(--dur) linear var(--delay) infinite}
+.veh.l{animation-name:driveL}
+.veh.on{opacity:.82}
+@keyframes drive{from{transform:translate(-180px,0)}to{transform:translate(100vw,calc(var(--f)*var(--rd)))}}
+@keyframes driveL{from{transform:translate(100vw,calc(var(--f)*var(--rd))) scaleX(-1)}to{transform:translate(-180px,0) scaleX(-1)}}
+.veh::after{content:"";position:absolute;left:96%;bottom:12%;width:180%;height:30%;opacity:var(--night);
+  background:radial-gradient(ellipse at left center,rgba(255,236,170,.7),rgba(255,236,170,0) 70%)}
+.lamp{position:absolute;left:calc(var(--x)*100%);bottom:calc(var(--rh) - var(--rd)*var(--x) - 6px);width:calc(1*var(--px));height:calc(22*var(--px));background:#5b6170}
+.lamp::before{content:"";position:absolute;left:0;top:0;width:calc(5*var(--px));height:calc(2*var(--px));background:#5b6170;box-shadow:inset 0 calc(-1*var(--px)) 0 #fff4c2}
+.lamp::after{content:"";position:absolute;left:calc(-8*var(--px));top:calc(1*var(--px));width:calc(22*var(--px));height:calc(26*var(--px));opacity:var(--night);
+  background:radial-gradient(ellipse at 50% 0,rgba(255,226,140,.55),rgba(255,226,140,0) 70%)}
+@media(max-width:899px){
+  :root{--rh:76px;--rd:32px;--px:1.25px}
+  .ground{display:block;height:76px}
+  .road{z-index:30}
+  .traffic{z-index:31;height:var(--rh)}
+  .lamp{display:none}
+  .rider-dock{z-index:32;bottom:calc(var(--rh)*.12)}
+}
+@media (prefers-reduced-motion: reduce){
+  .veh{animation:none!important;transform:translate(calc(var(--park)*100vw - 60px),calc(var(--f)*var(--rd)*var(--park)))!important;transition:none}
+  .veh.l{transform:translate(calc(var(--park)*100vw - 60px),calc(var(--f)*var(--rd)*var(--park))) scaleX(-1)!important}
+}
