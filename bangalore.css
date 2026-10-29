@@ -100,10 +100,11 @@ body[data-bg="it-park"] .scene-lights{opacity:var(--night)}
 .traffic{position:fixed;left:0;right:0;bottom:0;height:calc(var(--rh) + 160px);z-index:-1;pointer-events:none;overflow:hidden}
 .rider-dock{bottom:calc(var(--rh)*.28)}
 .veh{position:absolute;left:0;bottom:calc(var(--f)*var(--rh));width:calc(var(--w)*var(--px)*var(--s));height:calc(32*var(--px)*var(--s));
-  background:var(--img) 0 0/100% 100% no-repeat;image-rendering:pixelated;opacity:0;transition:opacity 1.2s ease;
-  animation:drive var(--dur) linear var(--delay) infinite}
-.veh.l{animation-name:driveL}
-.veh.on{opacity:.82}
+  background:var(--img) 0 0/400% 100% no-repeat;image-rendering:pixelated;opacity:0;transition:opacity 1.2s ease;
+  animation:drive var(--dur) linear var(--delay) infinite,spin .32s steps(4,jump-none) infinite}
+.veh.l{animation-name:driveL,spin}
+@keyframes spin{from{background-position:0 0}to{background-position:100% 0}}
+.veh.on{opacity:1}
 @keyframes drive{from{transform:translate(-180px,0)}to{transform:translate(100vw,calc(var(--f)*var(--rd)))}}
 @keyframes driveL{from{transform:translate(100vw,calc(var(--f)*var(--rd))) scaleX(-1)}to{transform:translate(-180px,0) scaleX(-1)}}
 .veh::after{content:"";position:absolute;left:96%;bottom:12%;width:180%;height:30%;opacity:var(--night);
@@ -124,3 +125,10 @@ body[data-bg="it-park"] .scene-lights{opacity:var(--night)}
   .veh{animation:none!important;transform:translate(calc(var(--park)*100vw - 60px),calc(var(--f)*var(--rd)*var(--park)))!important;transition:none}
   .veh.l{transform:translate(calc(var(--park)*100vw - 60px),calc(var(--f)*var(--rd)*var(--park))) scaleX(-1)!important}
 }
+
+/* depth fix: road layer sits above the cards on every screen, rider shares the traffic stack so nearer lanes draw in front */
+body{padding-bottom:var(--rh)}
+.road{z-index:30}
+.traffic{z-index:31}
+.traffic .rider-dock{position:absolute;z-index:72}
+@media(max-width:899px){.traffic .rider-dock{z-index:88}}
