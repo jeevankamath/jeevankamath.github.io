@@ -100,9 +100,9 @@ body[data-bg="it-park"] .scene-lights{opacity:var(--night)}
 .traffic{position:fixed;left:0;right:0;bottom:0;height:calc(var(--rh) + 160px);z-index:-1;pointer-events:none;overflow:hidden}
 .rider-dock{bottom:calc(var(--rh)*.28)}
 .veh{position:absolute;left:0;bottom:calc(var(--f)*var(--rh));width:calc(var(--w)*var(--px)*var(--s));height:calc(32*var(--px)*var(--s));
-  background:var(--img) 0 0/400% 100% no-repeat;image-rendering:pixelated;opacity:0;transition:opacity 1.2s ease;
-  animation:drive var(--dur) linear var(--delay) infinite,spin .32s steps(4,jump-none) infinite}
-.veh.l{animation-name:driveL,spin}
+  background:var(--img) 0 0/100% 100% no-repeat;image-rendering:pixelated;opacity:0;transition:opacity 1.2s ease;
+  animation:drive var(--dur) linear var(--delay) infinite}
+.veh.l{animation-name:driveL}
 @keyframes spin{from{background-position:0 0}to{background-position:100% 0}}
 .veh.on{opacity:1}
 @keyframes drive{from{transform:translate(-180px,0)}to{transform:translate(100vw,calc(var(--f)*var(--rd)))}}
@@ -137,3 +137,4 @@ body{padding-bottom:var(--rh)}
 /* road never covers content: hero and closing cards can always clear the road */
 section.hero,section.closing{padding-bottom:calc(var(--rh) + 16px)}
 @media(max-height:720px) and (min-width:900px){:root{--rh:96px}section.hero{padding-top:24px}}
+@media(max-width:599px){.veh.moff{display:none!important}}

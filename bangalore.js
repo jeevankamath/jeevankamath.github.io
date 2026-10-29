@@ -60,12 +60,13 @@
     ['motorbike',26,.14,1,0,22,7,.42],['scooter',24,.1,1,0,26,7,.92],['auto',26,.6,.75,1,29,7,.27],
     ['car-white',36,.48,.75,1,33,7,.75],['motorbike',26,.12,1,0,25,7,.06]];
   V.forEach(function(v){if(v[4])v[3]=.85;v[5]=v[4]?32:28});
-  var lc=[0,0],ln=[V.filter(function(v){return !v[4]}).length,V.filter(function(v){return v[4]}).length];
+  var mob=innerWidth<600,lc=[0,0],seen=[0,0];V.forEach(function(v){v.moff=mob&&seen[v[4]]++>=2});
+  var ln=[0,1].map(function(l){return V.filter(function(v){return v[4]==l&&!v.moff}).length});
   var tr=document.getElementById('traffic');if(!tr)return;
   var lamps=[.12,.32,.52,.72,.92].map(function(x){var d=document.createElement('i');d.className='lamp';d.style.setProperty('--x',x);(document.querySelector('.scene')||tr).appendChild(d);return d});
   var vs=V.map(function(v,i){var d=document.createElement('i');d.className='veh'+(v[4]?' l':'');
     var st=d.style;st.setProperty('--img','url(art/vehicle-'+v[0]+'.svg)');st.setProperty('--w',v[1]);st.setProperty('--f',v[2]);
-    st.setProperty('--s',v[3]);st.setProperty('--dur',v[5]+'s');st.setProperty('--delay',(-v[5]*(lc[v[4]]++/ln[v[4]])).toFixed(2)+'s');
+    st.setProperty('--s',v[3]);st.setProperty('--dur',v[5]+'s');st.setProperty('--delay',(v.moff?0:-v[5]*(lc[v[4]]++/ln[v[4]])).toFixed(2)+'s');if(v.moff)d.classList.add('moff');
     st.setProperty('--park',v[7]);st.zIndex=v[4]?1:3;d.dataset.min=v[6];tr.appendChild(d);return d});
   var dock=document.querySelector('.rider-dock');if(dock)tr.appendChild(dock);
   function density(stop){vs.forEach(function(d){d.classList.toggle('on',+d.dataset.min<=stop)})}
