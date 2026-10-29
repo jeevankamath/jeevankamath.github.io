@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="data:,">
+<title>Pain Map: possible area, not a diagnosis</title>
+<style>
+
+@font-face{font-family:"Plus Jakarta Sans";src:url(fonts/PlusJakartaSans-VariableFont_wght.ttf) format("truetype");font-weight:200 800;font-display:swap}
+@font-face{font-family:"Virgil";src:url(fonts/Virgil.woff2) format("woff2");font-display:swap}
+:root{
+  --paper:#fbfaf7;--card:#fff;--ink:#14213a;--navy:#1f3a5f;--text:#14213a;--muted:#4a5568;--line:#14213a;
+  --btn:#a14127;--accent:#e8572a;--accent-line:#cf4518;--sel:#ffd877;--sel-line:#ffb000;--hover:#8fb2dc;
+  --danger:#b3261e;--danger-wash:#fbe9e7;--warn-wash:#fff6dc;
+  --radius:12px;--focus:3px solid #1f3a5f;--font:"Plus Jakarta Sans",system-ui,sans-serif;--hand:"Virgil","Plus Jakarta Sans",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--text);font:16px/1.55 var(--font)}
+button,input,select{font:inherit}
+:focus-visible{outline:var(--focus);outline-offset:2px}
+a{color:var(--navy)}
+.shell{max-width:760px;margin:auto;padding:16px 16px 40px}
+header.top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.brand{font:700 20px var(--font);color:var(--ink);display:flex;gap:8px;align-items:center}
+.brand svg{width:28px;height:28px}
+.pill{font-size:12px;border:1.5px solid var(--ink);border-radius:20px;padding:4px 10px;background:#fff}
+.card{background:var(--card);border:1.5px solid var(--ink);border-radius:var(--radius);padding:18px;margin:14px 0;box-shadow:2px 2px 0 rgba(20,33,58,.12)}
+h1,h2,h3{color:var(--ink);font-family:var(--font);font-weight:700;line-height:1.2}
+h1{font-size:clamp(24px,5vw,30px);margin:.2em 0 .4em}h2{font-size:21px;margin:.2em 0 .5em}h3{font-size:17px;margin:.6em 0 .3em}
+.btn{border:2px solid var(--ink);background:var(--btn);color:#fff;border-radius:12px;padding:10px 20px;min-height:48px;font:700 16px var(--font);cursor:pointer;box-shadow:2px 2px 0 var(--ink)}
+.btn:active{transform:translate(2px,2px);box-shadow:none}
+.btn.secondary{background:#fff;color:var(--ink)}
+.btn.small{padding:6px 12px;min-height:44px;font-size:14px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.muted{color:var(--muted);font-size:14px}
+.disclaimer{border:1.5px solid var(--ink);background:var(--sel);padding:12px 14px;border-radius:10px;font-size:15px}
+.emergency{border:2px solid var(--danger);background:var(--danger-wash);padding:12px 14px;border-radius:10px;font-size:15px}
+.warnbox{border:1.5px dashed var(--ink);background:var(--warn-wash)}
+fieldset{border:1.5px solid var(--ink);border-radius:12px;margin:12px 0;padding:10px 12px}
+legend{font-weight:700;color:var(--ink);padding:0 4px}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;width:1px;height:1px}
+.opt span{display:flex;align-items:center;border:1.5px solid var(--ink);background:#fff;border-radius:22px;padding:8px 16px;min-height:44px;cursor:pointer;font-size:15px}
+.opt input:checked+span{background:var(--sel);border-color:var(--sel-line);border-width:2.5px;font-weight:700}
+.opt input:checked+span::before{content:"✓ "}
+.opt input:focus-visible+span{outline:var(--focus);outline-offset:2px}
+.flag{display:grid;gap:6px;border-bottom:1px dashed rgba(20,33,58,.35);padding:10px 0}
+.flag:last-child{border-bottom:0}
+.flag p{margin:0}
+.tel{display:inline-block;background:var(--danger);color:#fff;text-decoration:none;font:800 24px var(--font);padding:14px 26px;border-radius:12px;margin:10px 0;box-shadow:2px 2px 0 var(--ink)}
+.mapgrid{display:grid;gap:12px}
+.bodymap{width:100%;max-width:340px;display:block;margin:auto}
+.silhouette{fill:#fff;stroke:var(--ink);stroke-width:1.75;stroke-linejoin:round;filter:url(#rough)}
+.zone{fill:transparent;stroke:var(--ink);stroke-width:1;stroke-dasharray:4 3;cursor:pointer}
+.zone:hover,.zone:focus-visible{fill:var(--hover);fill-opacity:.4;outline:none}
+.zone.sel{fill:var(--sel);fill-opacity:1;stroke:var(--sel-line);stroke-width:2.5;stroke-dasharray:none}
+.maplbl{font:15px var(--hand);fill:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--ink);background:#fff;border-radius:22px;padding:8px 14px;min-height:44px;cursor:pointer;font-size:14px;color:var(--ink)}
+.chip[aria-pressed=true]{background:var(--sel);border-color:var(--sel-line);border-width:2.5px;font-weight:700}
+.toggle{display:inline-flex;border:1.5px solid var(--ink);border-radius:12px;overflow:hidden}
+.toggle button{border:0;background:#fff;color:var(--ink);padding:8px 16px;min-height:44px;cursor:pointer;font-weight:700}
+.toggle button[aria-pressed=true]{background:var(--ink);color:#fff}
+.result-label{display:inline-block;background:#fff;color:var(--ink);border:1.5px solid var(--ink);border-radius:20px;padding:4px 12px;font-size:13px;font-weight:700}
+.subtext{font-size:14px;color:var(--muted);margin:.2em 0 .8em}
+.strength{display:flex;align-items:center;gap:8px;font-weight:700}
+.dots{display:inline-flex;gap:4px}.dots i{width:10px;height:10px;border-radius:50%;border:1.5px solid #1f3a5f;display:inline-block}.dots i.on{background:#1f3a5f}
+.art{width:100%;max-width:360px;display:block;margin:8px auto;background:var(--paper);border:1.5px solid var(--ink);border-radius:12px}
+.art .bone{fill:none;stroke:var(--ink);stroke-opacity:.55;stroke-width:1;stroke-dasharray:4 3}
+.art .belly,.art .tendon{fill:none;stroke:var(--ink);stroke-width:1.75;stroke-linejoin:round;filter:url(#rough)}
+.art .pass2{fill:none;stroke:var(--ink);stroke-width:1;stroke-opacity:.6;transform:translate(1px,1px);filter:url(#rough2);pointer-events:none}
+.art .deep .belly{stroke-dasharray:6 4}
+.art .fibre{fill:none;stroke:var(--ink);stroke-opacity:.25;stroke-width:1;stroke-linecap:round}
+.art .lbl{font:15px var(--hand);fill:var(--ink)}
+.art .lbl.dim{font-size:15px}
+.art.has-hot .strand:not(.hot) .belly,.art.has-hot .strand:not(.hot) .tendon,.art.has-hot .strand:not(.hot) .pass2{stroke-opacity:.12}
+.art.has-hot .strand:not(.hot) .fibre{stroke-opacity:.12}
+.art .hot .belly,.art .hot .tendon{fill:var(--accent);fill-opacity:.35;stroke:var(--accent-line);stroke-width:2.5;stroke-dasharray:1200;stroke-dashoffset:1200;animation:drawin .6s ease-out forwards}
+.art .hot .pass2{stroke:var(--accent-line)}
+@keyframes drawin{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.art .hot .belly,.art .hot .tendon{animation:none;stroke-dashoffset:0;stroke-dasharray:none}*{scroll-behavior:auto!important;transition:none!important}}
+.reasons li{margin:3px 0}
+.plan{border:1.5px solid var(--ink);border-radius:12px;padding:12px 14px;margin:10px 0;background:#fff}
+.plan h3{margin-top:0}
+.plan .src{font-size:13px;color:var(--muted)}
+.plan .not{font-size:14px;background:var(--warn-wash);border:1px dashed var(--ink);border-radius:8px;padding:6px 10px}
+.alt{font-size:14px}
+input[type=range]{width:100%;accent-color:var(--navy)}
+footer{font-size:13px;color:var(--muted);margin-top:24px;border-top:1.5px dashed rgba(20,33,58,.4);padding-top:12px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.stickybar{position:sticky;bottom:0;background:var(--paper);padding:8px 0;min-height:56px;z-index:2}
+[hidden]{display:none!important}
+@media (min-width:900px){.shell{max-width:1040px}.mapgrid{grid-template-columns:320px 1fr;align-items:start}.resultgrid{display:grid;grid-template-columns:360px 1fr;gap:20px;align-items:start}}
+
+.topbar{position:sticky;top:0;z-index:5;height:56px;display:flex;align-items:center;gap:8px;background:var(--paper);border-bottom:1.5px solid var(--ink);padding:0 12px}
+.topbar .back{min-width:44px;min-height:44px;border:0;background:none;font-size:22px;cursor:pointer;color:var(--ink)}
+#dots{display:flex;gap:6px;flex:1;justify-content:center}#dots i{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--ink)}#dots i.on{background:var(--ink)}
+.ynrow{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:64px;border-bottom:1px dashed rgba(20,33,58,.35);padding:8px 0}
+.ynrow p{margin:0;flex:1}.ynrow.follow{background:var(--warn-wash);padding:8px 10px;border-radius:10px}
+.yn{display:inline-flex;border:1.5px solid var(--ink);border-radius:12px;overflow:hidden;flex:none}
+.ynb{border:0;background:#fff;color:var(--ink);min-width:64px;min-height:48px;font-weight:700;cursor:pointer}
+.ynb+.ynb{border-left:1.5px solid var(--ink)}.ynb[aria-pressed=true]{background:var(--sel);box-shadow:inset 0 0 0 2.5px var(--sel-line)}
+.rcard{border-radius:12px;padding:14px 16px;margin:12px 0}.rcard h3{margin-top:0}
+.rcard.red{border:2px solid var(--danger);background:var(--danger-wash)}.rcard.red h3{color:var(--danger)}
+.rcard.amber{border:1.5px solid #8a5a00;background:#fff4d6}.rcard.amber h3{color:#8a5a00}
+.rcard .src,.src{font-size:13px;color:var(--muted)}
+.stickybar{position:sticky;bottom:0;background:var(--paper);padding:12px 0;min-height:72px;z-index:2;display:flex;gap:10px;align-items:center}
+.zoomslot{width:100%;max-width:360px;margin:0 auto;border:1.5px solid var(--ink);border-radius:12px;background:var(--paper);overflow:hidden}
+.zoomslot svg{display:block;width:100%;height:auto;max-height:50vh}
+@media (max-width:480px){#s-zoom .zoomslot{width:100vw;max-width:none;margin-left:calc(50% - 50vw);border-radius:0;border-left:0;border-right:0}#s-zoom .zoomslot svg{max-height:none}}
+.zoomslot.mirror .drawwrap{transform:scaleX(-1)}
+.zoomslot.mirror .drawwrap text{transform:scaleX(-1);transform-box:fill-box;transform-origin:center}
+.mirrorcap{margin:0;padding:4px 8px;font-size:13px;color:var(--muted);text-align:center;border-top:1px dashed rgba(20,33,58,.35)}
+.ph .phl{font:20px var(--hand);fill:var(--ink)}.ph .phl.dim{font-size:15px;fill:var(--muted)}.ph .phl.small{font:15px var(--font);fill:var(--ink);pointer-events:none}
+.zoomslot .sub:focus-visible .hit{stroke:#1f3a5f;stroke-width:3;stroke-opacity:1}
+.has-hot .sub.hot .hit,.has-hot .hot .belly,.has-hot .hot .tendon{fill:#e8572a!important;fill-opacity:.35!important;stroke:#cf4518!important;stroke-width:2.5!important;stroke-opacity:1!important;stroke-dasharray:1400;stroke-dashoffset:1400;animation:drawin .6s ease-out forwards}
+.has-hot .sub.hot2 .hit,.has-hot .hot2 .belly,.has-hot .hot2 .tendon{fill:#ffd877!important;fill-opacity:.6!important;stroke:#ffb000!important;stroke-width:2.5!important;stroke-opacity:1!important;stroke-dasharray:none}
+.has-hot .strand.hot>*{fill:#e8572a;fill-opacity:.35;stroke:#cf4518;stroke-width:2.5;stroke-opacity:1}
+.has-hot .strand.hot2>*{fill:#ffd877;fill-opacity:.6;stroke:#ffb000;stroke-width:2.5;stroke-opacity:1}
+.has-hot .sub:not(.hot):not(.hot2) .hit{stroke-opacity:.12}
+@media (prefers-reduced-motion:reduce){.has-hot .hot .hit,.has-hot .hot .belly,.has-hot .hot .tendon{animation:none;stroke-dasharray:none;stroke-dashoffset:0}}
+textarea{width:100%;min-height:120px;font:16px var(--font);border:1.5px solid var(--ink);border-radius:12px;padding:10px}
+.qtext{font-size:20px;font-weight:700;color:var(--ink)}
+.bigyn{display:grid;gap:10px}.btn.big{width:100%;min-height:56px;font-size:18px}
+.linkbtn{background:none;border:0;color:var(--navy);text-decoration:underline;min-height:44px;cursor:pointer;margin-top:6px}
+#toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:20px;z-index:9}
+.either{font-weight:700;color:#8a5a00;margin:.4em 0 0}
+.rescard.first{border-left:8px solid #e8572a}.rescard.second{border-left:8px solid #ffd877}
+.strandname{margin:-.3em 0 .4em;color:var(--muted);text-transform:none}
+.note{border:1.5px dashed var(--ink);border-radius:10px;padding:8px 12px;background:#fff;margin:12px 0}.note .hand{font:15px var(--hand)}.note p{margin:.2em 0 0}
+.btn.steps{width:100%;min-height:48px;margin:10px 0}
+.twoweek{margin-top:14px}
+.neutral{border-color:var(--muted)}
+.pend{font-size:11px;background:#fff4d6;border:1px solid #8a5a00;border-radius:8px;padding:1px 6px}
+.cap{text-align:center}
+@media (min-width:900px){.resgrid{display:grid;grid-template-columns:360px 1fr;gap:20px;align-items:start}}
+.g20card{border:1.5px solid #14213a;box-shadow:none}.g20card .g20chip{background:#fff;color:#14213a;border:1.5px solid #14213a}.startlink{color:#14213a}
+.resgrid.plain{grid-template-columns:1fr}
+[data-muscle-id="knee.prepatellar_bursa"].hot,[data-muscle-id="knee.prepatellar_bursa"].hot *{fill:#e8572a;fill-opacity:.35;stroke:#cf4518;stroke-width:2px;stroke-dasharray:none;stroke-opacity:1}
+</style>
+<style>.proto-banner{position:static;display:block;width:100%;box-sizing:border-box;padding:10px 16px;background:#fff4d6;border-bottom:1px solid #ffb000;color:#14213a;font-family:"Plus Jakarta Sans",system-ui,sans-serif;font-size:14px;line-height:1.4;margin:0}</style>
+</head>
+<body>
+<div class="proto-banner" role="note"><span aria-hidden="true">⚠ </span>Prototype under physiotherapist review, not medical advice</div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="rough"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="2.2"/></filter><filter id="rough2"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="9"/><feDisplacementMap in="SourceGraphic" scale="2.6"/></filter></svg>
+<div class="topbar"><button class="back" id="backBtn" type="button" aria-label="Back" hidden>←</button><div id="dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><button class="btn secondary small" id="clearBtn" type="button">Clear my data</button></div>
+<div class="shell">
+<div id="live" class="sr-only" aria-live="polite"></div>
+<div id="toast" hidden role="status"></div>
+<main id="main">
+<section id="s-gate" class="card" aria-labelledby="gateH">
+  <h1 id="gateH">Before you start</h1>
+  <div class="disclaimer"><p><strong>This is not a diagnosis.</strong> Pain Map is an educational prototype. It suggests <em>possible</em> areas for sports-related pain, based on published physiotherapy research. It cannot examine you and may be wrong. It does not replace an assessment by a qualified doctor or physiotherapist.</p></div>
+  <div class="rcard red"><p><strong>Emergency: call <a href="tel:112">112</a> now</strong> if you have chest pain, numbness or weakness in both legs or around your genitals or bottom, new loss of bladder or bowel control, pain after a serious fall or accident, or you feel very unwell.</p></div>
+  <fieldset><legend>Are you 16 or over?</legend><div class="opts"><label class="opt"><input type="radio" name="age16" value="yes"><span>Yes</span></label><label class="opt"><input type="radio" name="age16" value="no"><span>No</span></label></div></fieldset>
+  <p class="muted">Your answers stay on this device. Nothing is sent to us. There are no accounts and no analytics.</p>
+  <p id="gateMsg" class="muted" role="status"></p>
+  <button class="btn" id="agreeBtn" type="button">I understand</button>
+</section>
+<section id="s-core" class="card" hidden aria-labelledby="coreH">
+  <h2 id="coreH">First, a safety check</h2><p class="muted">Answer every row. Right now, do you have…</p>
+  <div id="coreList"></div>
+  <div class="stickybar"><button class="btn" id="coreGo" type="button" disabled>Continue</button></div>
+</section>
+<section id="s-stop" class="card" hidden aria-labelledby="stopH">
+  <h2 id="stopH">Please get medical help</h2><div id="stopBody"></div>
+  <p>We have stopped here on purpose. This tool won't suggest a possible area when a warning sign is present.</p>
+  <button class="btn secondary" type="button" data-restart>Start again</button>
+</section>
+<section id="s-amber" class="card" hidden aria-labelledby="amberH">
+  <h2 id="amberH">Before you carry on</h2><div id="amberBody"></div>
+  <div class="stickybar"><button class="btn" id="amberGo" type="button">Carry on to the map</button></div>
+</section>
+<section id="s-map" class="card" hidden aria-labelledby="mapH">
+  <h2 id="mapH">Where is it hurting?</h2>
+  <div class="mapgrid"><div>
+    <div class="row" style="justify-content:center;margin-bottom:8px"><div class="toggle" role="group" aria-label="Body view"><button type="button" data-view="front" aria-pressed="true">Front</button><button type="button" data-view="back" aria-pressed="false">Back</button></div></div>
+    <svg id="bodymap" class="bodymap" viewBox="0 0 200 440" role="group" aria-label="Body map. Choose an area."></svg>
+  </div><div>
+    <h3>Or choose from the list</h3><div class="chips" id="regionChips"></div>
+    <div id="mapMsg" role="status"></div>
+    <fieldset><legend>Which side?</legend><div class="chips" id="sideOpts"></div></fieldset>
+    <details><summary>Your age (optional)</summary><div class="chips" id="ageOpts" style="margin-top:8px"></div></details>
+  </div></div>
+  <div class="stickybar"><button class="btn" id="mapGo" type="button" disabled>Next</button></div>
+</section>
+<section id="s-zoom" class="card" hidden aria-labelledby="zoomH">
+  <h2 id="zoomH">Show us exactly where</h2>
+  <div id="zoomSlot" class="zoomslot"></div>
+  <div id="subChips" style="margin-top:12px"></div>
+  <div id="zoomExtra"><div class="ynrow"><p>Is there one specific tender spot?</p><span id="tender"></span></div>
+   <fieldset><legend>Is it stiff?</legend><div class="chips" id="stiff"></div></fieldset></div>
+  <div class="stickybar"><button class="btn" id="zoomGo" type="button" disabled>Next</button></div>
+</section>
+<section id="s-text" class="card" hidden aria-labelledby="textH">
+  <h2 id="textH">In your own words (optional)</h2>
+  <label for="ownWords" class="muted">For example: "started after football, worse on stairs". Please don't include names or contact details.</label>
+  <textarea id="ownWords" maxlength="280"></textarea><p class="muted"><span id="wc">0 / 280</span> · Stays on this device. Not used for scoring.</p>
+  <div id="textWarn" hidden role="alert"></div>
+  <div class="stickybar"><button class="btn" id="textGo" type="button">Next</button><button class="linkbtn" id="textSkip" type="button">Skip</button></div>
+</section>
+<section id="s-rcheck" class="card" hidden aria-labelledby="rH">
+  <h2 id="rH">A quick check</h2><div id="rList"></div>
+  <div class="stickybar"><button class="btn" id="rGo" type="button" disabled>Continue</button></div>
+</section>
+<section id="s-q" class="card" hidden aria-labelledby="qH">
+  <h2 id="qH" class="sr-only">Questions</h2><p class="muted" id="qProg"></p><div id="qCard"></div>
+</section>
+<section id="s-res" hidden aria-labelledby="resH">
+  <div id="resBody"></div>
+  <div class="card row"><button class="btn" type="button" id="saveBtn">Save to my journal on this device</button><button class="btn secondary" type="button" data-restart>Start again</button><a href="pain-journal.html">Open journal</a></div>
+</section>
+</main>
+<footer><p><strong>This is not a diagnosis.</strong> Educational prototype only. Emergency: call 112. Your answers stay in this browser until you press "Clear my data". Anatomy drawings are original simplified illustrations.</p></footer>
+</div>
+<script>
+'use strict';
+const REFS={"1": ["Margolis RB et al. A rating system for use with patient pain drawings. Pain 1986.", "https://pubmed.ncbi.nlm.nih.gov/2937007/", "P"], "2": ["NICE NG226. Osteoarthritis in over 16s: diagnosis and management.", "https://www.nice.org.uk/guidance/ng226", "G"], "3": ["Physiopedia. Osgood-Schlatter disease.", "https://www.physio-pedia.com/Osgood-Schlatter_Disease", "S"], "4": ["Bailey CW, Cannon ML. Sever disease (calcaneal apophysitis). J Am Osteopath Assoc 2014.", "https://doi.org/10.7556/jaoa.2014.081", "P"], "5": ["NHS. Hip pain in children (irritable hip).", "https://www.nhs.uk/symptoms/hip-pain-children-irritable-hip/", "N"], "6": ["Peck DM, Voss LM, Voss TT. Slipped capital femoral epiphysis: diagnosis and management. Am Fam Physician 2017.", "https://pubmed.ncbi.nlm.nih.gov/28671425/", "P"], "7": ["NHS. Heart attack.", "https://www.nhs.uk/conditions/heart-attack/", "N"], "8": ["NHS. Deep vein thrombosis (DVT).", "https://www.nhs.uk/conditions/deep-vein-thrombosis-dvt/", "N"], "9": ["NHS. Pulmonary embolism.", "https://www.nhs.uk/conditions/pulmonary-embolism/", "N"], "10": ["NHS. Back pain.", "https://www.nhs.uk/conditions/back-pain/", "N"], "11": ["NHS. Sciatica.", "https://www.nhs.uk/conditions/sciatica/", "N"], "12": ["Finucane LM et al. International framework for red flags for potential serious spinal path", "https://doi.org/10.2519/jospt.2020.9971", "P"], "13": ["NHS. Septic arthritis.", "https://www.nhs.uk/conditions/septic-arthritis/", "N"], "14": ["NHS. Sprains and strains.", "https://www.nhs.uk/conditions/sprains-and-strains/", "N"], "15": ["NHS. Broken ankle.", "https://www.nhs.uk/conditions/broken-ankle/", "N"], "16": ["Blanpied PR et al. Neck pain: revision 2017. Clinical practice guidelines. JOSPT 2017.", "https://doi.org/10.2519/jospt.2017.0302", "P"], "17": ["NHS. Neck pain.", "https://www.nhs.uk/symptoms/neck-pain-and-stiff-neck/", "N"], "18": ["Wainner RS et al. Reliability and diagnostic accuracy of the clinical examination and pati", "https://doi.org/10.1097/00007632-200301010-00014", "P"], "19": ["Thoomes EJ et al. Value of physical tests in diagnosing cervical radiculopathy: a systematic review. Spine J 2018.", "https://doi.org/10.1016/j.spinee.2017.08.241", "P"], "20": ["NHS. Whiplash.", "https://www.nhs.uk/conditions/whiplash/", "N"], "21": ["Davies BM et al. Degenerative cervical myelopathy. BMJ 2018.", "https://doi.org/10.1136/bmj.k186", "P"], "22": ["Stiell IG et al. The Canadian C-spine rule for radiography in alert and stable trauma pati", "https://doi.org/10.1001/jama.286.15.1841", "P"], "23": ["Rushton A et al. International framework for examination of the cervical region for potent", "https://doi.org/10.2519/jospt.2022.11147", "P"], "24": ["NHS. Stroke.", "https://www.nhs.uk/conditions/stroke/", "N"], "25": ["NHS. Meningitis.", "https://www.nhs.uk/conditions/meningitis/", "N"], "26": ["Lewis J. Rotator cuff related shoulder pain: assessment, management and uncertainties. Man", "https://doi.org/10.1016/j.math.2016.03.009", "P"], "27": ["Hegedus EJ et al. Which physical examination tests provide clinicians with the most value ", "https://doi.org/10.1136/bjsports-2012-091066", "P"], "28": ["NHS. Shoulder impingement syndrome.", "https://www.nhs.uk/conditions/shoulder-impingement-syndrome/", "N"], "29": ["Kelley MJ et al. Shoulder pain and mobility deficits: adhesive capsulitis. Clinical practi", "https://doi.org/10.2519/jospt.2013.0302", "P"], "30": ["Lewis J. Frozen shoulder contracture syndrome: aetiology, diagnosis and management. Man Th", "https://doi.org/10.1016/j.math.2014.07.006", "P"], "31": ["Karbowiak M et al. Frozen shoulder. BMJ 2022.", "https://doi.org/10.1136/bmj-2021-068547", "P"], "32": ["NHS. Frozen shoulder.", "https://www.nhs.uk/conditions/frozen-shoulder/", "N"], "33": ["Mitchell C et al. Shoulder pain: diagnosis and management in primary care. BMJ 2005.", "https://doi.org/10.1136/bmj.331.7525.1124", "P"], "34": ["NHS. Dislocated shoulder.", "https://www.nhs.uk/conditions/dislocated-shoulder/", "N"], "35": ["NHS. Broken collarbone.", "https://www.nhs.uk/conditions/broken-collarbone/", "N"], "36": ["NHS. Polymyalgia rheumatica.", "https://www.nhs.uk/conditions/polymyalgia-rheumatica/", "N"], "37": ["NHS. Shoulder pain.", "https://www.nhs.uk/symptoms/shoulder-pain/", "N"], "38": ["Lucado AM et al. Lateral elbow pain and muscle function impairments. Clinical practice gui", "https://doi.org/10.2519/jospt.2022.0302", "P"], "39": ["NHS. Tennis elbow.", "https://www.nhs.uk/conditions/tennis-elbow/", "N"], "40": ["Ciccotti MC et al. Diagnosis and treatment of medial epicondylitis of the elbow. Clin Spor", "https://doi.org/10.1016/j.csm.2004.04.011", "P"], "41": ["Physiopedia. Cubital tunnel syndrome.", "https://www.physio-pedia.com/Cubital_Tunnel_Syndrome", "S"], "42": ["NHS. Bursitis.", "https://www.nhs.uk/conditions/bursitis/", "N"], "43": ["Annison et al. BET 1: Is the hook test sensitive enough to be used to exclude distal bicep", "https://doi.org/10.1136/emermed-2020-211011.2", "P"], "44": ["Appelboam A et al. Elbow extension test to rule out elbow fracture: multicentre, prospecti", "https://doi.org/10.1136/bmj.a2428", "P"], "45": ["NHS. Elbow and arm pain.", "https://www.nhs.uk/symptoms/elbow-and-arm-pain/", "N"], "46": ["NHS. Carpal tunnel syndrome.", "https://www.nhs.uk/conditions/carpal-tunnel-syndrome/", "N"], "47": ["Erickson M et al. Hand pain and sensory deficits: carpal tunnel syndrome. Clinical practic", "https://doi.org/10.2519/jospt.2019.0301", "P"], "48": ["Larsen CG et al. Management of de Quervain tenosynovitis: a critical analysis review. JBJS", "https://doi.org/10.2106/jbjs.rvw.21.00069", "P"], "49": ["Physiopedia. Scaphoid fracture.", "https://www.physio-pedia.com/Scaphoid_Fracture", "S"], "50": ["NICE NG38. Fractures (non-complex): assessment and management.", "https://www.nice.org.uk/guidance/ng38", "G"], "51": ["NHS. Broken arm or wrist.", "https://www.nhs.uk/conditions/broken-arm-or-wrist/", "N"], "52": ["NHS. Osteoarthritis.", "https://www.nhs.uk/conditions/osteoarthritis/", "N"], "53": ["NHS. Rheumatoid arthritis.", "https://www.nhs.uk/conditions/rheumatoid-arthritis/", "N"], "54": ["NICE NG100. Rheumatoid arthritis in adults: management.", "https://www.nice.org.uk/guidance/ng100", "G"], "55": ["NHS. Trigger finger.", "https://www.nhs.uk/conditions/trigger-finger/", "N"], "56": ["NHS. Ganglion cyst.", "https://www.nhs.uk/conditions/ganglion-cyst/", "N"], "57": ["NHS. Gout.", "https://www.nhs.uk/conditions/gout/", "N"], "58": ["NICE NG219. Gout: diagnosis and management.", "https://www.nice.org.uk/guidance/ng219", "G"], "59": ["Briggs AM et al. Thoracic spine pain in the general population: prevalence, incidence and ", "https://doi.org/10.1186/1471-2474-10-77", "P"], "60": ["Physiopedia. Costochondritis.", "https://www.physio-pedia.com/Costochondritis", "S"], "61": ["Proulx AM, Zryd TW. Costochondritis: diagnosis and treatment. Am Fam Physician 2009.", "https://pubmed.ncbi.nlm.nih.gov/19817327/", "P"], "62": ["NHS. Shingles.", "https://www.nhs.uk/conditions/shingles/", "N"], "63": ["Williams CM et al. Red flags to screen for vertebral fracture in patients presenting with ", "https://doi.org/10.1002/14651858.cd008643.pub2", "P"], "64": ["NHS. Osteoporosis.", "https://www.nhs.uk/conditions/osteoporosis/", "N"], "65": ["NHS. Kidney infection.", "https://www.nhs.uk/conditions/kidney-infection/", "N"], "66": ["NHS. Abdominal aortic aneurysm.", "https://www.nhs.uk/conditions/abdominal-aortic-aneurysm/", "N"], "67": ["Henschke N et al. Red flags to screen for malignancy in patients with low-back pain. Cochr", "https://doi.org/10.1002/14651858.cd008686.pub2", "P"], "68": ["NICE NG234. Spinal metastases and metastatic spinal cord compression.", "https://www.nice.org.uk/guidance/ng234", "G"], "69": ["NICE NG59. Low back pain and sciatica in over 16s: assessment and management.", "https://www.nice.org.uk/guidance/ng59", "G"], "70": ["George SZ et al. Interventions for the management of acute and chronic low back pain: revi", "https://doi.org/10.2519/jospt.2021.0304", "P"], "71": ["Delitto A et al. Low back pain. Clinical practice guidelines. JOSPT 2012.", "https://doi.org/10.2519/jospt.2012.42.4.A1", "P"], "72": ["Laslett M et al. Diagnosis of sacroiliac joint pain: validity of individual provocation te", "https://doi.org/10.1016/j.math.2005.01.003", "P"], "73": ["Katz JN et al. Diagnosis and management of lumbar spinal stenosis: a review. JAMA 2022.", "https://doi.org/10.1001/jama.2022.5921", "P"], "74": ["NICE NG65. Spondyloarthritis in over 16s: diagnosis and management.", "https://www.nice.org.uk/guidance/ng65", "G"], "75": ["Sieper J et al. New criteria for inflammatory back pain in patients with chronic back pain", "https://doi.org/10.1136/ard.2008.101501", "P"], "76": ["NHS. Ankylosing spondylitis.", "https://www.nhs.uk/conditions/ankylosing-spondylitis/", "N"], "77": ["Cibulka MT et al. Hip pain and mobility deficits: hip osteoarthritis, revision 2017. JOSPT", "https://doi.org/10.2519/jospt.2017.0301", "P"], "78": ["NHS. Hip pain in adults.", "https://www.nhs.uk/symptoms/hip-pain/", "N"], "79": ["Griffin DR et al. The Warwick Agreement on femoroacetabular impingement syndrome (FAI synd", "https://doi.org/10.1136/bjsports-2016-096743", "P"], "80": ["Enseki K et al. Nonarthritic hip joint pain. Clinical practice guidelines. JOSPT 2014.", "https://doi.org/10.2519/jospt.2014.0302", "P"], "81": ["Grimaldi A et al. Gluteal tendinopathy: a review of mechanisms, assessment and management.", "https://doi.org/10.1007/s40279-015-0336-5", "P"], "82": ["Weir A et al. Doha agreement meeting on terminology and definitions in groin pain in athle", "https://doi.org/10.1136/bjsports-2015-094869", "P"], "83": ["Thorborg K et al. Current clinical concepts: exercise and load management of adductor stra", "https://doi.org/10.4085/1062-6050-0496.21", "P"], "84": ["NHS. Hernia.", "https://www.nhs.uk/conditions/hernia/", "N"], "85": ["NHS. Broken hip.", "https://www.nhs.uk/conditions/broken-hip/", "N"], "86": ["NICE CG124. Hip fracture: management.", "https://www.nice.org.uk/guidance/cg124", "G"], "87": ["NHS. Testicle pain.", "https://www.nhs.uk/symptoms/testicle-pain/", "N"], "88": ["Kary JM. Diagnosis and management of quadriceps strains and contusions. Curr Rev Musculosk", "https://doi.org/10.1007/s12178-010-9064-5", "P"], "89": ["Pietsch S, Pizzari T. Risk factors for quadriceps muscle strain injuries in sport: a syste", "https://doi.org/10.2519/jospt.2022.10870", "P"], "90": ["Physiopedia. Quadriceps muscle strain.", "https://www.physio-pedia.com/Quadriceps_Muscle_Strain", "S"], "91": ["Mueller-Wohlfahrt HW et al. Terminology and classification of muscle injuries in sport: th", "https://doi.org/10.1136/bjsports-2012-091448", "P"], "92": ["Beiner JM, Jokl P. Muscle contusion injury and myositis ossificans traumatica. Clin Orthop", "https://doi.org/10.1097/00003086-200210001-00013", "P"], "93": ["Physiopedia. Meralgia paraesthetica.", "https://www.physio-pedia.com/Meralgia_Paraesthetica", "S"], "94": ["Khalil N et al. Treatment for meralgia paraesthetica. Cochrane 2008.", "https://doi.org/10.1002/14651858.CD004159.pub2", "P"], "95": ["Fredericson M, Wolf C. Iliotibial band syndrome in runners: innovations in treatment. Spor", "https://doi.org/10.2165/00007256-200535050-00006", "P"], "96": ["Hoenig T et al. Bone stress injuries. Nat Rev Dis Primers 2022.", "https://doi.org/10.1038/s41572-022-00352-y", "P"], "97": ["NHS. Compartment syndrome.", "https://www.nhs.uk/conditions/compartment-syndrome/", "N"], "98": ["NICE NG158. Venous thromboembolic diseases: diagnosis, management and thrombophilia testin", "https://www.nice.org.uk/guidance/ng158", "G"], "99": ["NHS. Hamstring injury.", "https://www.nhs.uk/conditions/hamstring-injury/", "N"], "100": ["Askling CM et al. High-speed running type or stretching-type of hamstring injuries makes a", "https://doi.org/10.1136/bjsports-2011-090534", "P"], "101": ["Pollock N et al. British athletics muscle injury classification: a new grading system. BJS", "https://doi.org/10.1136/bjsports-2013-093302", "P"], "102": ["Goom TSH et al. Proximal hamstring tendinopathy: clinical aspects of assessment and manage", "https://doi.org/10.2519/jospt.2016.5986", "P"], "103": ["Scott A et al. ICON 2019: International Scientific Tendinopathy Symposium Consensus: clini", "https://doi.org/10.1136/bjsports-2019-100885", "P"], "104": ["NHS. Baker's cyst.", "https://www.nhs.uk/conditions/bakers-cyst/", "N"], "105": ["Crossley KM et al. 2016 Patellofemoral pain consensus statement. BJSM 2016.", "https://doi.org/10.1136/bjsports-2016-096268", "P"], "106": ["Willy RW et al. Patellofemoral pain. Clinical practice guidelines. JOSPT 2019.", "https://doi.org/10.2519/jospt.2019.0302", "P"], "107": ["Malliaras P et al. Patellar tendinopathy: clinical diagnosis, load management, and advice ", "https://doi.org/10.2519/jospt.2015.5987", "P"], "108": ["Logerstedt DS et al. Knee pain and mobility impairments: meniscal and articular cartilage ", "https://doi.org/10.2519/jospt.2018.0301", "P"], "109": ["Logerstedt DS et al. Knee stability and movement coordination impairments: knee ligament s", "https://doi.org/10.2519/jospt.2017.0303", "P"], "110": ["NHS. Knee pain.", "https://www.nhs.uk/symptoms/knee-pain/", "N"], "111": ["Stiell IG et al. Prospective validation of a decision rule for the use of radiography in a", "https://pubmed.ncbi.nlm.nih.gov/8594242/", "P"], "112": ["Moen MH et al. Medial tibial stress syndrome: a critical review. Sports Med 2009.", "https://doi.org/10.2165/00007256-200939070-00002", "P"], "113": ["Winters M et al. Medial tibial stress syndrome can be diagnosed reliably using history and physical examination. BJSM 2018.", "https://doi.org/10.1136/bjsports-2016-097037", "P"], "114": ["NHS. Shin splints.", "https://www.nhs.uk/conditions/shin-splints/", "N"], "115": ["Blackman PG. A review of chronic exertional compartment syndrome in the lower leg. Med Sci", "https://doi.org/10.1097/00005768-200003001-00002", "P"], "116": ["Green B, Pizzari T. Calf muscle strain injuries in sport: a systematic review of risk fact", "https://doi.org/10.1136/bjsports-2016-097177", "P"], "117": ["NHS. Peripheral arterial disease (PAD).", "https://www.nhs.uk/conditions/peripheral-arterial-disease-pad/", "N"], "118": ["NHS. Cellulitis.", "https://www.nhs.uk/conditions/cellulitis/", "N"], "119": ["Martin RL et al. Ankle stability and movement coordination impairments: lateral ankle liga", "https://doi.org/10.2519/jospt.2021.0302", "P"], "120": ["Vuurberg G et al. Diagnosis, treatment and prevention of ankle sprains: update of an evide", "https://doi.org/10.1136/bjsports-2017-098106", "P"], "121": ["Stiell IG et al. A study to develop clinical decision rules for the use of radiography in ", "https://pubmed.ncbi.nlm.nih.gov/1554175/", "P"], "122": ["Bachmann LM et al. Accuracy of Ottawa ankle rules to exclude fractures of the ankle and mi", "https://doi.org/10.1136/bmj.326.7386.417", "P"], "123": ["Martin RL et al. Achilles pain, stiffness, and muscle power deficits: midportion Achilles ", "https://pubmed.ncbi.nlm.nih.gov/29712543/", "P"], "124": ["Carcia CR et al. Achilles pain, stiffness, and muscle power deficits: Achilles tendinitis.", "https://doi.org/10.2519/jospt.2010.0305", "P"], "125": ["Maffulli N. The clinical diagnosis of subcutaneous tear of the Achilles tendon. Am J Sport", "https://doi.org/10.1177/03635465980260021801", "P"], "126": ["Kou J. AAOS clinical practice guideline: acute Achilles tendon rupture. J Am Acad Orthop S", "https://doi.org/10.5435/00124635-201008000-00008", "P"], "127": ["NHS. Heel pain.", "https://www.nhs.uk/symptoms/foot-pain/heel-pain/", "N"], "128": ["Selmani E et al. Current concepts review: peroneal tendon disorders. Foot Ankle Int 2006.", "https://doi.org/10.1177/107110070602700314", "P"], "129": ["Antoniadis G, Scheglmann K. Posterior tarsal tunnel syndrome: diagnosis and treatment. Dts", "https://doi.org/10.3238/arztebl.2008.0776", "P"], "130": ["Koc TA et al. Heel pain – plantar fasciitis: revision 2023. Clinical practice guidelines. ", "https://doi.org/10.2519/jospt.2023.0303", "P"], "131": ["NHS. Plantar fasciitis.", "https://www.nhs.uk/conditions/plantar-fasciitis/", "N"], "132": ["NHS. Morton's neuroma.", "https://www.nhs.uk/conditions/mortons-neuroma/", "N"], "133": ["NHS. Bunions.", "https://www.nhs.uk/conditions/bunions/", "N"], "134": ["Heybeli N. Hallux rigidus: diagnosis and management. J Foot Ankle Surg (Asia Pacific) 2020", "https://doi.org/10.5005/jp-journals-10040-1125", "P"], "135": ["NHS. Broken toe.", "https://www.nhs.uk/conditions/broken-toe/", "N"], "136": ["NICE NG19. Diabetic foot problems: prevention and management.", "https://www.nice.org.uk/guidance/ng19", "G"], "137": ["Davda K et al. Peroneal tendon disorders. EFORT Open Rev 2017.", "https://doi.org/10.1302/2058-5241.2.160047", "P"], "138": ["Ho B, Baumhauer J. Hallux rigidus. EFORT Open Rev 2017.", "https://doi.org/10.1302/2058-5241.2.160031", "P"], "139": ["Aaron DL et al. Four common types of bursitis: diagnosis and management. J Am Acad Orthop Surg 2011.", "https://doi.org/10.5435/00124635-201106000-00006", "P"], "140": ["Baumbach SF et al. Prepatellar and olecranon bursitis: literature review and development of a treatment algorithm. Arch Orthop Trauma Surg 2014.", "https://doi.org/10.1007/s00402-013-1882-7", "P"], "141": ["Sachar K. Ulnar-sided wrist pain: evaluation and treatment of TFCC tears, ulnocarpal impaction syndrome, and lunotriquetral ligament tears. J Hand Surg Am 2008.", "https://doi.org/10.1016/j.jhsa.2008.08.026", "P"], "142": ["Tay SC et al. The \"ulnar fovea sign\" for defining ulnar wrist pain: an analysis of sensitivity and specificity. J Hand Surg Am 2007.", "https://doi.org/10.1016/j.jhsa.2007.01.022", "P"]};
+const SRC={
+ nhsHeart:['NHS – Heart attack','https://www.nhs.uk/conditions/heart-attack/'],
+ nhsBack:['NHS – Back pain','https://www.nhs.uk/conditions/back-pain/'],
+ finucane:['Finucane et al. 2020, JOSPT','https://doi.org/10.2519/jospt.2020.9971'],
+ nhsSprain:['NHS – Sprains and strains','https://www.nhs.uk/conditions/sprains-and-strains/'],
+ nhsCompart:['NHS – Compartment syndrome','https://www.nhs.uk/conditions/compartment-syndrome/'],
+ nhsDvt:['NHS – DVT','https://www.nhs.uk/conditions/deep-vein-thrombosis-dvt/'],
+ ottawa:['The Ottawa Rules','https://www.theottawarules.ca/'],
+ stiell92:['Stiell et al. 1992 (Ottawa ankle rules)','https://pubmed.ncbi.nlm.nih.gov/1554175/'],
+ stiell96:['Stiell et al. 1996, JAMA (Ottawa knee rule)','https://pubmed.ncbi.nlm.nih.gov/8594242/'],
+ bamic:['Pollock et al. 2014, BJSM (BAMIC)','https://doi.org/10.1136/bjsports-2013-093302'],
+ munich:['Mueller-Wohlfahrt et al. 2013, BJSM (Munich consensus)','https://doi.org/10.1136/bjsports-2012-091448'],
+ nhsHam:['NHS – Hamstring injury','https://www.nhs.uk/conditions/hamstring-injury/'],
+ martin21:['Martin et al. 2021, JOSPT (ankle sprain)','https://doi.org/10.2519/jospt.2021.0302'],
+ vuurberg:['Vuurberg et al. 2018, BJSM','https://doi.org/10.1136/bjsports-2017-098106'],
+ crossley:['Crossley et al. 2016, BJSM','https://doi.org/10.1136/bjsports-2016-096268'],
+ willy:['Willy et al. 2019, JOSPT','https://doi.org/10.2519/jospt.2019.0302'],
+ nhsKnee:['NHS – Knee pain','https://www.nhs.uk/symptoms/knee-pain/'],
+ hegedus:['Hegedus et al. 2012, BJSM','https://doi.org/10.1136/bjsports-2012-091066'],
+ nhsShoulder:['NHS – Shoulder pain','https://www.nhs.uk/symptoms/shoulder-pain/'],
+ nice59:['NICE NG59','https://www.nice.org.uk/guidance/ng59'],
+ george:['George et al. 2021, JOSPT','https://doi.org/10.2519/jospt.2021.0304'],
+ nhsSciatica:['NHS – Sciatica','https://www.nhs.uk/conditions/sciatica/'],
+ martin18:['Martin et al. 2018, JOSPT (Achilles)','https://pubmed.ncbi.nlm.nih.gov/29712543/'],
+ icon:['Scott et al. 2020, BJSM (ICON 2019)','https://doi.org/10.1136/bjsports-2019-100885'],
+ peace:['Dubois & Esculier 2020, BJSM (PEACE & LOVE)','https://doi.org/10.1136/bjsports-2019-101253'],
+ bleakley04:['Bleakley et al. 2004, AJSM','https://pubmed.ncbi.nlm.nih.gov/14754753/'],
+ nhsFrost:['NHS – Frostbite','https://www.nhs.uk/conditions/frostbite/'],
+ french:['French et al. 2006, Cochrane','https://doi.org/10.1002/14651858.CD004750.pub2'],
+ furlan:['Furlan et al. 2015, Cochrane','https://doi.org/10.1002/14651858.CD001929.pub3']
+};
+const PLANS={
+ protect:{t:'Protect and relative rest',use:'For the first 1–3 days after a sprain or strain, cut down on what provokes the pain and use a support or supportive shoes.',not:'Not complete bed rest for back pain. Stay gently active.',src:['nhsSprain','peace','nhsBack']},
+ elevate:{t:'Elevation',use:'If the ankle, knee or lower leg is swollen, rest it raised on a pillow above heart level in the first days.',not:'Not if you suspect a clot or compartment syndrome: those are warning signs; seek care.',src:['nhsSprain','peace']},
+ compress:{t:'Compression',use:'For swelling after a sprain, an elastic bandage can support it during the day.',not:'If it causes numbness, tingling, colour change or worse pain, loosen it at once. Remove it at night.',src:['nhsSprain']},
+ cold:{t:'Cold pack (optional)',use:'For comfort on a fresh injury: wrapped in a tea towel, up to 20 minutes every 2–3 hours. Sources disagree on ice, so this is optional.',not:'Never directly on skin. Avoid over numb areas or if circulation is poor. Evidence for ice is mixed.',src:['nhsSprain','bleakley04','nhsFrost']},
+ heat:{t:'Heat pack',use:'For back stiffness or muscle spasm, wrapped in a tea towel.',not:'Not in the first 2–3 days after a sprain or strain with swelling; not on numb skin.',src:['nhsBack','french','nhsSprain']},
+ massage:{t:'Gentle massage',use:'Later on, for comfort with muscle tension or back pain (the evidence is low quality).',not:'Avoid for the first couple of days after a sprain or strain, or over swelling, bruising or a suspected clot.',src:['nhsSprain','furlan']},
+ move:{t:'Gentle movement and gradual loading',use:'Once pain no longer stops you moving, keep it moving to avoid stiffness and let pain guide a gradual return.',not:'Not through sharp or worsening pain. Avoid running or strenuous sport for up to 8 weeks after a sprain or strain unless a physiotherapist advises otherwise.',src:['nhsSprain','peace','george']}
+};
+/* ===== CONFIG: everything clinical lives here. "pending:'physio'" marks open items awaiting physio sign-off. ===== */
+const ROUTING={
+ levels:{
+  emergency:{kind:'red',stops:true,head:'Please get medical help now',text:'Call 112 now, or go to the nearest emergency department.',tel:true},
+  sameday:{kind:'red',stops:true,head:'See a doctor today',text:'Please see a doctor urgently today. If you get worse or feel very unwell, call 112.',tel:false,link112:true},
+  doctor:{kind:'amber',stops:true,head:'See a doctor or physio',text:'This needs checking by a doctor or physiotherapist in person. We won\'t suggest a possible area for it.'},
+  soon:{kind:'amber',stops:false,head:'See a doctor or physio soon',text:'Please book to see a doctor or physiotherapist soon. You can carry on with the map.'},
+  clinician:{kind:'amber',stops:false,head:'See a doctor or physio promptly',text:'One of your answers needs an in-person check soon. You can still read the possible area below.'}
+ },
+ core:[
+  {id:'C1',q:'Chest pain or breathlessness?',yes:'emergency',src:[7,8,9]},
+  {id:'C2a',q:'Numbness or weakness in both legs or both arms, numbness in the groin or saddle area, or a leg or arm getting weaker?',yes:'emergency',src:[10,11,12,21],pending:'physio'},
+  {id:'C2b',q:'Tingling or numbness down one leg or one arm only?',yes:'soon',src:[11,16],pending:'physio'},
+  {id:'C3',q:'Loss of bladder or bowel control?',yes:'emergency',src:[10,11]},
+  {id:'C4',q:'Fever (a high temperature) with your pain?',yes:'sameday',src:[13,10],pending:'physio',
+   followUp:{id:'C4f',q:'Do you also have confusion, a stiff neck with a dislike of bright light, a rash that doesn\'t fade when you press a glass on it, or do you feel very unwell?',yes:'emergency',src:[25],pending:'physio'}},
+  {id:'C5',q:'A serious fall, or do you think something is broken?',yes:'emergency',src:[10,14,15]}
+ ],
+ // Free text is an extra safety net only; the toggles above stay the main check. pending physio
+ textWarn:{pending:'physio',pattern:/bladder|bowel|wet myself|can'?t (pee|wee)|incontinen|numb\w*\W+(\w+\W+){0,3}(groin|saddle|genital|bottom|private)|(groin|saddle|genital)\W+(\w+\W+){0,3}numb|can'?t walk|cannot walk|unable to walk|chest/i,level:'emergency'},
+ minAge:{age:16,pending:'physio',text:'Please see a doctor with a parent. This tool is only for people aged 16 and over.'},
+ feverAskedOnce:true,
+ // Engine options from blueprint v1.1 (§2, §3). Engineer ruled: keep ON permanently.
+ onlySubs:true, deadEndCards:true // region checks never ask about fever again; C4 covers it
+};
+const AGES=[['16-44','16–44'],['45-64','45–64'],['65+','65+']];
+// tender spot +0.5 applies to these kinds
+const TENDER_KINDS=['tendon','bursa','chestwall','bone'];
+const REGIONS={
+ neck:{name:'Neck',art:'neck',view:'back',noSide:true,
+  subs:[['back-centre','Back of the neck (centre)',['neck_mob','whiplash']],['side-top-shoulder','One side, or the top of the shoulder',['neck_mob','whiplash']],['skull-base','Base of the skull, with headache',['neck_head']],['into-arm','Spreading into the arm or hand',['neck_rad']]],
+  flags:[['NR1','After a knock to the head or neck, are you 65 or over, or do you have tingling in your arms or legs?','emergency',[22,20]],
+         ['NR2','Dizziness, double vision, trouble speaking or swallowing, a drop attack, facial numbness, or a new severe headache?','emergency',[23,24]],
+         ['NR3','Clumsy hands, unsteady walking, or numbness in both hands?','doctor',[21],'Possible pressure on the spinal cord in the neck (cervical myelopathy) needs a doctor.']],
+  qs:[['N1','Does pain, tingling or numbness travel down into your arm or hand?',{neck_rad:1},{neck_mob:1}],
+      ['N2','Did it start after a car accident, a sports collision or a sudden jolt of your head?',{whiplash:1},{}],
+      ['N3','Do you also get a headache that seems to start from your neck?',{neck_head:1},{}],
+      ['N4','Is it mainly stiffness that eases as you move, with no arm symptoms?',{neck_mob:1},{neck_mob:-1}]]},
+ shoulder:{name:'Shoulder',art:'shoulder',view:'both',
+  subs:[['top','Top of the shoulder (bony point)',['ac']],['outer-upper-arm','Outer upper arm',['rc']],['front','Front of the shoulder',['rc']],['back','Back of the shoulder or shoulder blade',[],{deadEndCard:{text:'Pain at the back of the shoulder or around the shoulder blade can come from the shoulder, the neck or the upper back. A physiotherapist can examine it properly. You can also try the neck or upper back path.',refs:[33,37],offer:['neck','upper_back']}}],['deep','Deep or whole shoulder',['frozen','sh_oa']],['from-neck','Coming from the neck',[],{switchTo:'neck',chipOnly:true}]],
+  flags:[['SR1','After a fall or forceful movement, did the arm "come out", change shape, or can you not move it?','emergency',[34,35],'Possible dislocation or broken collarbone.'],
+         ['SR2','Severe pain and stiffness in both shoulders (and maybe hips), stiff for more than 45 minutes in the morning?','doctor',[36],'Polymyalgia rheumatica is possible and needs a doctor.'],
+         ['SR3','Is the arm hot or cold to touch, or numb with no feeling?','sameday',[37]]],
+  qs:[['S1','Is it painful to lift your arm out to the side or overhead, even though you can still get it up?',{rc:1},{}],
+      ['S2','Is your shoulder getting stiffer, so you can no longer reach behind your back or up to a high shelf, even slowly?',{frozen:1,sh_oa:1},{frozen:-1}],
+      ['S3','Is the sorest point right on the bony bump on top of your shoulder?',{ac:1},{},{onlySubs:['top','outer-upper-arm','front']}],
+      ['S4','Does the pain start in your neck, or travel below your elbow with tingling?',{switch:'neck'},{}],
+      ['S5','Does your shoulder grind or crackle when you move it?',{sh_oa:1,pending:'physio',refs:[52]},{},{onlySubs:['deep']}]]},
+ elbow:{name:'Elbow',art:'elbow',view:'front',
+  subs:[['outer','Outside of the elbow',['lat_elbow']],['inner','Inside of the elbow',['med_elbow','ulnar']],['point','Point of the elbow (back)',['olec']],['front-crease','Front crease',['biceps']],['forearm','Forearm',['lat_elbow','ulnar'],{pending:'physio'}]],
+  flags:[['ER1','After an injury: a snap, a change in shape, severe pain moving the arm, or a numb or tingling arm?','emergency',[45]],
+         ['ER2','Sudden arm pain with pressure in your chest?','emergency',[45,7]]],
+  qs:[['E1','Does gripping or lifting (for example a full kettle) make it worse?',{lat_elbow:1,med_elbow:1},{lat_elbow:-1,med_elbow:-1}],
+      ['E2','Do you get tingling or numbness in your ring and little fingers?',{ulnar:1},{}],
+      ['E3','Is there a soft swelling, like a small balloon, on the point of the elbow?',{olec:1},{}],
+      ['E4','Did you feel a sudden pop at the front of the elbow while lifting something heavy?',{biceps:1,route:'clinician'},{}]]},
+ wrist_hand:{name:'Wrist and hand',art:'wrist-hand',view:'front',
+  subs:[['thumb-side-wrist','Thumb side of the wrist',['dequervain']],['little-finger-wrist','Little-finger side of the wrist',[],{deadEndCard:{text:'Pain on the little-finger side of the wrist has several possible causes, such as the cartilage (TFCC), a ligament or the bones. Telling them apart needs a hands-on examination by a physiotherapist or doctor. If this started with a fall, use the injury questions.',refs:[141,142],offer:[]}}],['back-of-wrist','Back of the wrist',['ganglion']],['palm-tingling','Palm, with finger tingling',['carpal']],['thumb-base','Base of the thumb',['hand_oa']],['finger-joints','Finger joints',['hand_oa']],['trigger-finger','A finger that clicks or locks',['trigger']]],
+  flags:[['WR1','Did you fall onto your hand, and now have pain on the thumb side of the wrist?','sameday',[49,50],'A broken wrist bone (scaphoid) needs checking the same day, even if the wrist still moves.'],
+         ['WR2','After an injury: has the wrist changed shape, or is the hand numb or a different colour?','emergency',[51]]],
+  qs:[['W1','Do you get tingling or numbness in your thumb, index and middle fingers, often at night?',{carpal:1},{carpal:-1}],
+      ['W2','Does using your thumb (pinching, lifting, wringing) hurt the thumb side of your wrist?',{dequervain:1,hand_oa:1},{}],
+      ['W3','Does a finger click, catch or lock when you bend it?',{trigger:1},{}],
+      ['W4','Can you see or feel a smooth lump?',{ganglion:1},{}]]},
+ upper_back:{name:'Upper and mid back',art:'upper-back',view:'back',noSide:true,
+  subs:[['between-shoulder-blades','Between the shoulder blades',['thoracic']],['beside-spine','One side, next to the spine',['thoracic']],['ribs-side','Around the ribs or side of the chest',['thoracic']],['chest-wall-front','Front chest wall or breastbone',['costo']]],
+  flags:[['UR1','Sudden, severe pain in your back or tummy, or pale or grey skin?','emergency',[66]],
+         ['UR2','Unexplained weight loss, pain worse at night, or a history of cancer?','doctor',[10,12,68]]],
+  qs:[['T1','Can you press on one exact spot that brings on the pain?',{costo:1,thoracic:1},{}],
+      ['T2','Does changing position or moving gently ease it?',{thoracic:1},{thoracic:-1}],
+      ['T3','Is there a burning or tingling band on one side, with or without a rash?',{route:'doctor',card:'Shingles is possible. Please see a doctor.',refs:[62]},{}],
+      ['T4','Are you 65 or over, or told you have osteoporosis, and did this start after a minor fall or strain?',{route:'doctor',card:'Please see a doctor to rule out a fracture.',refs:[63,64]},{}]],
+  note:'For pain coming from the upper back, it\'s sensible to see a doctor or physio as well.'},
+ lower_back:{name:'Lower back',art:'lower-back',view:'back',noSide:true,
+  subs:[['centre','Centre of the lower back',['lbp']],['one-side','One side',['lbp','sij']],['buttock','Buttock',['sij','sciatica']],['leg-above-knee','Pain into the leg, above the knee',['lbp','sciatica'],{chipOnly:true}],['below-knee','Pain below the knee or into the foot',['sciatica'],{chipOnly:true}]],
+  // fever/back pain is covered by C4 (same-day). pending physio
+  flags:[['LR1','Sciatica in both legs, or problems with sex or feeling in your genitals?','emergency',[10,11]],
+         ['LR2','Unexplained weight loss, pain worse at night or not eased by rest, or a history of cancer?','doctor',[10,68]],
+         ['LR3','Are you older or have osteoporosis, and did this start after a minor fall?','doctor',[63],'Please see a doctor to rule out a fracture.']],
+  qs:[['L1','Does pain go below your knee in one leg, possibly with pins and needles?',{sciatica:1},{lbp:1}],
+      ['L2','Does walking or standing bring on leg pain that eases when you sit or bend forward?',{stenosis:1},{}],
+      ['L3','Has it built up gradually over more than 3 months, waking you in the second half of the night?',{route:'soon',card:'Long-lasting back pain that wakes you at night can be inflammatory. Please see a doctor.',refs:[74,75]},{}],
+      ['L4','Is it mostly in one buttock, below the belt line, rather than the centre of your back?',{sij:1},{}]]},
+ hip_groin:{name:'Hip and groin',art:'hip-groin',view:'front',
+  subs:[['front-hip-crease','Front of the hip or groin crease',['hip_oa','fai']],['outer-hip','Outer hip (bony point)',['gtps']],['buttock','Buttock',['hip_referred']],['inner-groin','Inner groin',['adductor_groin']],['lower-tummy-lump','Lower tummy or groin lump',[],{g20:true,pending:'physio',deadEndCard:{head:'Please see a doctor',text:'See a doctor in the next few days to get the lump checked.',refs:[84],offer:[],noPhysioLink:true}}]],
+  flags:[['HR1','Severe hip pain after a fall, or you can\'t put weight on the leg?','emergency',[78,85],'A broken hip is possible.'],
+         ['HR2','Sudden severe pain in a testicle?','emergency',[87]],
+         ['HR3','Sudden severe pain without an injury, or a hot, swollen hip?','sameday',[78,13]],
+         ['HR4','Do you have a groin lump or hernia that is now painful, or with a bloated tummy, being sick, constipation or a high temperature?','sameday',[84],'A hernia that needs checking urgently is possible. Please get seen today.']],
+  qs:[['H1','Is the pain deep in the groin crease, with stiffness putting socks or shoes on?',{hip_oa:1,fai:1},{hip_oa:-1,fai:-1}],
+      ['H2','Is it worse lying on that side or on stairs, with a sore spot on the outer hip bone?',{gtps:1},{}],
+      ['H3','Does it hurt in the inner groin when you squeeze your knees together, kick or change direction?',{adductor_groin:1},{}],
+      ['H4','Can you see or feel a swelling or lump in your groin?',{route:'doctor',card:'A hernia is possible. Please see a doctor.',refs:[84]},{}]]},
+ thigh_front:{name:'Front and outer thigh',art:'thigh-front',view:'front',
+  subs:[['front-upper','Front, upper',['quad_strain','quad_contusion']],['front-middle','Front, middle',['quad_strain','quad_contusion']],['front-lower','Front, lower or just above the knee',['quad_contusion']],['outer','Outer thigh',['meralgia','itb']],['outer-hip-bone','Sore spot on the outer hip bone',[],{switchTo:'hip_groin',switchSub:'outer-hip',chipOnly:true}]],
+  flags:[['FR1','After an injury, can you not straighten your knee or lift your leg straight?','doctor',[90],'A torn thigh tendon (quadriceps rupture) is possible and needs a doctor.'],
+         ['FR2','A tense, swollen thigh with pain much worse than expected after a blow?','emergency',[97]],
+         ['FR3','A deep thigh ache in a runner that is worse at night or at rest?','doctor',[96],'A bone stress injury (femoral stress fracture) needs a doctor\'s check.'],
+         ['FR4','Throbbing pain with swelling, a change in skin colour, or swollen veins?','sameday',[8,98]]],
+  qs:[['TF1','Did it start suddenly while sprinting, kicking or jumping?',{quad_strain:1},{quad_strain:-1}],
+      ['TF2','Did something hit your thigh (a knee, ball or fall) just before it started?',{quad_contusion:1},{}],
+      ['TF3','Is it more a burning, tingling or numb patch on the outer front of the thigh than a muscle pain?',{meralgia:1},{}],
+      ['TF4','Does it come on during running and run down the outer thigh towards the outer knee?',{itb:1},{}]]},
+ thigh_back:{name:'Back of the thigh',art:'thigh-back',view:'back',
+  subs:[['high','High, near the sitting bone',['ham_stretch','pht']],['middle','Middle',['ham_sprint']],['lower','Lower, near the back of the knee',['ham_sprint']],['whole-leg','Whole back of the leg, with buttock or back pain',[],{switchTo:'lower_back',chipOnly:true}]],
+  flags:[['BR1','Did you feel a pop, with large or worsening bruising and difficulty walking?','doctor',[99],'A complete hamstring tear is possible and needs a doctor promptly.'],
+         ['BR2','Throbbing pain with swelling, a change in skin colour, or swollen veins?','sameday',[8]]],
+  qs:[['TB1','Did you feel a sudden sharp pain while running fast?',{ham_sprint:1},{}],
+      ['TB2','Did it happen during a big stretch (high kick, splits, slide)?',{ham_stretch:1},{}],
+      ['TB3','Is it mainly a deep ache at the sitting bone, worse sitting, that has built up over weeks?',{pht:1},{}],
+      ['TB4','Does the pain also come from your lower back and go below the knee with tingling?',{switch:'lower_back'},{}]]},
+ thigh_inner:{name:'Inner thigh',art:'inner-thigh',view:'front',
+  subs:[['high','High inner thigh or groin',['add_strain','adductor_groin']],['middle','Middle inner thigh',['add_strain']],['lower','Lower inner thigh, above the knee',['add_strain']]],
+  flags:[['IR1','Throbbing pain with swelling, a change in skin colour, or swollen veins?','sameday',[8]],
+         ['IR2','Sudden severe pain in a testicle?','emergency',[87]]],
+  qs:[['TI1','Did it start suddenly while kicking, sliding or changing direction?',{add_strain:1},{}],
+      ['TI2','Does it hurt when you squeeze your knees together?',{add_strain:1,adductor_groin:1},{add_strain:-1,adductor_groin:-1}],
+      ['TI3','Has it built up over weeks of running, as a deep ache even at rest or at night?',{route:'doctor',card:'A bone stress injury needs a doctor\'s check.',refs:[96]},{}],
+      ['TI4','Is it deep in the groin crease, with hip stiffness?',{switch:'hip_groin'},{}]]},
+ knee:{name:'Knee',art:'knee',view:'both',
+  subs:[['around-kneecap','Around or behind the kneecap',['pfp','prepatellar']],['below-kneecap','Just below the kneecap',['pat_tendon']],['bump-below','The bony bump below the knee',['osgood']],['inner','Inner knee',['meniscus','ligament']],['outer','Outer knee',['meniscus','itb']],['back-of-knee','Back of the knee',['baker']],['whole-knee-swollen','Whole knee, or swollen',['ligament','meniscus','knee_oa','prepatellar'],{chipOnly:true,pending:'physio'}]],
+  flags:[['KR1','Can you not put weight on it or move it, or is it badly swollen or a changed shape?','sameday',[110,111]],
+         ['KR2','Calf pain or swelling with a swollen back of the knee?','sameday',[104,8]]],
+  qs:[['K1','Did it start with a twist or a blow, and swell within hours?',{ligament:1,meniscus:1,route:'clinician'},{}],
+      ['K2','Does your knee lock, catch or give way?',{meniscus:1},{}],
+      ['K3','Is it worse on stairs, squatting, kneeling or sitting for a long time with the knee bent?',{pfp:1,knee_oa:1},{}],
+      ['K4','Is the sore spot just below the kneecap, and does jumping or landing hurt?',{pat_tendon:1,osgood:1},{},{onlySubs:['below-kneecap','bump-below']}],
+      ['K5','Is there a soft swelling right on the front of your kneecap?',{prepatellar:1,pending:'physio',refs:[42,139]},{},{onlySubs:['around-kneecap','whole-knee-swollen']}]]},
+ shin_calf:{name:'Shin and calf',art:'shin-calf',view:'both',
+  subs:[['inner-shin-edge','Along the inner edge of the shin',['mtss']],['shin-bone-spot','One spot on the shin bone',[],{g20:true,deadEndCard:{text:'Pain in one spot on the shin bone, especially if it built up with running or aches at rest or at night, can be a bone stress injury. It needs a hands-on check by a physiotherapist or doctor, and sometimes a scan.',refs:[96,112],offer:[]},pending:'physio'}],['front-outer-shin','Front-outer shin (muscle)',['cecs']],['calf-upper-middle','Calf muscle, upper or middle',['calf_strain']],['lower-calf','Lower calf, near the Achilles',['calf_strain']],['whole-calf-swollen','Whole calf swollen',[],{chipOnly:true,route:'sameday',card:'A swollen calf can be a blood clot (DVT). Please see a doctor today. Call 112 if you are breathless.',refs:[8,98]}]],
+  flags:[['CR1','After an injury, or under a tight cast or bandage: severe pain that keeps getting worse, tightness or numbness?','emergency',[97]],
+         ['CR2','Is one calf swollen, warm and painful?','sameday',[8,98]]],
+  // renamed from C1–C4 so they don't clash with the core check ids. SC2 no longer asks people to hop.
+  qs:[['SC1','Is the pain spread along the inner edge of your shin rather than at one spot?',{mtss:1},{}],
+      ['SC2','Does it ache at rest or at night?',{route:'clinician',card:'An ache at rest or at night can be a bone stress injury. Please see a doctor or physio promptly.',refs:[96,112]},{}],
+      ['SC3','Does a tight, aching pain come on at about the same point in each run or walk, and go away when you stop?',{cecs:1},{}],
+      ['SC4','Did you feel a sudden sharp pain or a "kick" in the calf while pushing off?',{calf_strain:1},{}]]},
+ ankle_achilles:{name:'Ankle and Achilles',art:'ankle-achilles',view:'both',
+  subs:[['outer','Outside of the ankle',['ankle_sprain']],['inner','Inside of the ankle',['tarsal']],['front','Front of the ankle',['ankle_sprain','ankle_oa'],{pending:'physio'}],['achilles-mid','Achilles, 2–6 cm above the heel',['ach_mid']],['achilles-insertion','Where the Achilles meets the heel',['ach_ins']],['behind-outer-bone','Behind the outer ankle bone',['peroneal']]],
+  flags:[['AR1','Odd angle, bone showing, severe pain, or toes blue, white or numb?','emergency',[15]],
+         ['AR2','Right after the injury could you not take 4 steps, and still can\'t?','sameday',[121,122],'A broken bone needs ruling out today.']],
+  qs:[['A1','Did you roll your ankle (foot turning inwards) just before it started?',{ankle_sprain:1},{ankle_sprain:-1}],
+      ['A2','Is the Achilles tendon stiff and sore first thing in the morning or at the start of exercise?',{ach_mid:1,ach_ins:1},{},{onlySubs:['achilles-mid','achilles-insertion']}],
+      ['A3','Did you feel a sudden snap or "kick" at the back of the ankle, and is it now hard to push up on tiptoe?',{route:'sameday',card:'A torn Achilles tendon is possible. Please get seen today.',refs:[126,127]},{}],
+      ['A4','Do you get burning, tingling or numbness running into the sole from the inside of the ankle?',{tarsal:1},{},{onlySubs:['inner']}],
+      ['A5','Since an earlier ankle sprain, has your ankle felt unstable or given way?',{peroneal:1,pending:'physio',refs:[137]},{},{onlySubs:['behind-outer-bone']}],
+      ['A6','Does it ache mainly when you are active or on your feet?',{ankle_oa:1,pending:'physio',refs:[2]},{},{onlySubs:['front']}]]},
+ foot:{name:'Foot',art:'foot',view:'front',
+  subs:[['bottom-heel','Bottom of the heel',['plantar']],['back-heel-child','Back of the heel (children and teens)',['sever']],['arch','Arch',['plantar']],['ball-3rd-4th','Ball of the foot, between the 3rd and 4th toes',['morton']],['ball-other-toes','Top of the foot, or ball under other toes',[],{g20:true,deadEndCard:{text:'Pain on the top of the foot or under the smaller toes can come from the bones, joints or nerves of the forefoot. If it built up with more walking or running, it can be a bone stress injury. A physiotherapist or doctor can examine it properly.',refs:[96,132],offer:[]},pending:'physio'}],['big-toe-joint','Big toe joint',['bunion','hallux']],['outer-edge','Outer edge of the foot',['peroneal']],['toes','Toes',[],{g20:true,deadEndCard:{text:'Toe pain has several possible causes, from an injury to a joint problem. After a stub or a knock, a broken toe is possible. A physiotherapist or doctor can examine it properly.',refs:[135],offer:[]},pending:'physio'}]],
+  flags:[['OR1','Do you have diabetes, and new foot pain, redness, swelling or a wound?','sameday',[136],'Please contact a doctor or foot service within 1 working day.'],
+         ['OR2','After an injury: a changed shape, a snap, or you can\'t walk or go on tiptoe, or a toe looks bent or badly bruised?','doctor',[127,135],'A broken bone (for example a broken toe) is possible. Please see a doctor.']],
+  qs:[['F1','Is it worst with your first steps in the morning or after sitting, easing a bit as you walk?',{plantar:1,sever:1},{plantar:-1},{onlySubs:['bottom-heel','back-heel-child','arch']}],
+      ['F2','Is it burning, tingling, or like walking on a pebble between your toes, worse in tight shoes?',{morton:1},{},{onlySubs:['ball-3rd-4th','ball-other-toes']}],
+      // gout follows the fever routing: no fever -> see a doctor today (same-day); fever already handled by C4/C4f. pending physio
+      ['F3','Did a joint (often the big toe) suddenly become very painful, red, hot and swollen?',{route:'sameday',card:'Gout or a joint infection is possible. Please see a doctor today.',refs:[57,13],pending:'physio'},{}],
+      ['F4','Has pain on the top of the foot built up with more walking or running, with one sore spot on a bone?',{route:'doctor',card:'A stress fracture in the foot is possible. Please see a doctor.',refs:[96]},{}],
+      ['F5','Is there a hard, bony lump on the side of your foot, by your big toe?',{bunion:1,pending:'physio',refs:[133]},{},{onlySubs:['big-toe-joint']}],
+      ['F6','Is your big toe joint stiff, and does it hurt most as you push off when walking or on stairs?',{hallux:1,pending:'physio',refs:[138]},{},{onlySubs:['big-toe-joint']}],
+      ['F7','Since an earlier ankle sprain, has your ankle felt unstable or given way?',{peroneal:1,pending:'physio',refs:[137]},{},{onlySubs:['outer-edge']}]]}
+};
+// Thigh picker: part x height -> region + sub
+const THIGH={parts:[['front','Front'],['outer','Outer'],['back','Back'],['inner','Inner']],heights:[['high','High'],['middle','Middle'],['low','Low'],['knee','Knee area']],
+ map(p,h){if(h==='knee')return ['knee',null];
+  if(p==='front')return ['thigh_front',{high:'front-upper',middle:'front-middle',low:'front-lower'}[h]];
+  if(p==='outer')return ['thigh_front','outer'];
+  if(p==='back')return ['thigh_back',{high:'high',middle:'middle',low:'lower'}[h]];
+  return ['thigh_inner',{high:'high',middle:'middle',low:'lower'}[h]];}};
+const NOT_COVERED=['Head','Chest','Abdomen'];
+// conditions: name, refs, area (data-muscle-id / data-strand / data-sub), kind, what a physio would check, plan
+const K=(name,refs,area,kind,check,o={})=>({name,refs,area,kind,check,...o});
+const CONDITIONS={
+ neck_mob:K('Stiff, sore neck (mechanical neck pain)',[16,17],'neck.cervical_paraspinals','joint','How far and how comfortably your neck turns and bends, and your posture.'),
+ neck_rad:K('Neck pain with an irritated nerve (radiculopathy)',[16,18,17],'into-arm','nerve','Feeling, strength and reflexes in your arm, and a cluster of neck tests.'),
+ whiplash:K('Whiplash-associated neck pain',[20,16],'neck.cervical_paraspinals','joint','Neck movement and control after the jolt, and nerve checks.'),
+ neck_head:K('Neck-related headache (cervicogenic)',[16],'neck.suboccipitals','joint','Whether moving or holding your neck brings on the headache.'),
+ rc:K('Rotator cuff-related shoulder pain',[26,27,28],'rc.supraspinatus','tendon','Pain and strength as you lift and turn your arm against resistance.'),
+ frozen:K('Frozen shoulder',[29,30,31],'deep','joint','How far your shoulder moves when someone else moves it for you.'),
+ sh_oa:K('Shoulder osteoarthritis',[33,2,52],'deep','joint','Movement, grinding and your age and history.',{ageMin:45}),
+ ac:K('AC joint pain or sprain',[33],'top','joint','Tenderness on the bony point and pain reaching across your body.'),
+ lat_elbow:K('Lateral elbow tendinopathy ("tennis elbow")',[38,39],'elbow.common_extensor','tendon','Grip strength and pain when straightening the wrist or middle finger against resistance.'),
+ med_elbow:K('Medial elbow tendinopathy ("golfer\'s elbow")',[40],'elbow.common_flexor','tendon','Pain when bending the wrist or turning the palm down against resistance.'),
+ ulnar:K('Ulnar nerve irritation',[41],'inner','nerve','Feeling and strength in the ring and little fingers, and nerve tests at the elbow.'),
+ olec:K('Olecranon bursitis',[42],'point','bursa','The swelling, and signs of infection such as heat and redness.'),
+ biceps:K('Distal biceps tendon injury',[43],'elbow.distal_biceps','tendon','The "hook test" and strength turning the palm up.'),
+ carpal:K('Carpal tunnel syndrome',[46,47],'wrist.median_nerve','nerve','Feeling and thumb strength, and tests that press on the nerve at the wrist.'),
+ dequervain:K('De Quervain\'s tenosynovitis',[48],'wrist.first_dorsal_compartment','tendon','Pain on the thumb side when the thumb is tucked in and the wrist is bent.'),
+ hand_oa:K('Thumb-base or finger osteoarthritis',[2,52],'wrist.thumb_cmc','joint','Joint shape, grinding and grip, with your age.',{ageMin:45}),
+ trigger:K('Trigger finger',[55],'wrist.flexor_tendon_a1','tendon','A tender nodule in the palm and the catching as you bend the finger.'),
+ ganglion:K('Ganglion cyst',[56],'back-of-wrist','bursa','The lump: whether it is smooth, moves, and lets light through.'),
+ thoracic:K('Mechanical upper or mid back pain',[59,10],'back.rhomboids','joint','Movement of your upper back and ribs, and ruling out other causes.'),
+ costo:K('Costochondritis (chest wall pain)',[60,61],'chest-wall-front','chestwall','Whether pressing on the rib joints by the breastbone brings on the pain.'),
+ lbp:K('Non-specific (mechanical) low back pain',[69,70,71,10],'back.erector_spinae','back','How you move and bend, and ruling out warning signs.'),
+ sciatica:K('Sciatica (an irritated nerve from the back)',[11,69],'back.gluteal','nerve','Leg feeling, strength and reflexes, and a straight-leg raise.'),
+ sij:K('Sacroiliac joint pain',[72],'back.gluteal','back','A cluster of tests that stress the joint at the back of the pelvis.'),
+ stenosis:K('Lumbar spinal stenosis',[73],'back.erector_spinae','back','Walking tolerance and how leaning forward changes your leg pain.',{ageMin:45}),
+ hip_oa:K('Hip osteoarthritis',[2,77,78],'hip.iliopsoas','joint','Hip rotation and stiffness, with your age.',{ageMin:45}),
+ fai:K('Hip impingement (FAI) or labral pain',[79,80],'hip.iliopsoas','joint','Pain when the hip is bent and turned inwards.',{ageMax:44}),
+ gtps:K('Outer hip pain (greater trochanteric pain syndrome)',[81,78],'hip.gluteus_medius','tendon','Tenderness on the outer hip bone and pain standing on one leg.'),
+ adductor_groin:K('Adductor-related groin pain',[82,83],'hip.adductor_longus','tendon','Pain and strength when squeezing your knees together.'),
+ hip_referred:K('Pain referred from the lower back',[11,69],'buttock','back','Your lower back as well as your hip.'),
+ quad_strain:K('Quadriceps (front thigh) strain',[88,89,90],'quad.rectus_femoris','muscle','Pain and strength straightening the knee, and a stretch of the front thigh.'),
+ quad_contusion:K('Thigh bruise (quadriceps contusion)',[88,92],'quad.vastus_lateralis','muscle','How far your knee bends, and swelling.'),
+ meralgia:K('Meralgia paraesthetica (a squashed thigh skin nerve)',[93,94],'outer','nerve','The area of altered feeling on the outer front thigh.'),
+ itb:K('Iliotibial band (ITB) syndrome',[95],'itb.iliotibial_band','tendon','Tenderness on the outer knee and pain as the knee bends with running.'),
+ ham_sprint:K('Hamstring strain (sprinting type)',[99,100,101],'hamstring.bf_long','muscle','Where it is tender, its length, and strength bending the knee.'),
+ ham_stretch:K('Hamstring strain (stretching type)',[100],'hamstring.semimembranosus','muscle','Tenderness near the sitting bone and pain on a stretch.'),
+ pht:K('Proximal hamstring tendinopathy',[102,103],'hamstring.semimembranosus','tendon','Pain at the sitting bone with loading and sitting tests.'),
+ add_strain:K('Adductor (inner thigh) strain',[83,82],'adductor.longus','muscle','Pain and strength when squeezing your knees together.'),
+ pfp:K('Pain around the kneecap (patellofemoral pain)',[105,106],'knee.patellofemoral','joint','Pain with squatting and steps, and how your hip and knee line up.'),
+ pat_tendon:K('Patellar tendinopathy',[107,103],'knee.patellar_tendon','tendon','Tenderness just below the kneecap and pain on a single-leg squat.',{ageMin:16}),
+ osgood:K('Osgood-Schlatter (growing knees)',[3],'knee.tibial_tuberosity','bone','The bump below the knee in a growing teenager.',{ageMax:17}),
+ meniscus:K('Meniscus (knee cartilage) irritation',[108],'knee.medial','joint','Joint-line tenderness and tests that twist the bent knee.'),
+ ligament:K('Knee ligament sprain',[109],'knee.medial','joint','Knee stability tests after a twist or blow.'),
+ knee_oa:K('Knee osteoarthritis',[2,52],'whole-knee-swollen','joint','Knee movement, grinding and short morning stiffness, with your age.',{ageMin:45}),
+ baker:K('Baker\'s cyst',[104],'knee.popliteal','bursa','The swelling behind the knee, and the calf to rule out a clot.'),
+ mtss:K('Shin splints (medial tibial stress syndrome)',[112,113,114],'shin.tibialis_posterior','bone','Tenderness along the inner shin edge over 5 cm or more, and your training load.'),
+ cecs:K('Exertional compartment syndrome',[115],'shin.tibialis_anterior','muscle','Symptoms during and after exercise; may need special pressure testing.'),
+ calf_strain:K('Calf strain',[116,91],'calf.gastroc_medial','muscle','Tenderness, calf raise strength, and the Achilles to rule out a tear.'),
+ ankle_sprain:K('Outer ankle sprain',[119,120,121],'ankle.atfl','joint','Ligament tenderness, swelling and the Ottawa rules for an X-ray.'),
+ ach_mid:K('Achilles tendinopathy (midportion)',[123,103],'achilles.midportion','tendon','Tenderness and thickening 2–6 cm above the heel, and calf raises.'),
+ ach_ins:K('Achilles tendinopathy (insertional)',[124],'achilles.insertion','tendon','Tenderness where the tendon meets the heel bone.'),
+ peroneal:K('Peroneal tendon problem',[137,128],'ankle.peroneals','tendon','Pain and strength turning the foot outwards.'),
+ tarsal:K('Tarsal tunnel syndrome',[129],'inner','nerve','Feeling in the sole and tapping over the nerve behind the inner ankle bone.'),
+ plantar:K('Plantar heel pain (plantar fasciitis)',[130,131],'foot.plantar_fascia_insertion','tendon','Tenderness under the heel and first-step pain.'),
+ sever:K('Sever\'s disease (growing heels)',[4],'foot.calcaneal_apophysis','bone','Squeezing the back of the heel in a growing child or teen.',{ageMax:17}),
+ morton:K('Morton\'s neuroma',[132],'foot.interdigital_nerve','nerve','Squeezing the forefoot and pressing between the 3rd and 4th toes.'),
+ bunion:K('Bunion (hallux valgus)',[133],'foot.first_mtp','joint','The angle of the big toe and your footwear.'),
+ // new (I-13), pending physio. Art has no knee.prepatellar zone yet, so 'around-kneecap' is used.
+ prepatellar:K('Prepatellar bursitis (swelling on the front of the kneecap)',[42,139,140],'knee.prepatellar_bursa','bursa','The swelling on the kneecap, and signs of infection such as heat, redness, broken skin or fever.',{pending:'physio'}),
+ // new (I-14), pending physio
+ ankle_oa:K('Ankle osteoarthritis',[2,52],'front','joint','Ankle movement, swelling and short morning stiffness, with your age.',{ageMin:45,pending:'physio'}),
+ hallux:K('Stiff big toe (hallux rigidus)',[138,134],'foot.first_mtp','joint','How far the big toe bends upwards.')
+};
+const PLAN_BY_KIND={muscle:['protect','compress','cold','move'],joint:['protect','move','heat'],tendon:['protect','move'],bursa:['protect','cold','move'],nerve:['move'],back:['move','heat','massage'],bone:['protect','move'],chestwall:['protect','heat','move']};
+const LOWER_LIMB=['thigh_front','thigh_back','thigh_inner','knee','shin_calf','ankle_achilles','foot'];
+
+/* ===== APP ===== */
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const DEBUG=new URLSearchParams(location.search).has('debug');
+const STEPS=['s-gate','s-core','s-map','s-zoom','s-text','s-rcheck','s-q','s-res'];
+let S;function fresh(){S={step:0,core:{},region:null,side:null,sub:null,tender:null,stiff:null,age:null,text:'',rflags:{},qi:0,ans:{},route:[],switched:[],scores:null,result:null,thigh:{}};}
+fresh();
+function say(t){$('#live').textContent=t}
+function go(id){$$('main>section').forEach(s=>s.hidden=s.id!==id);const i=STEPS.indexOf(id);if(i>=0)S.step=i;
+ $$('#dots i').forEach((d,k)=>d.classList.toggle('on',k<=S.step));$('#backBtn').hidden=id==='s-gate';
+ if(id!=='s-zoom')$('#zoomSlot').innerHTML='';if(id!=='s-res')$('#resArt')&&($('#resArt').innerHTML='');
+ const h=$('#'+id+' h1,#'+id+' h2');if(h){h.tabIndex=-1;h.focus({preventScroll:true})}window.scrollTo(0,0)}
+const hist=[];function nav(id){hist.push($$('main>section').find(s=>!s.hidden).id);go(id)}
+function back(){const p=hist.pop();if(p)go(p)}
+function srcLinks(ns){return [...new Set(ns)].filter(n=>REFS[n]).map(n=>`<a href="${REFS[n][1]}" target="_blank" rel="noopener">[${n}] ${esc(REFS[n][0])}</a>`).join(' · ')}
+function yn(name,cur){return `<div class="yn" role="group"><button type="button" class="ynb" data-n="${name}" data-v="yes" aria-pressed="${cur==='yes'}">Yes</button><button type="button" class="ynb" data-n="${name}" data-v="no" aria-pressed="${cur==='no'}">No</button></div>`}
+function pend(o){return DEBUG&&o&&o.pending?' <span class="pend">pending physio</span>':''}
+
+/* ---- Stop / amber cards ---- */
+function routeCard(level,extra,refs,noHead){const L=ROUTING.levels[level];
+ return `<div class="rcard ${L.kind}" data-level="${level}">${noHead?'':`<h3>${L.head}</h3>`}${extra?`<p><strong>${esc(extra)}</strong></p>`:''}<p>${L.text}</p>${L.tel?'<a class="tel" href="tel:112">Call 112</a>':''}${L.link112?'<p>If it is an emergency, <a href="tel:112">call 112</a>.</p>':''}${refs&&refs.length?`<p class="src">Based on: ${srcLinks(refs)}</p>`:''}</div>`}
+function stop(level,extra,refs){$('#stopBody').innerHTML=routeCard(level,extra,refs,true);$('#stopH').textContent=ROUTING.levels[level].head;nav('s-stop')}
+function worst(levels){const order=['emergency','sameday','doctor'];for(const o of order)if(levels.includes(o))return o;return null}
+
+/* ---- Screen 0: gate + age ---- */
+$('#agreeBtn').onclick=()=>{const a=$('input[name=age16]:checked');if(!a){$('#gateMsg').textContent='Please tell us if you are 16 or over.';return}
+ if(a.value==='no'){$('#stopBody').innerHTML=`<div class="rcard amber"><h3>Please see a doctor with a parent</h3><p>${ROUTING.minAge.text}</p></div>`;$('#stopH').textContent='Please see a doctor with a parent';nav('s-stop');return}
+ nav('s-core');renderCore()};
+
+/* ---- Screen 1: core check ---- */
+function renderCore(){let h='';for(const r of ROUTING.core){h+=`<div class="ynrow"><p>${r.q}${pend(r)}</p>${yn(r.id,S.core[r.id])}</div>`;
+  if(r.followUp&&S.core[r.id]==='yes'){const f=r.followUp;h+=`<div class="ynrow follow"><p>${f.q}${pend(f)}</p>${yn(f.id,S.core[f.id])}</div>`}}
+ $('#coreList').innerHTML=h;const need=ROUTING.core.flatMap(r=>r.followUp&&S.core[r.id]==='yes'?[r.id,r.followUp.id]:[r.id]);
+ $('#coreGo').disabled=!need.every(id=>S.core[id]);}
+$('#coreList').onclick=e=>{const b=e.target.closest('.ynb');if(!b)return;S.core[b.dataset.n]=b.dataset.v;renderCore();$(`.ynb[data-n="${b.dataset.n}"][data-v="${b.dataset.v}"]`).focus()};
+$('#coreGo').onclick=()=>{const lv=[],refs=[];S.route=[];
+ for(const r of ROUTING.core){if(S.core[r.id]==='yes'){lv.push(r.yes);refs.push(...r.src);if(r.followUp&&S.core[r.followUp.id]==='yes'){lv.push(r.followUp.yes);refs.push(...r.followUp.src)}if(!ROUTING.levels[r.yes].stops)S.route.push({level:r.yes,text:r.q.replace('?',''),refs:r.src})}}
+ const w=worst(lv);if(w){stop(w,null,refs);return}
+ if(S.route.length){$('#amberBody').innerHTML=routeCard('soon','You said: '+S.route.map(x=>x.text.toLowerCase()).join('; ')+'.',S.route[0].refs);nav('s-amber');return}
+ nav('s-map');drawMap()};
+$('#amberGo').onclick=()=>{nav('s-map');drawMap()};
+
+/* ---- Screen 2: body map ---- */
+const BODY=`<g class="silhouette"><circle cx="100" cy="34" r="22"/><path d="M90 54 L110 54 L112 66 L146 74 C158 78 162 90 162 100 L170 200 L160 204 L148 112 L144 210 L140 236 L130 410 L108 412 L102 250 L98 250 L92 412 L70 410 L60 236 L56 210 L52 112 L40 204 L30 200 L38 100 C38 90 42 78 54 74 L88 66Z"/></g>`;
+// [region, side(person), cx, cy, rx, ry]; front: viewer-left = person's right
+const ZONES={front:[['Head',null,100,34,20,20],['Chest',null,100,100,22,16],['Abdomen',null,100,160,20,20],['shoulder','right',56,84,13,12],['shoulder','left',144,84,13,12],['elbow','right',44,146,11,13],['elbow','left',156,146,11,13],['wrist_hand','right',34,198,11,13],['wrist_hand','left',166,198,11,13],['hip_groin','right',80,222,14,11],['hip_groin','left',120,222,14,11],['thigh','right',80,262,14,20],['thigh','left',120,262,14,20],['knee','right',81,304,12,12],['knee','left',119,304,12,12],['shin_calf','right',78,346,11,22],['shin_calf','left',122,346,11,22],['ankle_achilles','right',76,388,10,9],['ankle_achilles','left',124,388,10,9],['foot','right',72,410,12,8],['foot','left',128,410,12,8]],
+ back:[['neck',null,100,62,12,9],['shoulder','left',56,84,13,12],['shoulder','right',144,84,13,12],['upper_back',null,100,110,22,22],['lower_back',null,100,176,24,22],['elbow','left',44,146,11,13],['elbow','right',156,146,11,13],['thigh','left',80,262,14,20],['thigh','right',120,262,14,20],['knee','left',81,304,12,12],['knee','right',119,304,12,12],['shin_calf','left',78,346,11,22],['shin_calf','right',122,346,11,22],['ankle_achilles','left',76,390,10,10],['ankle_achilles','right',124,390,10,10]]};
+let view='front';
+const RNAME=r=>r==='thigh'?'Thigh':REGIONS[r]?REGIONS[r].name:r;
+function drawMap(){const z=ZONES[view].map(([r,s,x,y,rx,ry])=>{const sel=(S.region===r||(r==='thigh'&&S.thighPick))&&(!s||S.side===s||S.side==='both');
+  return `<ellipse class="zone${sel?' sel':''}" tabindex="0" role="button" data-r="${r}" data-s="${s||''}" cx="${x}" cy="${y}" rx="${Math.max(rx,13)}" ry="${Math.max(ry,13)}" aria-label="${RNAME(r)}${s?' ('+s+')':''}"/>`}).join('');
+ $('#bodymap').innerHTML=BODY+z+`<text class="maplbl" x="${view==='front'?6:150}" y="430">right</text><text class="maplbl" x="${view==='front'?160:10}" y="430">left</text>`;
+ $$('[data-view]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.view===view));
+ const chips=[...Object.keys(REGIONS).filter(k=>!k.startsWith('thigh_')).map(k=>[k,REGIONS[k].name]),['thigh','Thigh'],['several','Several places'],...NOT_COVERED.map(n=>[n,n])];
+ $('#regionChips').innerHTML=chips.map(([k,n])=>`<button type="button" class="chip" data-r="${k}" aria-pressed="${S.region===k||(k==='thigh'&&!!S.thighPick)}">${n}</button>`).join('');
+ const nosd=S.region&&REGIONS[S.region]&&REGIONS[S.region].noSide;
+ $('#sideOpts').innerHTML=nosd?'<p class="muted">No side needed for this area.</p>':['right','left','both'].map(s=>`<button type="button" class="chip" data-side="${s}" aria-pressed="${S.side===s}">${s[0].toUpperCase()+s.slice(1)}</button>`).join('');
+ $('#ageOpts').innerHTML=AGES.map(([v,l])=>`<button type="button" class="chip" data-age="${v}" aria-pressed="${S.age===v}">${l}</button>`).join('');
+ $('#mapGo').disabled=!((S.region||S.thighPick)&&(nosd||S.side));}
+function pick(r,s){$('#mapMsg').innerHTML='';
+ if(NOT_COVERED.includes(r)){S.region=null;S.thighPick=false;$('#mapMsg').innerHTML=`<div class="rcard amber"><h3>${r}: not covered in this version</h3><p>Please see a doctor or physio about pain here.${r==='Chest'?' <strong>If you have chest pain or breathlessness, call <a href="tel:112">112</a> now.</strong>':''}</p></div>`;drawMap();return}
+ if(r==='several'){S.region=null;S.thighPick=false;$('#mapMsg').innerHTML=`<div class="rcard amber"><h3>Pain in several places</h3><p>Pain in several places at once is best checked in person. Please see a doctor or physio. If you feel unwell with it, see a doctor today.</p></div>`;drawMap();return}
+ S.thighPick=r==='thigh';S.region=r==='thigh'?null:r;if(s)S.side=s;else if(REGIONS[r]&&REGIONS[r].noSide)S.side='both';drawMap();say(RNAME(r)+' chosen')}
+$('#bodymap').onclick=e=>{const z=e.target.closest('.zone');if(z)pick(z.dataset.r,z.dataset.s||null)};
+$('#bodymap').onkeydown=e=>{if((e.key==='Enter'||e.key===' ')&&e.target.closest('.zone')){e.preventDefault();e.target.dispatchEvent(new MouseEvent('click',{bubbles:true}))}};
+$('#regionChips').onclick=e=>{const b=e.target.closest('.chip');if(b)pick(b.dataset.r)};
+$('#sideOpts').onclick=e=>{const b=e.target.closest('[data-side]');if(b){S.side=b.dataset.side;drawMap()}};
+$('#ageOpts').onclick=e=>{const b=e.target.closest('[data-age]');if(b){S.age=S.age===b.dataset.age?null:b.dataset.age;drawMap()}};
+$$('[data-view]').forEach(b=>b.onclick=()=>{view=b.dataset.view;drawMap()});
+$('#mapGo').onclick=()=>{S.sub=null;S.tender=null;S.stiff=null;S.thigh={};nav('s-zoom');renderZoom()};
+
+/* ---- Screen 3: zoom slot ---- */
+const artCache={};
+async function loadArt(slug){if(artCache[slug]!==undefined)return artCache[slug];
+ try{const r=await fetch(`art/zoom/${slug}.svg`,{cache:'no-store'});if(!r.ok)throw 0;const t=await r.text();if(!t.includes('<svg'))throw 0;artCache[slug]=t}catch{artCache[slug]=null}return artCache[slug]}
+function placeholder(reg){const R=REGIONS[reg];const subs=R.subs.filter(s=>!(s[3]&&s[3].chipOnly));const h=Math.min(56,300/Math.max(subs.length,1));
+ return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 400" class="ph" role="group" aria-label="${R.name}: drawing coming"><rect x="6" y="6" width="308" height="388" rx="14" fill="none" stroke="#14213a" stroke-width="1.5" stroke-dasharray="6 4"/><text class="phl" x="160" y="40" text-anchor="middle">${R.name}</text><text class="phl dim" x="160" y="64" text-anchor="middle">drawing coming</text>${subs.map((s,i)=>`<g class="sub" data-sub="${s[0]}"><rect class="hit" x="30" y="${84+i*h}" width="260" height="${h-8}" rx="10"/><text class="phl small" x="160" y="${84+i*h+(h-8)/2+5}" text-anchor="middle">${esc(s[1])}</text></g>`).join('')}</svg>`}
+async function fillSlot(el,reg){const R=REGIONS[reg];el.innerHTML='<p class="muted">Loading drawing…</p>';const t=await loadArt(R.art);
+ // Left side: mirror the drawing wrapper only (right-side art). 'Both' uses the right view. Inner/outer labels are anatomical, so they stay the same after mirroring.
+ const mir=S.side==='left'&&!!t&&!R.noSide;
+ el.innerHTML=`<div class="drawwrap">${t||placeholder(reg)}</div>${mir?'<p class="mirrorcap">Shown for your left side</p>':''}`;el.dataset.src=t?`art/zoom/${R.art}.svg`:'placeholder';el.dataset.mirror=mir?'left':'right';el.classList.toggle('mirror',mir);
+ const svg=el.querySelector('svg');if(svg){svg.removeAttribute('width');svg.removeAttribute('height');svg.classList.add('zoomsvg')}return svg}
+function thighRows(){return `<fieldset><legend>Which part?</legend><div class="chips">${THIGH.parts.map(([v,l])=>`<button type="button" class="chip" data-tp="${v}" aria-pressed="${S.thigh.p===v}">${l}</button>`).join('')}</div></fieldset>
+ <fieldset><legend>How high?</legend><div class="chips">${THIGH.heights.map(([v,l])=>`<button type="button" class="chip" data-th="${v}" aria-pressed="${S.thigh.h===v}">${l}</button>`).join('')}</div></fieldset>`}
+async function renderZoom(){const zs=$('#zoomSlot');
+ if(S.thighPick&&!S.region){$('#zoomH').textContent='Show us exactly where: thigh';$('#subChips').innerHTML=thighRows();zs.innerHTML='';$('#zoomExtra').hidden=true;zoomReady();return}
+ const R=REGIONS[S.region];$('#zoomH').textContent='Show us exactly where: '+R.name.toLowerCase();
+ $('#subChips').innerHTML=`<div class="chips" role="group" aria-label="Exact spot">${R.subs.map(([id,l])=>`<button type="button" class="chip" data-sub="${id}" aria-pressed="${S.sub===id}">${esc(l)}</button>`).join('')}</div>`;
+ $('#zoomExtra').hidden=false;$('#tender').innerHTML=yn('tender',S.tender);
+ $('#stiff').innerHTML=[['no','No'],['short','Yes, under 30 minutes after waking'],['long','Yes, longer than 30 minutes']].map(([v,l])=>`<button type="button" class="chip" data-stiff="${v}" aria-pressed="${S.stiff===v}">${l}</button>`).join('');
+ const svg=await fillSlot(zs,S.region);if(svg){svg.querySelectorAll('.sub').forEach(g=>{g.setAttribute('tabindex','0');g.setAttribute('role','button');const s=R.subs.find(x=>x[0]===g.dataset.sub);if(s)g.setAttribute('aria-label',s[1]);else g.style.display='none'})}
+ syncSub();}
+function syncSub(){$$('#zoomSlot .sub').forEach(g=>g.classList.toggle('sel',g.dataset.sub===S.sub));$$('#subChips [data-sub]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.sub===S.sub));
+ $('#tender')&&($('#tender').innerHTML=yn('tender',S.tender));$$('#stiff [data-stiff]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.stiff===S.stiff));zoomReady()}
+function zoomReady(){$('#zoomGo').disabled=!(S.region&&S.sub&&S.tender&&S.stiff)}
+function chooseSub(id){S.sub=id;const s=REGIONS[S.region].subs.find(x=>x[0]===id);syncSub();say(s[1]+' chosen');
+ const o=s[3]||{};if(o.jump){}}
+$('#zoomSlot').onclick=e=>{const g=e.target.closest('.sub');if(g&&S.region)chooseSub(g.dataset.sub)};
+$('#zoomSlot').onkeydown=e=>{const g=e.target.closest('.sub');if(g&&(e.key==='Enter'||e.key===' ')){e.preventDefault();chooseSub(g.dataset.sub)}};
+$('#subChips').onclick=e=>{const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.sub){chooseSub(b.dataset.sub);return}
+ if(b.dataset.tp)S.thigh.p=b.dataset.tp;if(b.dataset.th)S.thigh.h=b.dataset.th;
+ if(b.dataset.th==='knee'){S.thigh.p=S.thigh.p||'front'}
+ if(S.thigh.p&&S.thigh.h){const [reg,sub]=THIGH.map(S.thigh.p,S.thigh.h);S.region=reg;S.thighPick=false;S.sub=sub;if(reg==='knee')say('Moving you to the knee');renderZoom();return}
+ $('#subChips').innerHTML=thighRows()};
+$('#zoomExtra').onclick=e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.n==='tender')S.tender=b.dataset.v;if(b.dataset.stiff)S.stiff=b.dataset.stiff;syncSub()};
+$('#zoomGo').onclick=()=>{const s=REGIONS[S.region].subs.find(x=>x[0]===S.sub),o=s[3]||{};
+ if(o.switchTo){toast(`Moving you to ${REGIONS[o.switchTo].name}`);S.switched.push(S.region);S.region=o.switchTo;S.sub=o.switchSub||null;renderZoom();return}
+ if(o.route){const L=ROUTING.levels[o.route];if(L.stops){stop(o.route,o.card,o.refs);return}}
+ nav('s-text');$('#ownWords').value=S.text;count()};
+
+/* ---- Screen 4: own words ---- */
+function count(){$('#wc').textContent=`${$('#ownWords').value.length} / 280`}
+$('#ownWords').oninput=count;
+function textGo(skip){S.text=skip?'':$('#ownWords').value.trim();
+ if(S.text&&ROUTING.textWarn.pattern.test(S.text)){$('#textWarn').innerHTML=routeCard('emergency','Some words you wrote can be a warning sign (for example bladder or bowel problems, a numb groin, not being able to walk, or chest pain). If any of these is happening now:')+`<button type="button" class="btn secondary" id="textOk">None of these is happening now. Carry on</button>`;$('#textWarn').hidden=false;$('#textOk').onclick=()=>{S.textWarned=true;$('#textWarn').hidden=true;toRcheck()};return}
+ toRcheck()}
+$('#textGo').onclick=()=>textGo(false);$('#textSkip').onclick=()=>textGo(true);
+
+/* ---- Screen 5: region check ---- */
+function toRcheck(){S.rflags={};nav('s-rcheck');renderR()}
+function renderR(){const R=REGIONS[S.region];$('#rH').textContent=`A quick check for your ${R.name.toLowerCase()}`;
+ $('#rList').innerHTML=R.flags.map(([id,q])=>`<div class="ynrow"><p>${q}</p>${yn(id,S.rflags[id])}</div>`).join('');$('#rGo').disabled=!R.flags.every(f=>S.rflags[f[0]])}
+$('#rList').onclick=e=>{const b=e.target.closest('.ynb');if(!b)return;S.rflags[b.dataset.n]=b.dataset.v;renderR()};
+$('#rGo').onclick=()=>{const R=REGIONS[S.region];const hit=R.flags.filter(f=>S.rflags[f[0]]==='yes');
+ if(hit.length){const w=worst(hit.map(f=>f[2]))||hit[0][2];const f=hit.find(x=>x[2]===w);
+  if(ROUTING.levels[w].stops){stop(w,f[4]||null,hit.flatMap(x=>x[3]));return}S.route.push({level:w,text:f[4]||f[1],refs:f[3]})}
+ S.qi=0;S.ans={};S.qlist=qsFor(S.region,S.sub);nav('s-q');renderQ()};
+
+/* ---- Screen 6: questions ---- */
+function renderQ(){const Q=S.qlist;const q=Q[S.qi];$('#qProg').textContent=`Question ${S.qi+1} of ${Q.length}`;
+ $('#qCard').innerHTML=`<p class="qtext" id="qText">${q[1]}</p><div class="bigyn"><button type="button" class="btn big" data-a="yes">Yes</button><button type="button" class="btn big secondary" data-a="no">No</button></div><button type="button" class="linkbtn" data-a="unsure">Not sure</button>`;$('#qText').focus&&0}
+$('#qCard').onclick=e=>{const b=e.target.closest('[data-a]');if(!b)return;const Q=S.qlist;const q=Q[S.qi];S.ans[q[0]]=b.dataset.a;
+ const eff=b.dataset.a==='yes'?q[2]:b.dataset.a==='no'?q[3]:{};
+ if(eff.switch){toast(`Moving you to ${REGIONS[eff.switch].name}`);S.switched.push(S.region);S.region=eff.switch;S.sub=null;S.tender=null;S.stiff=null;nav('s-zoom');renderZoom();return}
+ if(eff.route){const L=ROUTING.levels[eff.route];if(L.stops){stop(eff.route,eff.card,eff.refs||[]);return}S.route.push({level:eff.route,text:eff.card||q[1],refs:eff.refs||[]})}
+ if(S.qi<Q.length-1){S.qi++;renderQ();say(`Question ${S.qi+1}`)}else{S.result=evaluate();nav('s-res');renderResult()}};
+let tt;function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;say(m);clearTimeout(tt);tt=setTimeout(()=>t.hidden=true,1800)}
+
+/* ---- Engine (Part C) ---- */
+// v1.1 §2: questions with onlySubs are shown and scored only for those spots (ROUTING.onlySubs, ON permanently)
+function qsFor(region,sub){return REGIONS[region].qs.filter(q=>!(ROUTING.onlySubs&&q[4]&&q[4].onlySubs)||q[4].onlySubs.includes(sub))}
+function ageOk(c){if(!S.age)return true;const lo={'16-44':16,'45-64':45,'65+':65}[S.age];if(c.ageMin&&lo<c.ageMin)return false;if(c.ageMax&&lo>c.ageMax)return false;return true}
+function evaluate(region=S.region,sub=S.sub,ans=S.ans,tender=S.tender,stiff=S.stiff){const R=REGIONS[region];const s=R.subs.find(x=>x[0]===sub);const sc={};
+ for(const c of s[2])sc[c]=1;
+ for(const q of qsFor(region,sub)){const a=ans[q[0]];const eff=a==='yes'?q[2]:a==='no'?q[3]:{};for(const [k,v] of Object.entries(eff))if(CONDITIONS[k]&&(k in sc||v>0))sc[k]=(sc[k]||0)+v}
+ if(tender==='yes')for(const k in sc)if(TENDER_KINDS.includes(CONDITIONS[k].kind))sc[k]+=.5;
+ if(stiff==='short'&&['45-64','65+'].includes(S.age))for(const k in sc)if(/_oa$/.test(k))sc[k]+=1;
+ for(const k in sc)if(!ageOk(CONDITIONS[k]))sc[k]-=2;
+ const list=Object.entries(sc).map(([id,v])=>({id,score:v})).sort((a,b)=>b.score-a.score);
+ const shown=list.filter(x=>x.score>=2);let top=shown.slice(0,1);if(shown[1]&&shown[0].score-shown[1].score<=.5)top=shown.slice(0,2);
+ return {deadEnd:s[2].length===0,top,list,tie:top.length===2}}
+function strength(v){return v>=3?['Strong match',3]:['Possible',2]}
+
+/* ---- Screen 7: result ---- */
+function plansHtml(cid){const c=CONDITIONS[cid];let keys=[...PLAN_BY_KIND[c.kind]||['move']];if(LOWER_LIMB.includes(S.region)&&c.kind==='muscle')keys.splice(1,0,'elevate');
+ return keys.map(k=>{const p=PLANS[k];return `<article class="plan"><h3>${p.t}</h3><p>${p.use}</p><p class="not"><strong>When not to:</strong> ${p.not}</p><p class="src">Sources: ${p.src.map(s=>`<a href="${SRC[s][1]}" target="_blank" rel="noopener">${SRC[s][0]}</a>`).join(' · ')}</p></article>`}).join('')}
+async function renderResult(){const r=S.result;const R=REGIONS[S.region];const amb=S.route.map(x=>routeCard(x.level,x.text,x.refs)).join('');
+ const stiffNote=S.stiff==='long'?routeCard('soon','Stiffness lasting more than 30 minutes after waking can be inflammatory.',[36,53,74]):'';
+ const words=S.text?`<div class="note"><span class="hand">In your words</span><p>“${esc(S.text)}”</p></div>`:'';
+ const two='<p class="twoweek"><strong>If it isn\'t improving within about 2 weeks, or it gets worse, see a physiotherapist.</strong></p>';
+ let h='';
+ const so0=r.deadEnd&&((R.subs.find(x=>x[0]===S.sub)||[])[3]||{});
+ if(!r.top.length&&so0&&so0.g20&&ROUTING.deadEndCards){const dc=so0.deadEndCard;
+  h=`<div class="card g20card" data-outcome="deadend" data-deadend-card="${S.sub}"><span class="result-label g20chip">We can't narrow this one down yet</span><h2 id="resH">${esc(dc.head||'Please see a physio')}</h2><p>${esc(dc.text)}</p><p class="src">Based on: ${srcLinks(dc.refs)}</p>${dc.noPhysioLink?'':`<div class="row"><a class="btn" id="physioLink" href="${PHYSIO_MAPS_URL}" target="_blank" rel="noopener noreferrer">Find a physio near me</a></div>`}<p><a href="#" class="startlink" data-restart-link>Start again</a></p>${words}</div>`}
+ else if(!r.top.length){h=`<div class="card neutral" data-outcome="${r.deadEnd?'deadend':'nomatch'}">${r.deadEnd?'<span class="result-label">Not a diagnosis</span>':'<span class="result-label">Possible area, not a diagnosis</span>'}<h2 id="resH">${r.deadEnd?'Please see a physio':'We can\'t suggest a likely match. Please see a physiotherapist.'}</h2>${deadEndBody(r,R)}${words}${two}</div>${amb}${stiffNote}`}
+ else{h=r.top.map((t,i)=>{const c=CONDITIONS[t.id];const [w,n]=strength(t.score);
+   return `<div class="card rescard ${i?'second':'first'}" data-cond="${t.id}">${i===0?`<span class="result-label">Possible area, not a diagnosis</span>${r.tie?'<p class="either">Could be either</p>':''}`:''}
+   <h2 ${i===0?'id="resH"':''}>${esc(c.name)}</h2><p class="strandname">Area: ${esc(areaName(c.area))}</p>
+   <p class="subtext">Commonly seen with these answers. This isn't a diagnosis; only an examination can confirm it.</p>
+   <p class="strength"><span class="dots" aria-hidden="true">${[1,2,3].map(k=>`<i class="${k<=n?'on':''}"></i>`).join('')}</span>${w}</p>
+   <h3>What a physio would check</h3><p>${esc(c.check)}</p><p class="src">Source: ${srcLinks(c.refs)}</p></div>`}).join('');
+  // Engineer ruling: a condition with noArt (no shape in the art yet) shows as a plain card, no empty highlight
+  const artOn=r.top.some(t=>!CONDITIONS[t.id].noArt);
+  h=`<div class="resgrid${artOn?'':' plain'}" data-art="${artOn?'on':'off'}">${artOn?`<div><div id="resArt" class="zoomslot"></div><p class="muted cap">${r.tie?'Orange: first possible area. Yellow: second.':'Possible area shown in orange.'}</p></div>`:''}<div>${h}${words}${R.note?`<p class="muted">${R.note}</p>`:''}${amb}${stiffNote}
+   <button type="button" class="btn steps" id="stepsBtn" aria-expanded="false" aria-controls="plans">See safe first steps</button><div id="plans" hidden><h3>Safe first steps</h3>${plansHtml(r.top[0].id)}</div>${two}</div></div>`}
+ $('#resBody').innerHTML=h;$('#resH')&&$('#resH').focus();
+ const sb=$('#stepsBtn');if(sb)sb.onclick=()=>{const p=$('#plans');p.hidden=!p.hidden;sb.setAttribute('aria-expanded',!p.hidden)};
+ if(r.top.length&&$('#resArt')){const svg=await fillSlot($('#resArt'),S.region);if(svg){svg.classList.add('has-hot');r.top.forEach((t,i)=>{if(CONDITIONS[t.id].noArt)return;const a=CONDITIONS[t.id].area;const el=svg.querySelector(`.strand[data-strand="${a}"]`)||svg.querySelector(`[data-muscle-id="${a}"],[data-strand="${a}"],[data-sub="${a}"]`);if(el){el.classList.add(i?'hot2':'hot');el.parentNode.appendChild(el)}else{const g=svg.querySelector(`[data-sub="${S.sub}"]`);g&&g.classList.add(i?'hot2':'hot')}})}}}
+// Engineer ruling: fixed URL, query only. Never add the spot, region or answers.
+const PHYSIO_MAPS_URL='https://www.google.com/maps/search/?api=1&query=physiotherapist%20near%20me';
+function deadEndBody(r,R){const so=(R.subs.find(x=>x[0]===S.sub)[3])||{};const dc=ROUTING.deadEndCards&&so.deadEndCard;
+ if(r.deadEnd&&dc)return `<p data-deadend-card="${S.sub}">${esc(dc.text)}</p>${dc.refs.length?`<p class="src">Based on: ${srcLinks(dc.refs)}</p>`:''}${dc.offer.length?`<div class="row">${dc.offer.map(g=>`<button type="button" class="btn secondary" data-offer="${g}">Try the ${esc(REGIONS[g].name.toLowerCase())} path</button>`).join('')}</div>`:''}`;
+ if(r.deadEnd)return `<p>We don't have enough on pain in this exact spot (${esc(R.subs.find(x=>x[0]===S.sub)[1].toLowerCase())}) to suggest a possible area. A doctor or physiotherapist can examine it properly.</p>`;
+ return '<p>Your answers don\'t point clearly to one area. A physiotherapist can examine it properly.</p>'}
+$('#resBody').addEventListener('click',e=>{if(e.target.closest('[data-restart-link]')){e.preventDefault();restart();return}const b=e.target.closest('[data-offer]');if(!b)return;toast(`Moving you to ${REGIONS[b.dataset.offer].name}`);S.switched.push(S.region);S.region=b.dataset.offer;S.sub=null;S.tender=null;S.stiff=null;S.route=[];nav('s-zoom');renderZoom()});
+function areaName(a){if(a.includes('.'))return a.split('.').pop().replace(/_/g,' ');for(const R of Object.values(REGIONS)){const s=R.subs.find(x=>x[0]===a);if(s)return s[1].toLowerCase()}return a}
+
+/* ---- Journal + clear ---- */
+const JKEY='stillpoint-pain-journal-v1',APP_KEYS=[JKEY,'painmap-v1'];
+$('#saveBtn').onclick=()=>{let L=[];try{L=JSON.parse(localStorage.getItem(JKEY)||'[]');if(!Array.isArray(L))L=[]}catch{L=[]}
+ const n=new Date(),p=x=>String(x).padStart(2,'0');const R=REGIONS[S.region];const t=S.result.top;
+ L.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),region:(R.noSide?'':S.side+' ')+R.name,subLocation:S.sub,date:`${n.getFullYear()}-${p(n.getMonth()+1)}-${p(n.getDate())}T${p(n.getHours())}:${p(n.getMinutes())}`,context:'Pain Map: possible area, not a diagnosis',sensations:[],notes:(t.length?t.map(x=>CONDITIONS[x.id].name).join(' or '):'No likely match')+(S.text?' | In my words: '+S.text:''),conditionIds:t.map(x=>x.id),muscle_ids:t.map(x=>CONDITIONS[x.id].area)});
+ try{localStorage.setItem(JKEY,JSON.stringify(L));$('#saveBtn').textContent='Saved on this device';$('#saveBtn').disabled=true;say('Saved on this device.')}catch{say('Could not save in this browser.')}};
+function restart(){fresh();hist.length=0;$('#ownWords').value='';$('#textWarn').hidden=true;$('#saveBtn').disabled=false;$('#saveBtn').textContent='Save to my journal on this device';$$('input[name=age16]').forEach(i=>i.checked=false);go('s-gate')}
+$$('[data-restart]').forEach(b=>b.onclick=restart);
+$('#backBtn').onclick=back;
+$('#clearBtn').onclick=()=>{if(!confirm('Clear all Pain Map and journal data saved in this browser? This cannot be undone.'))return;APP_KEYS.forEach(k=>localStorage.removeItem(k));restart();say('All data on this device has been cleared.')};
+go('s-gate');
+if(DEBUG)window.PainMap={S,get state(){return S},ROUTING,REGIONS,CONDITIONS,evaluate,qsFor,setAge:a=>S.age=a}; // test hook, only with ?debug
+
+</script>
+</body>
+</html>
