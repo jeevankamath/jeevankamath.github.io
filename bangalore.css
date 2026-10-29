@@ -138,3 +138,21 @@ body{padding-bottom:var(--rh)}
 section.hero,section.closing{padding-bottom:calc(var(--rh) + 16px)}
 @media(max-height:720px) and (min-width:900px){:root{--rh:96px}section.hero{padding-top:24px}}
 @media(max-width:599px){.veh.moff{display:none!important}}
+/* short desktop screens: tighten the hero so "Book a 1:1" clears the road with no scrolling */
+@media(max-height:799px) and (min-width:900px){
+  body section.hero{min-height:0;padding:8px 0 calc(var(--rh) + 16px);align-items:flex-start}
+  body .hero>.wrap{padding-top:16px;padding-bottom:16px}
+  body .hero>.wrap>*{margin-top:0;margin-bottom:16px}
+  body .hero>.wrap>*:last-child{margin-bottom:0}
+  body .hero h1{font-size:clamp(32px,6vh,44px);line-height:1.15}
+  body .hero .eyebrow{margin-bottom:8px}
+  body .hero .cta-row{margin-top:0}
+  body .hero .quiz-q{margin:0 0 8px}
+  body .hero .quiz-result:empty{display:none}
+  body .hero .quiz{margin-bottom:16px}
+  body .hero .quiz-opts{margin:0}
+  body .hero .lead{font-size:16px;line-height:24px}
+  body .hero .paths{margin-top:0}
+  body .hero .paths{display:flex;gap:16px}
+  body .hero .path{flex:1;min-height:64px;max-height:64px;padding:6px 16px;display:flex;flex-direction:column;justify-content:center}
+}
