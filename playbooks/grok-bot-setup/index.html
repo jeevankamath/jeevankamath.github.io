@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en-GB" data-theme="colour">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grok Bot setup playbook: a plain-English guide for non-coders | Jeevan Kamath</title>
+<meta name="description" content="How to set up Grok Bot step by step, no coding needed: create bots, route work through a Chief bot, and use memory, routines, connectors and approvals safely.">
+<link rel="canonical" href="https://jeevankamath.github.io/playbooks/grok-bot-setup/">
+<meta name="author" content="Jeevan Kamath">
+<meta property="og:type" content="article"><meta property="og:title" content="How to set up Grok Bot: a step-by-step playbook for non-coders"><meta property="og:description" content="How to set up Grok Bot step by step, no coding needed: create bots, route work through a Chief bot, and use memory, routines, connectors and approvals safely."><meta property="og:url" content="https://jeevankamath.github.io/playbooks/grok-bot-setup/"><meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary"><meta name="twitter:title" content="How to set up Grok Bot: a playbook for non-coders"><meta name="twitter:description" content="How to set up Grok Bot step by step, no coding needed: create bots, route work through a Chief bot, and use memory, routines, connectors and approvals safely.">
+<link rel="preload" href="/assets/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
+<link rel="stylesheet" href="playbook.css">
+<link rel="stylesheet" href="theme-colour.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "How to set up Grok Bot: a step-by-step playbook for non-coders", "description": "How to set up Grok Bot step by step, no coding needed: create bots, route work through a Chief bot, and use memory, routines, connectors and approvals safely.", "inLanguage": "en-GB", "author": {"@type": "Person", "name": "Jeevan Kamath", "url": "https://jeevankamath.github.io/"}, "datePublished": "2026-10-29", "dateModified": "2026-10-29", "mainEntityOfPage": "https://jeevankamath.github.io/playbooks/grok-bot-setup/"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://jeevankamath.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Grok Bot setup playbook", "item": "https://jeevankamath.github.io/playbooks/grok-bot-setup/"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Do I need to code to use Grok Bot?", "acceptedAnswer": {"@type": "Answer", "text": "No. Lauren calls it \"basically like the cursor moment for people who are not in tech\" [53:29–53:37], and it works through a familiar chat interface."}}, {"@type": "Question", "name": "What's the difference between a bot and a skill?", "acceptedAnswer": {"@type": "Answer", "text": "A bot is a team member with a name, a job title and a charter. A skill is a written-down way of doing something, which you can teach by demonstration."}}, {"@type": "Question", "name": "How many bots should I start with?", "acceptedAnswer": {"@type": "Answer", "text": "One. Add more only when one domain clearly needs its own specialist."}}, {"@type": "Question", "name": "Can bots send emails for me?", "acceptedAnswer": {"@type": "Answer", "text": "They draft them for you. Emails and messages appear as a draft card, and nothing goes until you press Send."}}, {"@type": "Question", "name": "How do I log a bot into a website safely?", "acceptedAnswer": {"@type": "Answer", "text": "Use the screen handoff and sign in yourself. Never paste a password or code into chat."}}]}]</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="mbar"><button type="button" class="mtoc-btn" aria-expanded="false" aria-controls="toc">On this page ▾</button><div class="progress"><span></span></div></div>
+<div class="wrap">
+<nav id="toc" class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ol><li><a href="#quick-start-checklist-what-do-i-do-first">Quick-start checklist: what do I do first?</a></li><li><a href="#why-should-a-non-coder-build-an-ai-team-at-all">Why should a non-coder build an AI team at all?</a></li><li><a href="#the-10-steps-at-a-glance">The 10 steps at a glance</a></li><li><a href="#how-do-i-create-my-first-bot-and-name-its-role">How do I create my first bot and name its role?</a></li><li><a href="#how-do-i-orchestrate-a-team-of-bots">How do I orchestrate a team of bots?</a></li><li><a href="#how-do-memory-routines-connectors-and-approvals-work">How do memory, routines, connectors and approvals work?</a></li><li><a href="#how-do-i-keep-my-ai-team-secure">How do I keep my AI team secure?</a></li><li><a href="#how-do-i-test-and-debug-my-bots">How do I test and debug my bots?</a></li><li><a href="#how-do-i-grow-from-one-bot-to-a-full-team-without-it-getting">How do I grow from one bot to a full team without it getting messy?</a></li><li><a href="#faq">FAQ</a></li><li><a href="#copy-paste-prompt-library">Copy-paste prompt library</a></li><li><a href="#sources">Sources</a></li></ol></nav>
+<main id="main">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> › Grok Bot setup playbook</nav>
+<header class="hero">
+<p class="eyebrow">Playbook · Updated 29 Oct 2026 · 16 min read</p>
+<h1>How to set up Grok Bot: a step-by-step playbook for non-coders</h1>
+<svg xmlns="http://www.w3.org/2000/svg" class="mascot" viewBox="0 0 120 120" width="96" height="96" aria-hidden="true" focusable="false" fill="none" stroke="#1f3a5f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<!-- Grok Bot playbook guide. Decorative. Hooks: add class "mascot--blink" to <svg> for a slow blink (off under reduced motion); .m-eyes, .m-arm (wave), .m-antenna -->
+<circle cx="60" cy="62" r="54" fill="#ffe08a" stroke="none"/>
+<g class="m-antenna"><path d="M60 16v12"/><circle cx="60" cy="12" r="5" fill="#e8572a"/></g>
+<rect x="28" y="28" width="64" height="48" rx="16" fill="#fbfaf7"/>
+<rect x="36" y="38" width="48" height="28" rx="10" fill="#1f3a5f"/>
+<g class="m-eyes" fill="#ffc23d" stroke="none"><circle cx="49" cy="51" r="5"/><circle cx="71" cy="51" r="5"/></g>
+<path d="M52 59q8 5 16 0" stroke="#ffc23d"/>
+<circle cx="32" cy="58" r="3" fill="#ff8a7a" stroke="none"/><circle cx="88" cy="58" r="3" fill="#ff8a7a" stroke="none"/>
+<rect x="40" y="80" width="40" height="28" rx="10" fill="#e8572a"/>
+<path d="M52 92h16" stroke="#fbfaf7"/>
+<path d="M40 88q-12 2-14 12"/>
+<g class="m-arm"><path d="M80 88q12-4 16-16"/><circle cx="97" cy="69" r="4" fill="#2ec4b6"/></g>
+</svg>
+<p class="intro">Build a small team of AI bots without writing code. Each section opens with a short answer, then the steps, checklists and prompts you can copy.</p>
+<aside class="summary" aria-label="In short"><p class="summary-title">In short</p><ul><li><strong>What this is:</strong> a step-by-step guide to building a team of Grok Bot bots, no coding needed.</li><li><strong>The core idea:</strong> one "Chief" bot routes work to specialist bots, and each bot has a job title and a charter.</li><li><strong>The safety rule:</strong> bots draft, you approve. Sends, money, public posts and deletes always wait for your yes.</li><li><strong>The habit that makes it work:</strong> start with small tasks you can check, then review and prune every week.</li></ul></aside>
+<p class="byline">By <a href="/">Jeevan Kamath</a>, SDR mentor, sales leader and AI generalist</p>
+</header>
+<section aria-labelledby="quick-start-checklist-what-do-i-do-first"><h2 id="quick-start-checklist-what-do-i-do-first">Quick-start checklist: what do I do first?</h2>
+<p><strong>Short answer:</strong> install the app, meet one Chief bot, give it one small task you can check in about 30 seconds, then grow from there.</p>
+<div class="checklist"><ul class="ck">
+<li><label><input type="checkbox" data-ck="1"> <span>Install the Grok Bot desktop app and meet your general "Chief" bot.</span></label></li>
+<li><label><input type="checkbox" data-ck="2"> <span>Write the Chief's charter: what it owns, what good looks like, where it stops.</span></label></li>
+<li><label><input type="checkbox" data-ck="3"> <span>Give it one small task you can check in about 30 seconds. Check the result.</span></label></li>
+<li><label><input type="checkbox" data-ck="4"> <span>Connect only the tools you need right now. Connectors are shared across your account, so you only connect each one once.</span></label></li>
+<li><label><input type="checkbox" data-ck="5"> <span>Set your approval line: drafts are fine, while sends, payments, public posts and deletes wait for your yes.</span></label></li>
+<li><label><input type="checkbox" data-ck="6"> <span>Never paste a password or code into chat. Use the screen handoff for logins, or the vault if your account has one.</span></label></li>
+<li><label><input type="checkbox" data-ck="7"> <span>Teach one repeat workflow by demonstration, so it becomes a skill.</span></label></li>
+<li><label><input type="checkbox" data-ck="8"> <span>Set up one routine (on a schedule or a trigger) just by asking for it in chat.</span></label></li>
+<li><label><input type="checkbox" data-ck="9"> <span>Add a specialist bot only when the Chief is doing too many different jobs.</span></label></li>
+<li><label><input type="checkbox" data-ck="10"> <span>Book a weekly review: what worked, what didn't, what to prune.</span></label></li>
+</ul><p class="ck-meta"><span class="ck-count" role="status"></span> <button type="button" class="ck-reset" hidden>Reset</button></p></div>
+</section><section aria-labelledby="why-should-a-non-coder-build-an-ai-team-at-all"><h2 id="why-should-a-non-coder-build-an-ai-team-at-all">Why should a non-coder build an AI team at all?</h2>
+<p><strong>Short answer:</strong> because Grok Bot lets you run agents the way you'd run people. Each bot has its own name and job, and you orchestrate them from a familiar chat screen.</p>
+<p>In a one-hour talk, Lauren Tan, who works on Grok Bot, described it as a way to "create like individual agents that have their own identity and you can kind of orchestrate them" [32:27]. She called it "a very, very accessible way to use agents in a very comfortable, very familiar interface. It looks like I message" [53:37–53:43].</p>
+<p>Her examples map neatly onto sales work: "one agent per account that you manage", or "an agent that summarizes all the work" a colleague "did last night" [54:03–54:08].</p>
+<p>The catch is trust. In her words, "when you don't have much trust in your agents, I feel like you really can't get the most out of them" [02:02–02:06]. Everything below is about building that trust step by step.</p>
+</section><section aria-labelledby="the-10-steps-at-a-glance"><h2 id="the-10-steps-at-a-glance">The 10 steps at a glance</h2>
+<ol>
+<li><strong>Install the desktop app</strong> and meet a general "Chief" bot.</li>
+<li><strong>Give each bot a job title and a charter</strong>: what it owns, what good looks like, where it stops.</li>
+<li><strong>Connect tools once.</strong> Connectors are shared across your account.</li>
+<li><strong>Hand off logins with the screen handoff.</strong> Never paste passwords.</li>
+<li><strong>Teach by demonstration.</strong> A recorded workflow becomes a skill.</li>
+<li><strong>Set routines in plain conversation</strong>, on a schedule or a trigger.</li>
+<li><strong>Split specialists by domain.</strong></li>
+<li><strong>Run group chats with objectives</strong>, not task lists.</li>
+<li><strong>Draw your approval line by reversibility.</strong> Drafts are a yes. Sends, money, public posts and deletes get parked for you.</li>
+<li><strong>Review and prune weekly.</strong></li>
+</ol>
+</section><section aria-labelledby="how-do-i-create-my-first-bot-and-name-its-role"><h2 id="how-do-i-create-my-first-bot-and-name-its-role">How do I create my first bot and name its role?</h2>
+<p><strong>Short answer:</strong> start with one general "Chief" bot, give it a clear job title, and write a short charter before you give it any work.</p>
+<p><strong>Steps</strong></p>
+<ol>
+<li><strong>Install the desktop app</strong> and open your first, general-purpose bot. I call mine the Chief.</li>
+<li><strong>Give it a name and a job title.</strong> A fun name helps. Lauren mentions you "can get your agent a fun name" [53:49]. The job title is what actually matters, though. "Chief of Staff" tells the bot (and you) what it's for.</li>
+<li><strong>Introduce yourself.</strong> Treat it like a sharp new hire with no context. Lauren's picture of a new agent is a capable person with "no business context whatsoever" who "onboarded, you know, like five seconds ago" [15:45–15:54]. Tell it who you are, how you like answers written, and what you're working on.</li>
+<li><strong>Write the charter</strong> (template below) and paste it in.</li>
+<li><strong>Give it one small task you can check quickly</strong> (see the testing section).</li>
+</ol>
+<h3 id="charter-template-copy-and-paste">Charter template (copy and paste)</h3>
+<div class="copy"><div class="copy-head"><span class="copy-label">Copy and paste</span><button type="button" class="copy-btn" hidden>Copy</button></div><pre><code>Your name: [Name]
+Your job title: [e.g. Chief of Staff / Prospecting Researcher / Content Editor]
+
+What you own:
+- [Area 1, e.g. my calendar and inbox triage]
+- [Area 2]
+
+What good looks like:
+- [e.g. a daily 5-bullet brief by 8:30 am, British spelling, no fluff]
+- [e.g. every claim has a link I can check]
+
+Where you stop (always ask me first):
+- Sending any email or message
+- Spending or committing money
+- Posting anything public
+- Deleting or overwriting anything (rename with &quot;OLD - &quot; instead)
+
+Who you hand off to:
+- [e.g. research goes to the Research bot; drafts for LinkedIn go to the Content bot]
+
+How to report back:
+- [e.g. a 2-line summary first, then details; flag anything you're unsure about]
+</code></pre></div>
+<h3 id="copy-paste-prompt-onboard-a-new-bot">Copy-paste prompt: onboard a new bot</h3>
+<div class="copy"><div class="copy-head"><span class="copy-label">Copy and paste</span><button type="button" class="copy-btn" hidden>Copy</button></div><pre><code>You're joining my team. Here's your charter: [paste charter].
+Before you start, repeat back in 3 bullets what you own, what good looks like,
+and where you stop. Then ask me up to 3 questions you need answered to do this job well.
+</code></pre></div>
+</section><section aria-labelledby="how-do-i-orchestrate-a-team-of-bots"><h2 id="how-do-i-orchestrate-a-team-of-bots">How do I orchestrate a team of bots?</h2>
+<p><strong>Short answer:</strong> have one main bot (your EA or Chief of Staff) take every request and route it to specialist bots, each split by domain. Use group chats when several bots need to work towards a shared objective.</p>
+<h3 id="who-should-my-main-bot-be">Who should my main bot be?</h3>
+<p>Your Chief (EA or Chief of Staff) is the front door. You talk to it, and it decides who does the work. Lauren's metaphor is the head chef: "you're not cooking all the food yourself anymore, you have a team of cooks… And it's your job to really design the environment" [22:54–23:06]. You're the head chef and the Chief is your sous chef.</p>
+<h3 id="when-should-i-add-a-specialist-bot">When should I add a specialist bot?</h3>
+<p>Add one when a single domain keeps coming up and needs its own context. Split by <strong>domain</strong>, not by task. Some examples for a sales leader:</p>
+<ul>
+<li><strong>Prospecting / research bot.</strong> Account and company research. Lauren's "one agent per account that you manage" [54:03] is a version of this.</li>
+<li><strong>Content bot.</strong> LinkedIn posts, newsletters and mentoring material.</li>
+<li><strong>Mentoring bot.</strong> SDR coaching notes, call-review frameworks and practice scripts.</li>
+<li><strong>Builder bot.</strong> Your app-building side projects.</li>
+</ul>
+<p>Give every specialist its own charter, and spell out who it hands work back to.</p>
+<h3 id="how-do-group-chats-with-bots-work">How do group chats with bots work?</h3>
+<p>Put the relevant bots in one group chat and give them an <strong>objective, not a task list</strong>. "Prepare me for Thursday's QBR: one-page account brief, three risks, two talking points" works better than ten micro-instructions, because it tells everyone what good looks like and lets them split the work.</p>
+<h3 id="copy-paste-prompt-set-up-routing">Copy-paste prompt: set up routing</h3>
+<div class="copy"><div class="copy-head"><span class="copy-label">Copy and paste</span><button type="button" class="copy-btn" hidden>Copy</button></div><pre><code>You're my Chief of Staff. From now on, when I send a request:
+1) Decide which specialist owns it (Research, Content, Mentoring, Builder) or whether you handle it.
+2) Tell me in one line who you're routing it to and why.
+3) Bring the result back to me with a 2-line summary.
+Never send, pay, post or delete without my explicit yes.
+</code></pre></div>
+<h3 id="copy-paste-prompt-kick-off-a-group-chat">Copy-paste prompt: kick off a group chat</h3>
+<div class="copy"><div class="copy-head"><span class="copy-label">Copy and paste</span><button type="button" class="copy-btn" hidden>Copy</button></div><pre><code>Objective: [outcome, e.g. a ready-to-send follow-up pack for the Acme call].
+Done means: [e.g. a draft email, a 5-bullet account summary, and 2 open questions].
+Deadline: [time].
+Decide among yourselves who does what, post your plan in 3 lines, then go.
+Drafts only. Nothing gets sent without me.
+</code></pre></div>
+</section><section aria-labelledby="how-do-memory-routines-connectors-and-approvals-work"><h2 id="how-do-memory-routines-connectors-and-approvals-work">How do memory, routines, connectors and approvals work?</h2>
+<p><strong>Short answer:</strong> tell your bots what to remember, ask for routines in plain words, connect each tool once, and keep anything irreversible behind your approval.</p>
+<h3 id="how-do-i-make-a-bot-remember-things">How do I make a bot remember things?</h3>
+<p><strong>Short answer:</strong> each bot has its own memory, and there's also a shared profile that all your bots can see.</p>
+<ul>
+<li><strong>A bot's own memory</strong> is for things that only matter to its job, such as the Research bot's account notes or the Content bot's style rules.</li>
+<li><strong>The shared profile</strong> is for things every bot should know, such as your name, your role, how you like answers written and your time zone.</li>
+<li>Tell a bot plainly: "Please remember that…". You can also ask "What do you remember about me?" and ask it to forget anything that's wrong or private.</li>
+<li>If something applies to the whole team, say so: "Add this to my shared profile so all my bots know it."</li>
+</ul>
+<p>Lauren's tip for making bots smarter is to write down what you'd otherwise repeat. A skill, she says, is "just markdown" that "encodes a lot of information instructions" [16:02–16:06]. If you correct a bot twice on the same thing, turn the correction into a written instruction or a skill.</p>
+<h3 id="how-do-i-set-up-a-routine">How do I set up a routine?</h3>
+<p>Ask for it in conversation, either on a <strong>schedule</strong> ("every Monday at 9 am…") or on a <strong>trigger</strong> ("when a new reply arrives from a prospect…").</p>
+<div class="copy"><div class="copy-head"><span class="copy-label">Copy and paste</span><button type="button" class="copy-btn" hidden>Copy</button></div><pre><code>Every weekday at 8:30 am, send me a 5-bullet brief: today's meetings,
+anything urgent in my inbox, and one thing I should follow up on. British spelling.
+</code></pre></div>
+<div class="copy"><div class="copy-head"><span class="copy-label">Copy and paste</span><button type="button" class="copy-btn" hidden>Copy</button></div><pre><code>When [trigger, e.g. a new email arrives from a prospect on my list], draft a reply
+for my review. Don't send it.
+</code></pre></div>
+<h3 id="how-do-connectors-work">How do connectors work?</h3>
+<p>Connect a tool (email, calendar, documents and so on) <strong>once</strong>. Connectors are shared across your account, so every bot can use them. Only connect what you actually need. My beginner guide also says you can disconnect later in the settings. <span class="badge">Unconfirmed</span> I haven't confirmed exactly where Grok Bot keeps its disconnect option.</p>
+<h3 id="where-should-i-draw-the-approval-line">Where should I draw the approval line?</h3>
+<p>Draw it by <strong>reversibility</strong>:</p>
+<ul>
+<li><strong>Yes without asking:</strong> reading, researching, summarising, drafting and preparing.</li>
+<li><strong>Parked for my approval:</strong> sending emails or messages, spending money, posting anything public, and deleting anything.</li>
+</ul>
+<div class="copy"><div class="copy-head"><span class="copy-label">Copy and paste</span><button type="button" class="copy-btn" hidden>Copy</button></div><pre><code>Approval rule for all of you: drafts are fine. Anything that sends, spends,
+posts publicly or deletes must be parked and shown to me first.
+If you'd need to delete, rename with &quot;OLD - &quot; instead.
+</code></pre></div>
+<h3 id="how-do-i-teach-a-bot-by-demonstration">How do I teach a bot by demonstration?</h3>
+<p>Record yourself doing the workflow once. The recording becomes a reusable skill that the bot can repeat. Good candidates are things you do every week the same way, such as logging call notes or formatting a prospect list.</p>
+<div class="copy"><div class="copy-head"><span class="copy-label">Copy and paste</span><button type="button" class="copy-btn" hidden>Copy</button></div><pre><code>I'm going to show you how I [workflow]. Watch the recording, turn it into a skill,
+then describe back to me the steps you'll follow and where you'll stop and ask.
+</code></pre></div>
+</section><section aria-labelledby="how-do-i-keep-my-ai-team-secure"><h2 id="how-do-i-keep-my-ai-team-secure">How do I keep my AI team secure?</h2>
+<p><strong>Short answer:</strong> never put passwords or codes in chat, use the screen handoff (or a vault) for logins, review drafts before anything is sent, and connect as few tools as possible.</p>
+<ul>
+<li><strong>No passwords, PINs, card numbers or one-time codes in chat. Ever.</strong> When a bot needs you to log in, use the <strong>screen handoff</strong> so you sign in yourself on the real sign-in screen.</li>
+<li><strong>Use the vault for saved details.</strong> The vault holds cards, logins and contact details, so you never have to type them into chat. It's a tab in Settings, and it only appears on accounts where it's enabled. If you can't see it, use the screen handoff instead.</li>
+<li><strong>Drafts before sends.</strong> The bot drafts and you decide. Anything that sends, pays, posts or deletes waits for you.</li>
+<li><strong>Least connections.</strong> Connect only the tools a bot's charter needs. Because connectors are shared across your account, every extra connection is available to every bot.</li>
+<li><strong>Rename, don't delete.</strong> Tell bots to archive by renaming with an "OLD - " prefix instead of deleting or overwriting.</li>
+<li><strong>Be careful with other people's details</strong>, such as contacts' phone numbers, addresses and anything sensitive.</li>
+<li><strong>Watch for scams.</strong> If any message urgently asks for money or codes, even one a bot shows you, stop and check.</li>
+</ul>
+<p>Lauren's engineering advice applies here too. Good teams use guardrails, and she mentions setting things up so "you restrict credentials so that, you know, your intern doesn't wipe your production database" [31:35–31:39]. Treat your bots the same way.</p>
+</section><section aria-labelledby="how-do-i-test-and-debug-my-bots"><h2 id="how-do-i-test-and-debug-my-bots">How do I test and debug my bots?</h2>
+<p><strong>Short answer:</strong> you don't need to code for this. Treat every new bot like a new team member. Give it a small job first, check the result yourself, then trust it with bigger work.</p>
+<p>Bots can sound sure and still be wrong. Lauren describes agents "confidently stating that they found the smoking gun… but it's actually not the real problem" [01:52–02:00]. If you don't check, "you are the verifier… you're the bottleneck" [08:54]. She calls verification "the most important skill that you should have in your toolbox when you work with agents" [06:03–06:11].</p>
+<h3 id="how-do-i-test-with-a-small-real-job">How do I test with a small, real job?</h3>
+<p><strong>Short answer:</strong> start with a task you can check in about 30 seconds, ideally one you already know the answer to.</p>
+<ul>
+<li>Give a new bot one small task, such as "summarise this email" or "find my next meeting".</li>
+<li>Check the answer against the real source (the email, your calendar). If it's wrong or vague, tell the bot exactly what was wrong. It does better with a clear correction than with "try again".</li>
+<li>Ask the bot to show its proof, such as a link, a screenshot or the file it made. Don't accept "done" on its own.</li>
+</ul>
+<div class="copy"><div class="copy-head"><span class="copy-label">Copy and paste</span><button type="button" class="copy-btn" hidden>Copy</button></div><pre><code>Find my next three calendar meetings and list them with times in IST. 3 lines, nothing else.
+</code></pre></div>
+<div class="copy"><div class="copy-head"><span class="copy-label">Copy and paste</span><button type="button" class="copy-btn" hidden>Copy</button></div><pre><code>Summarise this email thread [paste or link] in 3 bullets, and quote the line each bullet comes from.
+</code></pre></div>
+<h3 id="how-do-i-test-sends-and-actions-safely">How do I test sends and actions safely?</h3>
+<p><strong>Short answer:</strong> review every draft before it goes, run new routines once on demand, and test in one bot's chat before handing work to a team.</p>
+<ul>
+<li>Emails and messages appear as a <strong>draft card</strong> that you press <strong>Send</strong> on. Read the card before you press it. This is your built-in test step.</li>
+<li>Test a new routine once by asking the bot to run that job now. Check the result before you leave it to run on its schedule.</li>
+<li>Test in one bot's chat first. Only hand the job to a team (for example, your main EA bot sending work on to a specialist) once it works on its own.</li>
+</ul>
+<h3 id="how-do-i-spot-check-outputs-over-time">How do I spot-check outputs over time?</h3>
+<p><strong>Short answer:</strong> check anything involving money, dates, names or numbers, and turn repeated corrections into written instructions.</p>
+<ul>
+<li>Ask: "How sure are you? Where did this come from? Show me the source."</li>
+<li>Watch how the bot works, not just the answer. Lauren's advice is that "you don't want to just be a passive observer of the agent" [20:38–20:41], especially early on.</li>
+<li>Teach the fix once. When you've corrected a bot, ask it to remember the correction or save the steps as a skill, so you don't have to repeat yourself.</li>
+</ul>
+<h3 id="what-should-my-weekly-routine-review-prompt-say">What should my weekly routine review prompt say?</h3>
+<p><strong>Short answer:</strong> once a week, ask your Chief for a table of every bot and routine, with what to keep, change, pause or prune.</p>
+<div class="copy"><div class="copy-head"><span class="copy-label">Copy and paste</span><button type="button" class="copy-btn" hidden>Copy</button></div><pre><code>Weekly team review. For each bot and each routine:
+1) What did it do this week (count and examples)?
+2) What went wrong or needed my correction?
+3) Is it still needed? Recommend: keep, change, pause or prune.
+4) Any connector that no bot used this week?
+Give me a table, then your top 3 recommendations. Don't change anything until I approve.
+</code></pre></div>
+<h3 id="what-do-i-do-when-something-goes-wrong">What do I do when something goes wrong?</h3>
+<p><strong>Short answer:</strong> ask the bot what failed, reconnect broken tools the safe way, and do any sign-in steps yourself.</p>
+<ul>
+<li>Ask the bot directly: "What failed, and what did you try?" It can tell you what broke in plain words.</li>
+<li>If the job itself is unclear, check the charter (what it owns, what good looks like, where it stops) and shrink the task back to something you can check in 30 seconds.</li>
+<li>If a connector (a linked app such as Gmail or Google Drive) stops working, the bot shows a <strong>reconnect card</strong>. Use that card to reconnect, rather than giving the bot a password in chat.</li>
+<li>If a step needs you, such as a sign-in or a one-time code, the bot hands that step to you through the screen handoff. Do it yourself, and never paste passwords or codes into the chat.</li>
+</ul>
+<h3 id="what-if-the-bot-s-computer-gets-stuck">What if the bot's computer gets stuck?</h3>
+<p><strong>Short answer:</strong> wait and retry first. Update the bot's computer next, and reset it only as a last resort.</p>
+<p>All your bots share one computer; each gets its own screen on it. If pages won't load, the screen won't show, or the bot keeps saying its computer is failing:</p>
+<ol>
+<li><strong>Wait and retry.</strong> Wait a minute and ask the bot to try again. Most hiccups are the computer still starting up.</li>
+<li><strong>Update the bot's computer.</strong> Go to <strong>Settings &gt; Computer</strong> tab &gt; <strong>Update Bot's Computer</strong>. Click <strong>Update</strong>, then click it again to confirm. This moves the bot to a fresh computer and keeps its files and logins. Any software it installed will need reinstalling, and the bot can do that itself.</li>
+<li><strong>Reset only as a last resort.</strong> <strong>Reset Bot's Computer</strong> (the <strong>Reset</strong> button) restores the last saved snapshot and can lose recent work. Use it only if Update hasn't helped.</li>
+</ol>
+</section><section aria-labelledby="how-do-i-grow-from-one-bot-to-a-full-team-without-it-getting"><h2 id="how-do-i-grow-from-one-bot-to-a-full-team-without-it-getting">How do I grow from one bot to a full team without it getting messy?</h2>
+<p><strong>Short answer:</strong> slowly. Add a bot only after the last one has earned your trust.</p>
+<p>Lauren's trust curve is the key idea: "there's really no shortcut… because this is really about your personal level of trust in agents" [28:01–28:10]. She also warns against jumping straight to a huge fleet, because "you're just going to waste a lot of tokens" [26:55–26:58].</p>
+<p>A sensible progression:</p>
+<ol>
+<li>Chief only, with small checkable tasks.</li>
+<li>Chief plus one routine.</li>
+<li>Chief plus one specialist.</li>
+<li>Group chats with objectives.</li>
+<li>More specialists, each with a charter, reviewed weekly.</li>
+</ol>
+</section><section aria-labelledby="faq"><h2 id="faq">FAQ</h2>
+<div class="faq">
+<details><summary>Do I need to code to use Grok Bot?</summary><div><p>No. Lauren calls it "basically like the cursor moment for people who are not in tech" [53:29–53:37], and it works through a familiar chat interface.</p></div></details>
+<details><summary>What&#x27;s the difference between a bot and a skill?</summary><div><p>A bot is a team member with a name, a job title and a charter. A skill is a written-down way of doing something, which you can teach by demonstration.</p></div></details>
+<details><summary>How many bots should I start with?</summary><div><p>One. Add more only when one domain clearly needs its own specialist.</p></div></details>
+<details><summary>Can bots send emails for me?</summary><div><p>They draft them for you. Emails and messages appear as a draft card, and nothing goes until you press Send.</p></div></details>
+<details><summary>How do I log a bot into a website safely?</summary><div><p>Use the screen handoff and sign in yourself. Never paste a password or code into chat.</p></div></details>
+</div></section><section aria-labelledby="copy-paste-prompt-library"><h2 id="copy-paste-prompt-library">Copy-paste prompt library</h2>
+<h3 id="onboard-the-chief">Onboard the Chief</h3>
+<div class="copy"><div class="copy-head"><span class="copy-label">Copy and paste</span><button type="button" class="copy-btn" hidden>Copy</button></div><pre><code>You're my Chief of Staff. I'm Jeevan: SDR mentor, sales leader and AI generalist.
+I like short answers first, British spelling and a warm, direct tone.
+Your charter: [paste]. Repeat back what you own, what good looks like and where you stop.
+</code></pre></div>
+<h3 id="create-a-specialist">Create a specialist</h3>
+<div class="copy"><div class="copy-head"><span class="copy-label">Copy and paste</span><button type="button" class="copy-btn" hidden>Copy</button></div><pre><code>Help me create a new specialist bot for [domain]. Draft its name, job title and charter
+using my template (owns / what good looks like / where it stops / hands off to).
+Show me the draft before creating anything.
+</code></pre></div>
+<h3 id="daily-brief-routine">Daily brief routine</h3>
+<div class="copy"><div class="copy-head"><span class="copy-label">Copy and paste</span><button type="button" class="copy-btn" hidden>Copy</button></div><pre><code>Every weekday at 8:30 am, give me: today's meetings, 3 inbox items that need me,
+and 1 follow-up I'm at risk of forgetting. 5 bullets max.
+</code></pre></div>
+<h3 id="approval-rule">Approval rule</h3>
+<div class="copy"><div class="copy-head"><span class="copy-label">Copy and paste</span><button type="button" class="copy-btn" hidden>Copy</button></div><pre><code>Standing rule: drafts yes. Sends, payments, public posts and deletes are parked for my approval.
+Archive by renaming with &quot;OLD - &quot;, never delete or overwrite.
+</code></pre></div>
+<h3 id="weekly-review">Weekly review</h3>
+<div class="copy"><div class="copy-head"><span class="copy-label">Copy and paste</span><button type="button" class="copy-btn" hidden>Copy</button></div><pre><code>Run the weekly team review: each bot and routine, what it did, what went wrong,
+keep / change / pause / prune, and unused connectors. Table first, then top 3 recommendations.
+Change nothing until I approve.
+</code></pre></div>
+<h3 id="debug-a-bad-output">Debug a bad output</h3>
+<div class="copy"><div class="copy-head"><span class="copy-label">Copy and paste</span><button type="button" class="copy-btn" hidden>Copy</button></div><pre><code>That output wasn't right. Walk me through step by step what you did, what sources you used,
+and where it went wrong. Then propose one change to your charter or skill so it doesn't happen again.
+</code></pre></div>
+</section><section aria-labelledby="sources"><h2 id="sources">Sources</h2>
+<ul>
+<li>My beginner guide: <em>Clear, step-by-step guide to building and working with bots for non-tech users</em> (Google Doc).</li>
+<li>A one-hour talk by Lauren Tan on building trust with agents (transcript; timestamps in square brackets).</li>
+<li>Teammates' notes on testing and debugging, plus details checked against the app's UI reference (draft and reconnect cards, vault, memory, and the bot computer settings).</li>
+<li>An X article summarising a 10-step Grok Bot team setup (Chief bot, charters, shared connectors, screen handoff, teaching by demonstration, routines, specialists, group chats, approval by reversibility, weekly review).</li>
+</ul>
+<p><em>The one item marked “Unconfirmed” (where to disconnect a connector) wasn't confirmed. Check it in the app before you rely on it.</em></p></section>
+<footer class="foot"><a href="/">Back to Jeevan's site</a><a class="btn" href="#main">Back to the top</a></footer>
+</main>
+</div>
+<a class="totop" href="#main" aria-label="Back to top">↑</a>
+<script src="playbook.js" defer></script>
+</body>
+</html>

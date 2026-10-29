@@ -1,0 +1,45 @@
+/* Colour theme for the Grok Bot playbook. Load AFTER playbook.css; set <html data-theme="colour">. */
+[data-theme="colour"]{--bg:#fbfaf7;--surface:#ffffff;--border:#e4e1d8;--text:#14213a;--muted:#5a5955;--head:#1f3a5f;--h2acc:#a14127;--accent:#e8572a;--link:#a14127;--btn:#a14127;--btn-h:#7e3625;--badge-ink:#14213a;--badge-bg:#ffc23d;--focus:#1f3a5f;--tip:#2ec4b6;
+--brand-grad:linear-gradient(135deg,#e8572a,#cf4518);--sun-grad:linear-gradient(135deg,#ffc23d,#ffe08a);--rainbow:linear-gradient(90deg,#e8572a,#ffc23d,#3ecf8e,#2ec4b6,#3bb3e8,#1f3a5f);--sec-accent:#e8572a;--sec-ink:#a14127;--sec-on:#14213a;--sec-grad:var(--sun-grad)}
+[data-theme="colour"] body{background:radial-gradient(1200px 400px at 90% -10%,#ffe08a55,transparent),radial-gradient(900px 400px at -10% 10%,#7fd8cf40,transparent),#fbfaf7}
+[data-theme="colour"] .crumbs{border-top:6px solid transparent;border-image:var(--rainbow) 1}
+[data-theme="colour"] h1{color:#1f3a5f}
+[data-theme="colour"] .eyebrow{display:inline-block;background:var(--sun-grad);color:#14213a;padding:4px 12px;border-radius:999px}
+[data-theme="colour"] .summary{border-left:0;position:relative;border-top:6px solid transparent;border-image:var(--brand-grad) 1;border-radius:0}
+[data-theme="colour"] main>section,[data-theme="colour"] main section[aria-labelledby]{background:#fff;border:1px solid var(--border);border-radius:20px;padding:0 20px 20px;overflow:hidden;box-shadow:0 2px 0 var(--sec-accent),0 10px 30px -18px #1f3a5f55}
+[data-theme="colour"] section[aria-labelledby]>h2{display:block;margin:0 -20px 16px;padding:18px 20px 14px;border-top:0;background:var(--sec-grad);color:var(--sec-on);font-size:clamp(22px,3.6vw,30px)}
+[data-theme="colour"] section[aria-labelledby] h3{color:var(--sec-ink)}
+[data-theme="colour"] section[aria-labelledby] a{color:var(--sec-ink)}
+[data-theme="colour"] section[aria-labelledby] blockquote{border-left-color:var(--sec-accent);background:#fbfaf7}
+[data-theme="colour"] section[aria-labelledby] .badge{background:var(--sec-grad);color:var(--sec-on);border:1px solid var(--sec-accent)}
+[data-theme="colour"] section[aria-labelledby] .copy,[data-theme="colour"] section[aria-labelledby] .checklist,[data-theme="colour"] section[aria-labelledby] .faq details{border-top:4px solid var(--sec-accent)}
+[data-theme="colour"] section[aria-labelledby] th{background:#fbfaf7;color:#14213a;border-bottom:3px solid var(--sec-accent)}
+[data-theme="colour"] .copy-btn:hover,[data-theme="colour"] .ck-reset:hover{border-color:var(--sec-accent);background:#fbfaf7}
+[data-theme="colour"] ul.ck input{accent-color:var(--sec-ink)}
+[data-theme="colour"] .toc a[aria-current="true"]{border-left-color:var(--accent);background:#fff3d6;color:#14213a}
+[data-theme="colour"] .progress span{background:var(--rainbow)}
+[data-theme="colour"] .btn,[data-theme="colour"] .totop{background:#a14127;color:#fff}
+/* Mascot: decorative guide, aria-hidden. Hooks for Animator: .mascot, .mascot--blink (eyes), data-anim="mascot-wave" */
+[data-theme="colour"] .mascot{width:96px;height:96px;float:right;margin:0 0 8px 12px}
+@media(max-width:767px){[data-theme="colour"] .mascot{width:72px;height:72px}}
+.mascot .m-eyes{transform-box:fill-box;transform-origin:center}
+.mascot--blink .m-eyes{animation:m-blink 4.8s infinite}
+@keyframes m-blink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+@media(prefers-reduced-motion:reduce){.mascot--blink .m-eyes{animation:none}}
+/* Per-section accents, keyed by each section's stable heading id (sections carry aria-labelledby, not id) */
+[data-theme="colour"] section[aria-labelledby="quick-start-checklist-what-do-i-do-first"]{--sec-accent:#e8572a;--sec-ink:#a14127;--sec-on:#14213a;--sec-grad:linear-gradient(135deg,#ffd0bd,#ffe08a)}
+[data-theme="colour"] section[aria-labelledby="why-should-a-non-coder-build-an-ai-team-at-all"]{--sec-accent:#2ec4b6;--sec-ink:#0b6b63;--sec-on:#14213a;--sec-grad:linear-gradient(135deg,#7fd8cf,#a8ecc8)}
+[data-theme="colour"] section[aria-labelledby="the-10-steps-at-a-glance"]{--sec-accent:#ffc23d;--sec-ink:#855600;--sec-on:#14213a;--sec-grad:linear-gradient(135deg,#ffe08a,#ffc23d)}
+[data-theme="colour"] section[aria-labelledby="how-do-i-create-my-first-bot-and-name-its-role"]{--sec-accent:#ff6f61;--sec-ink:#b4382a;--sec-on:#14213a;--sec-grad:linear-gradient(135deg,#ffb3a8,#ffd0bd)}
+[data-theme="colour"] section[aria-labelledby="how-do-i-orchestrate-a-team-of-bots"]{--sec-accent:#3bb3e8;--sec-ink:#1667a0;--sec-on:#14213a;--sec-grad:linear-gradient(135deg,#9ad8f5,#cdeefc)}
+[data-theme="colour"] section[aria-labelledby="how-do-memory-routines-connectors-and-approvals-work"]{--sec-accent:#3ecf8e;--sec-ink:#16704b;--sec-on:#14213a;--sec-grad:linear-gradient(135deg,#a8ecc8,#d7f7e6)}
+[data-theme="colour"] section[aria-labelledby="how-do-i-keep-my-ai-team-secure"]{--sec-accent:#1f3a5f;--sec-ink:#1f3a5f;--sec-on:#ffffff;--sec-grad:linear-gradient(135deg,#1f3a5f,#2a5585)}
+[data-theme="colour"] section[aria-labelledby="how-do-i-test-and-debug-my-bots"]{--sec-accent:#e8572a;--sec-ink:#a14127;--sec-on:#14213a;--sec-grad:linear-gradient(135deg,#ffe08a,#ffd0bd)}
+[data-theme="colour"] section[aria-labelledby="how-do-i-grow-from-one-bot-to-a-full-team-without-it-getting"]{--sec-accent:#3bb3e8;--sec-ink:#1667a0;--sec-on:#14213a;--sec-grad:linear-gradient(135deg,#cdeefc,#9ad8f5)}
+[data-theme="colour"] section[aria-labelledby="faq"]{--sec-accent:#2ec4b6;--sec-ink:#0b6b63;--sec-on:#14213a;--sec-grad:linear-gradient(135deg,#a8ecc8,#7fd8cf)}
+[data-theme="colour"] section[aria-labelledby="copy-paste-prompt-library"]{--sec-accent:#3ecf8e;--sec-ink:#16704b;--sec-on:#14213a;--sec-grad:linear-gradient(135deg,#d7f7e6,#a8ecc8)}
+[data-theme="colour"] section[aria-labelledby="sources"]{--sec-accent:#1f3a5f;--sec-ink:#1f3a5f;--sec-on:#ffffff;--sec-grad:linear-gradient(135deg,#2a5585,#1f3a5f)}
+/* Tap-target fixes (>=48px) for links the base CSS leaves short */
+[data-theme="colour"] .toc a{min-height:48px;display:flex;align-items:center}
+[data-theme="colour"] .crumbs a,[data-theme="colour"] .foot a{min-width:48px}[data-theme="colour"] .crumbs a,[data-theme="colour"] .foot a,[data-theme="colour"] .byline a{display:inline-flex;align-items:center;min-height:48px}
+[data-theme="colour"] .skip:focus{min-height:48px;display:inline-flex;align-items:center}

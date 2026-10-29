@@ -1,0 +1,191 @@
+<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Player One: Jeevan Kamath, SDR leader turned AI builder</title><meta name="description" content="Jeevan Kamath's career as a game: from a shop counter to SDR leader to non-coder who builds AI apps. Seven levels, one final boss."><link rel="canonical" href="https://jeevankamath.github.io/player-one/"><meta name="author" content="Jeevan Kamath"><meta property="og:type" content="profile"><meta property="og:title" content="Player One: Jeevan Kamath"><meta property="og:description" content="Jeevan Kamath's career as a game: from a shop counter to SDR leader to non-coder who builds AI apps. Seven levels, one final boss."><meta property="og:url" content="https://jeevankamath.github.io/player-one/"><meta property="og:locale" content="en_GB"><meta name="twitter:card" content="summary"><script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfilePage","url":"https://jeevankamath.github.io/player-one/","inLanguage":"en-GB","mainEntity":{"@type":"Person","name":"Jeevan Kamath","url":"https://jeevankamath.github.io/","jobTitle":"SDR mentor and sales leader"}}</script><link rel="preload" href="/assets/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin><style>
+*{box-sizing:border-box}body{margin:0;background:#0f1a2b;color:#e9edf3;font:18px/1.65 system-ui,sans-serif}
+.px{font:700 13px/1 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#ff7a4d}
+.hud{position:sticky;top:0;z-index:3;height:48px;display:flex;align-items:center;gap:16px;padding:0 20px;background:#0f1a2bee;border-bottom:2px solid #263a57}
+.hud .bar{flex:1;max-width:320px;margin-left:auto;height:8px;border-radius:999px;background:#263a57}.hud .bar i{display:block;height:100%;width:38%;background:#ffc23d;border-radius:999px}
+.title{text-align:center;padding:72px 20px 56px}h1{font-size:clamp(40px,8vw,72px);line-height:1.05;margin:12px 0;color:#fff}
+.btn{display:inline-flex;align-items:center;min-height:52px;padding:0 28px;border-radius:12px;background:#a14127;color:#fff;font-weight:700;text-decoration:none;box-shadow:0 6px 0 #5e2416,0 10px 20px rgba(0,0,0,.35);margin:8px}
+.btn.s{background:transparent;border:2px solid #e9edf3;box-shadow:0 6px 0 #263a57}
+.path{max-width:1040px;margin:0 auto;padding:0 20px;position:relative}
+.lv{background:#16243a;border:2px solid #263a57;border-radius:16px;padding:24px;margin:0 0 32px;display:flex;gap:20px;align-items:flex-start;width:min(100%,560px)}
+.lv:nth-of-type(even){margin-left:auto}h2{color:#fff;font-size:clamp(24px,4vw,32px);margin:8px 0}
+.bd{flex:0 0 72px;height:72px;border-radius:50%;border:3px solid #e8572a;display:grid;place-items:center;font-size:30px;background:#0f1a2b}
+.chip{display:inline-block;font-size:14px;font-weight:600;padding:4px 12px;border:1px solid #263a57;border-radius:999px;color:#a9b4c4;margin:4px 4px 0 0}
+.boss{background:#13213a;border-top:2px solid #263a57;padding:56px 20px;text-align:center}
+.hp{max-width:420px;margin:12px auto;height:12px;border-radius:999px;background:#263a57}.hp i{display:block;width:70%;height:100%;background:#d93838;border-radius:999px}
+.g{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;align-items:center;margin-top:24px}p.m{color:#a9b4c4}
+.lv p{margin:.4em 0}.loot{margin-top:8px}.loot em{font-style:normal}.boss p{max-width:64ch;margin:.6em auto}.gauge-fig{margin:12px 0 0}
+.hud-level{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}.hud-name{display:none}@media(min-width:600px){.hud-name{display:inline}}</style>
+<style>/* Self-hosted, SIL OFL 1.1 */
+@font-face{font-family:"Plus Jakarta Sans";font-style:normal;font-weight:400 800;font-display:swap;src:url(/assets/fonts/plus-jakarta-sans-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Plus Jakarta Sans";font-style:normal;font-weight:400 800;font-display:swap;src:url(/assets/fonts/plus-jakarta-sans-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+20A0-20AB,U+20AD-20C4,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Press Start 2P";font-style:normal;font-weight:400;font-display:swap;src:url(/assets/fonts/press-start-2p-latin-400.woff2) format("woff2")}
+
+/* animations.css (Animator bot), inlined */
+/* Player One animation hooks (design-spec v1/v1.1). Hidden start states apply only when JS adds .anim-on to <html>,
+   so content stays readable without JS. */
+:root{--ease-enter:cubic-bezier(.2,.8,.2,1);--ease-io:cubic-bezier(.65,0,.35,1);--hp:.6}
+
+/* xp-bar: --xp 0..1 set by JS from scroll progress + unlocked levels */
+.hud .bar i{width:100%;transform-origin:left center;transform:scaleX(var(--xp,0));transition:transform 200ms linear}
+
+/* level-enter */
+.anim-on [data-anim="level-enter"]{opacity:0;transform:translateY(24px);transition:opacity 400ms var(--ease-enter),transform 400ms var(--ease-enter)}
+.anim-on [data-anim="level-enter"].is-in{opacity:1;transform:none}
+
+/* badge-pop: .6 -> 1.08 -> 1, 500ms */
+.anim-on [data-anim="badge-pop"]{transform:scale(.6);opacity:0}
+.anim-on [data-anim="badge-pop"].is-in{animation:badge-pop 500ms var(--ease-enter) forwards}
+@keyframes badge-pop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.08);opacity:1}100%{transform:scale(1);opacity:1}}
+
+/* gauge: arc uses pathLength=100; --g = fill percent */
+.gauge .fill{stroke-dasharray:100 100;stroke-dashoffset:calc(100 - var(--g,50))}
+.anim-on .gauge .fill{transition:stroke-dashoffset 1200ms ease-in-out}
+.gauge .ghost{stroke:#a9b4c4;stroke-dasharray:4 4;opacity:.9}
+
+/* boss-hp: drops from full to var(--hp) on enter, 800ms; no numeric label */
+.hp i{width:100%;transform-origin:left center;transform:scaleX(var(--hp))}
+.anim-on [data-anim="boss-hp"] i{transform:scaleX(1);transition:transform 800ms var(--ease-io)}
+.anim-on [data-anim="boss-hp"].is-in i{transform:scaleX(var(--hp))}
+
+/* robot-blink: eyes scaleY 1 -> .1 -> 1 in 160ms, only on hover/focus/tap */
+.robot-wrap{display:inline-block;border-radius:12px;cursor:pointer;min-width:48px;min-height:48px}
+.robot-wrap:focus-visible{outline:3px solid #ffc23d;outline-offset:3px}
+.robot-eyes{transform-box:fill-box;transform-origin:center}
+.robot-wrap.blink .robot-eyes{animation:blink 160ms ease-in-out}
+@keyframes blink{50%{transform:scaleY(.1)}}
+
+@media (prefers-reduced-motion:reduce){
+  .anim-on [data-anim]{opacity:1!important;transform:none!important;animation:none!important;transition:none!important}
+  .anim-on [data-anim="boss-hp"] i{transform:scaleX(var(--hp))!important;transition:none!important}
+  .hud .bar i,.anim-on .gauge .fill{transition:none!important}
+  .robot-wrap.blink .robot-eyes{animation:none!important}
+}
+/* ---- design v2 ---- */
+body{font-family:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+@media(max-width:767px){body{font-size:17px}}
+.px{font:400 12px/1.5 "Press Start 2P",ui-monospace,"Courier New",monospace;letter-spacing:.04em;color:#ff7a4d}
+h1,h2,h3{font-family:"Plus Jakarta Sans",system-ui,sans-serif;font-weight:800}
+.btn{min-height:52px;font-family:inherit}.btn:focus-visible,a:focus-visible{outline:3px solid #ffc23d;outline-offset:3px}
+.bd{background:#16243a;width:72px}.bd svg{display:block}
+.chip{border-color:#3a5274}
+.path{--node:20px;padding-left:56px;padding-right:16px}
+.path::before{content:"";position:absolute;top:0;bottom:0;left:27px;border-left:3px dashed #3a5274}
+.lv{position:relative;width:100%;flex-direction:column;gap:12px;padding:20px 16px;margin:0 0 40px}
+.lv::after{content:"";position:absolute;top:32px;left:-41px;width:var(--node);height:var(--node);border-radius:50%;background:#ffc23d;border:3px solid #0f1a2b;box-shadow:0 0 0 3px #e8572a}
+.lv:nth-of-type(even){margin-left:0}
+@media(min-width:1024px){
+.path{max-width:1040px;padding:24px 20px}
+.path::before{left:50%;transform:translateX(-1.5px)}
+.lv{width:calc(50% - 48px);flex-direction:row;gap:20px;padding:24px;margin:0 0 24px}
+.lv:nth-of-type(odd){margin-right:auto}.lv:nth-of-type(even){margin-left:auto}
+.lv:nth-of-type(odd)::after{left:auto;right:-63px}
+.lv:nth-of-type(even)::after{left:-63px}
+}
+.boss .bd-c{margin:0 auto 12px}
+.attacks{list-style:none;padding:0;margin:24px auto;max-width:960px;display:grid;gap:16px;grid-template-columns:1fr}
+@media(min-width:768px){.attacks{grid-template-columns:repeat(3,1fr)}}
+.atk{background:#16243a;border:2px solid #263a57;border-top:4px solid #d93838;border-radius:14px;padding:16px 18px;text-align:left}
+.atk h3{color:#fff;font-size:20px;margin:8px 0 4px}.atk p{margin:0;color:#e9edf3;font-size:16px}
+.gauge{max-width:100%;height:auto}.gauge-fig{max-width:100%;overflow:hidden}.lv>div:last-child{min-width:0}
+</style></head><body>
+<div class="hud" data-anim="xp-bar"><span class="px hud-level" aria-live="polite">START</span><div class="bar" role="progressbar" aria-label="XP: levels unlocked" aria-valuemin="0" aria-valuemax="7" aria-valuenow="0" aria-valuetext="No levels unlocked yet"><i></i></div></div>
+<header class="title" id="start"><h1>PLAYER ONE: JEEVAN KAMATH</h1><p class="m"><em>Press start.</em></p><a class="btn" href="#level-1">▶ Press Start</a></header>
+<main><div class="path">
+<section class="lv" id="level-1" data-level="1" data-name="The Origin" data-anim="level-enter" aria-labelledby="lv1-h"><div class="bd" data-anim="badge-pop" role="img" aria-label="Badge: shop counter"><svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#e9edf3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 20l4-10h24l4 10" stroke="#ffc23d"/><path d="M8 20q4 4 8 0q4 4 8 0q4 4 8 0q4 4 8 0"/><path d="M10 22v16h28V22"/><path d="M20 38v-9h8v9" stroke="#ffc23d"/></svg></div><div><div class="px">Level 1</div><h2 id="lv1-h">THE ORIGIN</h2><p>Every hero starts somewhere. Mine was growing up behind my dad's shop counter, dreaming about robots and AI.</p><p>Plot twist: I was bad at maths. Engineering said no.</p><p class="loot"><span class="chip"><em>Quest failed. Respawning…</em></span></p></div></section>
+<section class="lv" id="level-2" data-level="2" data-name="Skill Unlocked" data-anim="level-enter" aria-labelledby="lv2-h"><div class="bd" data-anim="badge-pop" role="img" aria-label="Badge: speech bubble"><svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#e9edf3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 10h28q4 0 4 4v14q0 4-4 4H22l-8 7v-7h-4q-4 0-4-4V14q0-4 4-4z"/><path d="M15 19h18M15 25h11" stroke="#ffc23d"/></svg></div><div><div class="px">Level 2</div><h2 id="lv2-h">SKILL UNLOCKED</h2><p>Turns out I had a different power. Talking to people. Persuading them. Selling.</p><p>So I picked marketing and a BBA. The books were tough. But give me a hands-on challenge, or someone who needs help, and I'm all in.</p><p class="loot"><span class="chip"><em>+1 Charisma.</em></span></p></div></section>
+<section class="lv" id="level-3" data-level="3" data-name="The First Boss Fight" data-anim="level-enter" aria-labelledby="lv3-h"><div class="bd" data-anim="badge-pop" role="img" aria-label="Badge: bulk order box"><svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#e9edf3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 16l16-8 16 8v18l-16 8-16-8z"/><path d="M8 16l16 8 16-8M24 24v18"/><path d="M16 12l16 8v6" stroke="#ffc23d"/></svg></div><div><div class="px">Level 3</div><h2 id="lv3-h">THE FIRST BOSS FIGHT</h2><p>First job: an internship at Decathlon. My mission? Large B2B orders for the army and retailers.</p><p>Big orders. Bigger lessons.</p><p class="loot"><span class="chip"><em>Achievement unlocked: Real World.</em></span></p></div></section>
+<section class="lv" id="level-4" data-level="4" data-name="The Merchant Years" data-anim="level-enter" aria-labelledby="lv4-h"><div class="bd" data-anim="badge-pop" role="img" aria-label="Badge: price tag on a crate"><svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#e9edf3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="6" y="22" width="24" height="18" rx="2"/><path d="M6 31h24M18 22v18"/><path d="M26 8h12v12L26 32 14 20z" stroke="#ffc23d"/><circle cx="33" cy="13" r="1.5" stroke="#ffc23d"/></svg></div><div><div class="px">Level 4</div><h2 id="lv4-h">THE MERCHANT YEARS</h2><p>Two years as a digital merchandiser. Discounts, product pushes, making things sell.</p><p class="loot"><span class="chip"><em>+2 Commerce.</em></span></p></div></section>
+<section class="lv" id="level-5" data-level="5" data-name="The Accidental Hero" data-anim="level-enter" aria-labelledby="lv5-h"><div class="bd" data-anim="badge-pop" role="img" aria-label="Badge: sword and shield"><svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#e9edf3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M24 8l12 4v10q0 10-12 16Q12 32 12 22V12z"/><path d="M10 40L32 18M32 18l4-4M28 14l6 6" stroke="#ffc23d"/></svg></div><div><div class="px">Level 5</div><h2 id="lv5-h">THE ACCIDENTAL HERO</h2><p>Then I wandered into an SDR role at an HR-tech SaaS startup. Totally by accident.</p><p>I stayed five years.</p><p>I learned sales. Built rapport. Grew the team. Launched new products. Then I led that team, and finished as a top performer for three of those five years.</p><p class="loot"><span class="chip"><em>Class change: Rep → Leader.</em></span></p></div></section>
+<section class="lv" id="level-6" data-level="6" data-name="The Non-Coder Who Builds" data-anim="level-enter" aria-labelledby="lv6-h"><div class="bd" data-anim="badge-pop" role="img" aria-label="Badge: robot with code brackets"><svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#e9edf3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M24 6v6"/><rect x="12" y="12" width="24" height="20" rx="6"/><path d="M19 21h.01M29 21h.01" stroke="#ffc23d" stroke-width="4"/><path d="M10 38l-4-3 4-3M38 32l4 3-4 3M22 39l4-6" stroke="#ffc23d"/></svg></div><div><div class="px">Level 6</div><h2 id="lv6-h">THE NON-CODER WHO BUILDS</h2><p>Here's the secret level. I don't code. I build AI apps anyway.</p><p>I used AI to fix internal processes, and my automations cut reps' research time from 80% to 50%.</p><p>Next target: 20%.</p><figure class="gauge-fig" style="margin:0" aria-describedby="gauge-text" aria-label="Research time gauge"><svg class="gauge" data-anim="gauge" data-from="80" data-to="50" width="320" height="150" viewBox="-130 0 350 150" aria-hidden="true" focusable="false">
+<path d="M20 120 A90 90 0 0 1 200 120" stroke="#263a57" stroke-width="16" fill="none" stroke-linecap="round"/>
+<path class="fill" pathLength="100" d="M20 120 A90 90 0 0 1 200 120" stroke="#ffc23d" stroke-width="16" fill="none" stroke-linecap="round"/>
+<line class="ghost" x1="30.7" y1="62.4" x2="11.3" y2="48.3" stroke-width="4"/>
+<text x="5.3" y="44.3" fill="#a9b4c4" font-size="14" text-anchor="end">Next target 20%</text>
+<text class="gauge-value" x="110" y="112" fill="#fff" text-anchor="middle" font-size="26" font-weight="800">50%</text></svg></figure>
+<p class="m" id="gauge-text">Research time: 80% → 50%. Next target: 20%.<br><small>From my own automation work</small></p></div></section>
+</div>
+<section class="boss" id="boss" data-level="7" data-name="The Next Quest" aria-labelledby="lv7-h"><div class="bd bd-c" data-anim="badge-pop" role="img" aria-label="Badge: quest flag"><svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#e9edf3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 42V8"/><path d="M12 9h22l-5 7 5 7H12" stroke="#ffc23d"/><path d="M6 42h14"/></svg></div><div class="px">Level 7</div><h2 id="lv7-h">THE NEXT QUEST</h2>
+<div class="hp" data-anim="boss-hp" role="img" aria-label="Boss HP bar, partly drained" style="--hp:.6"><i></i></div><p class="m">Boss HP</p><ul class="attacks" aria-label="Boss attacks"><li class="atk" data-anim="level-enter"><span class="px">Attack 1</span><h3>The Research Swamp</h3><p>Reps spend most of their day digging for information instead of selling.</p></li><li class="atk" data-anim="level-enter"><span class="px">Attack 2</span><h3>The Broken Process</h3><p>Everyone knows the process is slow. Nobody has time to fix it.</p></li><li class="atk" data-anim="level-enter"><span class="px">Attack 3</span><h3>The AI Fog</h3><p>Everyone says “use AI”. Nobody knows which problem to start with.</p></li></ul>
+<div class="g"><span class="robot-wrap" data-anim="robot-blink" tabindex="0" role="img" aria-label="Robot sketch (blinks on hover, focus or tap)"><svg class="robot" aria-hidden="true" focusable="false" width="180" height="193" viewBox="0 0 140 150" fill="none" stroke="#a9b4c4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <!-- robot_blinking-sketch_player-one-page: hand-drawn robot; eyes in .robot-eyes blink via data-anim="robot-blink" -->
+  <path d="M70 11 q1 9 0 17"/><circle cx="70" cy="7.5" r="4"/>
+  <path d="M41 28.5 h58 q16 0.5 16.5 16 v29 q-0.5 16 -16 16.5 h-58 q-16 -0.5 -16.5 -16 v-29 q0.5 -16 16 -16.5z"/>
+  <g class="robot-eyes"><circle cx="52" cy="58" r="8" fill="#ffc23d"/><circle cx="88" cy="58" r="8" fill="#ffc23d"/></g>
+  <path d="M55 76 q15 8 30 0"/>
+  <path d="M50 98 h40 q10 0.5 10.5 10 v24 q-0.5 10 -10 10.5 h-40 q-10 -0.5 -10.5 -10 v-24 q0.5 -10 10 -10.5z"/>
+  <path d="M40 110 q-12 4 -16 16 M100 110 q12 4 16 16"/>
+</svg>
+</span></div>
+<p>The robot-loving kid never left. He just levelled up.</p><p>Now I'm looking for my party: leaders tackling big AI problems who want someone who can talk, sell and build.</p><p class="loot"><span class="chip"><em>Player Two, ready?</em></span></p>
+<span id="contact"></span><a class="btn" href="https://calendar.app.google/WUWmh8HrbW56DnaH7" target="_blank" rel="noopener">Join the quest ▶</a><a class="btn s" href="/">Back to the site</a></section></main>
+<script>/* animations.js (Animator bot), inlined */
+/* Player One animation hooks: xp-bar, level-enter, badge-pop, gauge, robot-blink, boss-hp. Vanilla JS. */
+(function () {
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var root = document.documentElement; root.classList.add('anim-on');
+  var io = 'IntersectionObserver' in window;
+  function onEnter(els, cb, threshold) {
+    if (!io || reduce) { els.forEach(cb); return; }
+    var ob = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { cb(e.target); ob.unobserve(e.target); } }); }, { threshold: threshold || 0.2 });
+    els.forEach(function (el) { ob.observe(el); });
+  }
+  var $$ = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
+
+  // level-enter + badge-pop
+  onEnter($$('[data-anim="level-enter"]'), function (el) { el.classList.add('is-in'); }, 0.2);
+  onEnter($$('[data-anim="badge-pop"]'), function (el) { el.classList.add('is-in'); }, 0.6);
+  // boss-hp
+  onEnter($$('[data-anim="boss-hp"]'), function (el) { el.classList.add('is-in'); }, 0.5);
+
+  // gauge: 80 -> 50 when 50% visible; text swaps (no in-between numbers shown)
+  $$('[data-anim="gauge"]').forEach(function (g) {
+    var lab = g.querySelector('.gauge-value'), from = +g.dataset.from, to = +g.dataset.to;
+    g.style.setProperty('--g', reduce ? to : from); if (lab) lab.textContent = (reduce ? to : from) + '%';
+    onEnter([g], function () {
+      g.getBoundingClientRect(); // commit start state
+      requestAnimationFrame(function () {
+        g.style.setProperty('--g', to);
+        setTimeout(function () { if (lab) lab.textContent = to + '%'; g.classList.add('is-done'); }, reduce ? 0 : 600);
+      });
+    }, 0.5);
+  });
+
+  // xp-bar: scroll progress, never below the share of levels unlocked; label via IntersectionObserver
+  var hud = document.querySelector('[data-anim="xp-bar"]');
+  if (hud) {
+    var fill = hud.querySelector('.bar'), label = hud.querySelector('.hud-level'), levels = $$('[data-level]'), unlocked = 0;
+    var setLevel = function (n) {
+      if (n <= unlocked) return; unlocked = n; var l = levels[n - 1];
+      label.innerHTML = 'LVL ' + n + '/' + levels.length + '<span class="hud-name"> · ' + l.dataset.name + '</span>';
+      fill.setAttribute('aria-valuenow', n); fill.setAttribute('aria-valuetext', 'Level ' + n + ' of ' + levels.length + ' unlocked: ' + l.dataset.name);
+    };
+    var update = function () {
+      var max = document.documentElement.scrollHeight - innerHeight, p = max > 0 ? scrollY / max : 1;
+      var xp = Math.min(1, Math.max(p, unlocked / levels.length));
+      hud.style.setProperty('--xp', xp.toFixed(3));
+      // fallback for fast jumps: unlock every level whose top has passed 60% of the viewport
+      var passed = levels.filter(function (l) { return l.getBoundingClientRect().top < innerHeight * 0.6; }).length;
+      if (passed > unlocked) setLevel(passed);
+    };
+    if (io) {
+      var lo = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (e.isIntersecting) { setLevel(+e.target.dataset.level); update(); }
+        });
+      }, { rootMargin: '-40% 0px -50% 0px' });
+      levels.forEach(function (l) { lo.observe(l); });
+    }
+    addEventListener('scroll', update, { passive: true }); addEventListener('resize', update); update();
+  }
+
+  // robot-blink on hover / focus / tap (never loops)
+  $$('[data-anim="robot-blink"]').forEach(function (r) {
+    var blink = function () { if (reduce) return; r.classList.remove('blink'); void r.offsetWidth; r.classList.add('blink'); };
+    r.addEventListener('pointerenter', blink); r.addEventListener('focus', blink); r.addEventListener('click', blink);
+    r.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); blink(); } });
+    r.addEventListener('animationend', function () { r.classList.remove('blink'); });
+  });
+})();
+</script>
+</body></html>
