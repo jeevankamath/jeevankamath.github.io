@@ -130,5 +130,7 @@ body[data-bg="it-park"] .scene-lights{opacity:var(--night)}
 body{padding-bottom:var(--rh)}
 .road{z-index:30}
 .traffic{z-index:31}
-.traffic .rider-dock{position:absolute;z-index:72}
-@media(max-width:899px){.traffic .rider-dock{z-index:88}}
+.traffic .rider-dock{position:absolute;z-index:2}
+@media(max-width:899px){.traffic .rider-dock{bottom:12px}}
+.veh.l{filter:brightness(.92)}
+.veh::before{content:"";position:absolute;left:8%;right:8%;bottom:-2px;height:4px;border-radius:50%;background:rgba(20,33,58,.2)}
