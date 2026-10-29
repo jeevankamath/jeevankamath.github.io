@@ -9,7 +9,7 @@
 <title>Pain Map: possible area, not a diagnosis</title>
 <style>
 
-@font-face{font-family:"Plus Jakarta Sans";src:url(fonts/PlusJakartaSans-VariableFont_wght.ttf) format("truetype");font-weight:200 800;font-display:swap}
+@font-face{font-family:"Plus Jakarta Sans";src:url(fonts/PlusJakartaSans-VariableFont_wght.woff2) format("woff2");font-weight:200 800;font-display:swap}
 @font-face{font-family:"Virgil";src:url(fonts/Virgil.woff2) format("woff2");font-display:swap}
 :root{
   --paper:#fbfaf7;--card:#fff;--ink:#14213a;--navy:#1f3a5f;--text:#14213a;--muted:#4a5568;--line:#14213a;
@@ -500,7 +500,6 @@ const LOWER_LIMB=['thigh_front','thigh_back','thigh_inner','knee','shin_calf','a
 /* ===== APP ===== */
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const DEBUG=new URLSearchParams(location.search).has('debug');
 const STEPS=['s-gate','s-core','s-map','s-zoom','s-text','s-rcheck','s-q','s-res'];
 let S;function fresh(){S={step:0,core:{},region:null,side:null,sub:null,tender:null,stiff:null,age:null,text:'',rflags:{},qi:0,ans:{},route:[],switched:[],scores:null,result:null,thigh:{}};}
 fresh();
@@ -513,7 +512,7 @@ const hist=[];function nav(id){hist.push($$('main>section').find(s=>!s.hidden).i
 function back(){const p=hist.pop();if(p)go(p)}
 function srcLinks(ns){return [...new Set(ns)].filter(n=>REFS[n]).map(n=>`<a href="${REFS[n][1]}" target="_blank" rel="noopener">[${n}] ${esc(REFS[n][0])}</a>`).join(' · ')}
 function yn(name,cur){return `<div class="yn" role="group"><button type="button" class="ynb" data-n="${name}" data-v="yes" aria-pressed="${cur==='yes'}">Yes</button><button type="button" class="ynb" data-n="${name}" data-v="no" aria-pressed="${cur==='no'}">No</button></div>`}
-function pend(o){return DEBUG&&o&&o.pending?' <span class="pend">pending physio</span>':''}
+function pend(){return ''}
 
 /* ---- Stop / amber cards ---- */
 function routeCard(level,extra,refs,noHead){const L=ROUTING.levels[level];
@@ -696,7 +695,6 @@ $$('[data-restart]').forEach(b=>b.onclick=restart);
 $('#backBtn').onclick=back;
 $('#clearBtn').onclick=()=>{if(!confirm('Clear all Pain Map and journal data saved in this browser? This cannot be undone.'))return;APP_KEYS.forEach(k=>localStorage.removeItem(k));restart();say('All data on this device has been cleared.')};
 go('s-gate');
-if(DEBUG)window.PainMap={S,get state(){return S},ROUTING,REGIONS,CONDITIONS,evaluate,qsFor,setAge:a=>S.age=a}; // test hook, only with ?debug
 
 </script>
 </body>
