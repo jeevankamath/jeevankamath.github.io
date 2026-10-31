@@ -139,6 +139,16 @@ textarea{width:100%;min-height:120px;font:16px var(--font);border:1.5px solid va
 .neutral{border-color:var(--muted)}
 .pend{font-size:11px;background:#fff4d6;border:1px solid #8a5a00;border-radius:8px;padding:1px 6px}
 .cap{text-align:center}
+.couldbe{margin:0 0 4px;font:700 18px var(--font);color:var(--ink)}
+.plan .psub{font-size:14px;color:#4a5568;margin-top:-4px}.plan h2,.nextstep h2{font-size:20px;font-weight:700}
+.prow{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px dashed rgba(20,33,58,.3)}.prow ul{margin:0;padding-left:18px;font-size:15px;flex:1;min-width:0}
+.daypill{flex:none;background:#1f3a5f;color:#fff;font:700 13px var(--font);height:28px;line-height:28px;padding:0 10px;border-radius:14px;white-space:nowrap}
+.plan sup a.ref{display:inline-block;min-width:24px;min-height:24px;text-align:center;font-size:12px}
+.sooner{border-left:6px solid #ffb000;background:#fff4d6;padding:10px 14px;margin:12px 0;border-radius:8px}.sooner h3{margin:0 0 6px;font-size:16px;color:#5c3d00}.sooner ul{margin:0;padding-left:18px;font-size:15px}.sooner a.ref{font-size:12px;color:var(--muted)}
+.pnote{font-size:14px;color:#4a5568}.tapped{margin:8px 0}
+.nextstep{background:#fbfaf7;border:2px solid var(--ink);border-radius:16px}.nextstep .btn{min-height:56px;display:inline-flex;align-items:center;margin:6px 8px 0 0;text-decoration:none}
+@media (max-width:899px){.resgrid.v61{display:flex;flex-direction:column}.resgrid.v61>div:first-child{order:2}}
+@media (min-width:900px){.resgrid.v61{grid-template-columns:45fr 55fr}.resgrid.v61>div:first-child{order:2}}
 @media (min-width:900px){.resgrid{display:grid;grid-template-columns:360px 1fr;gap:20px;align-items:start}}
 .g20card{border:1.5px solid #14213a;box-shadow:none}.g20card .g20chip{background:#fff;color:#14213a;border:1.5px solid #14213a}.startlink{color:#14213a}
 .resgrid.plain{grid-template-columns:1fr}
@@ -614,6 +624,2219 @@ const NEXT={
  self:['Keep moving gently within comfort; complete rest usually slows recovery.','Ease off the activity that brings it on for now (for example, shorter or flatter runs) rather than stopping everything, then build back up gradually.','A cold pack wrapped in a towel (up to 20 minutes) or gentle warmth can ease it. Use whichever feels better.','Stop any activity that makes the pain much worse, sharper or that lasts into the next day.'],
  refs:[14,10,69,110,147]};
 
+const SELFCARE={
+"plans": {
+"neck_mob": {
+"region": "neck",
+"days": {
+"Days 1–2": [
+{
+"t": "Put a cold pack (frozen peas in a tea towel) on your neck for 5 minutes, 3 times a day, or a hot water bottle wrapped in a tea towel for 20 minutes, 2 to 3 times a day.",
+"src": "NHS – Neck pain",
+"url": "https://www.nhs.uk/conditions/neck-pain/"
+},
+{
+"t": "Do not wear a neck collar – it is better to keep your neck moving.",
+"src": "NHS – Neck pain",
+"url": "https://www.nhs.uk/conditions/neck-pain/"
+},
+{
+"t": "Do not drive or cycle, or do anything risky, while you cannot move your neck properly.",
+"src": "NHS – Neck pain",
+"url": "https://www.nhs.uk/conditions/neck-pain/"
+}
+],
+"Days 1–5": [
+{
+"t": "Sleep with a low, firm pillow so your head is level with the rest of your body. Do not sleep on your front or twist your neck in bed.",
+"src": "NHS – Neck pain",
+"url": "https://www.nhs.uk/conditions/neck-pain/"
+}
+],
+"Days 3–4": [
+{
+"t": "Try gentle neck flexibility exercises.",
+"src": "NHS – Neck pain",
+"url": "https://www.nhs.uk/conditions/neck-pain/"
+}
+],
+"Day 5": [
+{
+"t": "Sit upright – roll your shoulders back gently – and do not keep your neck in one position for long, for example at a desk.",
+"src": "NHS – Neck pain",
+"url": "https://www.nhs.uk/conditions/neck-pain/"
+}
+]
+},
+"physioReview": true,
+"longTerm": false
+},
+"neck_head": {
+"region": "neck",
+"days": {
+"Days 1–2": [
+{
+"t": "Put a cold pack (frozen peas in a tea towel) on your neck for 5 minutes, 3 times a day, or a hot water bottle wrapped in a tea towel for 20 minutes, 2 to 3 times a day.",
+"src": "NHS – Neck pain",
+"url": "https://www.nhs.uk/conditions/neck-pain/"
+},
+{
+"t": "Do not wear a neck collar – it is better to keep your neck moving.",
+"src": "NHS – Neck pain",
+"url": "https://www.nhs.uk/conditions/neck-pain/"
+},
+{
+"t": "Do not drive or cycle, or do anything risky, while you cannot move your neck properly.",
+"src": "NHS – Neck pain",
+"url": "https://www.nhs.uk/conditions/neck-pain/"
+}
+],
+"Days 1–5": [
+{
+"t": "Sleep with a low, firm pillow so your head is level with the rest of your body. Do not sleep on your front or twist your neck in bed.",
+"src": "NHS – Neck pain",
+"url": "https://www.nhs.uk/conditions/neck-pain/"
+}
+],
+"Days 3–4": [
+{
+"t": "Try gentle neck flexibility exercises.",
+"src": "NHS – Neck pain",
+"url": "https://www.nhs.uk/conditions/neck-pain/"
+}
+],
+"Day 5": [
+{
+"t": "Sit upright – roll your shoulders back gently – and do not keep your neck in one position for long, for example at a desk.",
+"src": "NHS – Neck pain",
+"url": "https://www.nhs.uk/conditions/neck-pain/"
+}
+]
+},
+"physioReview": true,
+"longTerm": false
+},
+"neck_rad": {
+"region": "neck",
+"days": {
+"Days 1–2": [
+{
+"t": "Put a cold pack (frozen peas in a tea towel) on your neck for 5 minutes, 3 times a day, or a hot water bottle wrapped in a tea towel for 20 minutes, 2 to 3 times a day.",
+"src": "NHS – Neck pain",
+"url": "https://www.nhs.uk/conditions/neck-pain/"
+},
+{
+"t": "Do not wear a neck collar – it is better to keep your neck moving.",
+"src": "NHS – Neck pain",
+"url": "https://www.nhs.uk/conditions/neck-pain/"
+},
+{
+"t": "Do not drive or cycle, or do anything risky, while you cannot move your neck properly.",
+"src": "NHS – Neck pain",
+"url": "https://www.nhs.uk/conditions/neck-pain/"
+}
+],
+"Days 1–5": [
+{
+"t": "Sleep with a low, firm pillow so your head is level with the rest of your body. Do not sleep on your front or twist your neck in bed.",
+"src": "NHS – Neck pain",
+"url": "https://www.nhs.uk/conditions/neck-pain/"
+}
+],
+"Days 3–4": [
+{
+"t": "Try gentle neck flexibility exercises.",
+"src": "NHS – Neck pain",
+"url": "https://www.nhs.uk/conditions/neck-pain/"
+}
+],
+"Day 5": [
+{
+"t": "Sit upright – roll your shoulders back gently – and do not keep your neck in one position for long, for example at a desk.",
+"src": "NHS – Neck pain",
+"url": "https://www.nhs.uk/conditions/neck-pain/"
+}
+]
+},
+"physioReview": true,
+"longTerm": false
+},
+"whiplash": {
+"region": "neck",
+"days": {
+"Days 1–5": [
+{
+"t": "Keep doing your everyday activities – it may hurt a little but it speeds up recovery.",
+"src": "NHS – Whiplash",
+"url": "https://www.nhs.uk/conditions/whiplash/"
+},
+{
+"t": "Do not use a neck brace or collar, and do not rest your neck for long periods.",
+"src": "NHS – Whiplash",
+"url": "https://www.nhs.uk/conditions/whiplash/"
+}
+]
+},
+"physioReview": false,
+"longTerm": false,
+"note": "NHS says to see a doctor if it isn't better after a week."
+},
+"rc": {
+"region": "shoulder",
+"days": {
+"Days 1–5": [
+{
+"t": "Stay active and move your shoulder gently. Do not stop using it completely.",
+"src": "NHS – Shoulder pain",
+"url": "https://www.nhs.uk/conditions/shoulder-pain/"
+},
+{
+"t": "Do not do things that seem to make it worse, and do not make up your own hard exercises or use heavy gym equipment.",
+"src": "NHS – Shoulder pain",
+"url": "https://www.nhs.uk/conditions/shoulder-pain/"
+},
+{
+"t": "Use a cold pack (frozen peas in a tea towel) for up to 20 minutes 3 times a day, or a hot water bottle wrapped in a tea towel for up to 20 minutes 2 to 3 times a day.",
+"src": "NHS – Shoulder pain",
+"url": "https://www.nhs.uk/conditions/shoulder-pain/"
+},
+{
+"t": "Stand up straight with your shoulders down and gently back. Sit with a cushion behind your lower back and rest your arm on a cushion in your lap. Do not slouch.",
+"src": "NHS – Shoulder pain",
+"url": "https://www.nhs.uk/conditions/shoulder-pain/"
+}
+],
+"Day 5": [
+{
+"t": "Keep going with shoulder exercises for 6 to 8 weeks to stop the pain coming back.",
+"src": "NHS – Shoulder pain",
+"url": "https://www.nhs.uk/conditions/shoulder-pain/"
+}
+]
+},
+"physioReview": true,
+"longTerm": false
+},
+"sh_oa": {
+"region": "shoulder",
+"days": {
+"Days 1–5": [
+{
+"t": "Stay active and move your shoulder gently. Do not stop using it completely.",
+"src": "NHS – Shoulder pain",
+"url": "https://www.nhs.uk/conditions/shoulder-pain/"
+},
+{
+"t": "Do not do things that seem to make it worse, and do not make up your own hard exercises or use heavy gym equipment.",
+"src": "NHS – Shoulder pain",
+"url": "https://www.nhs.uk/conditions/shoulder-pain/"
+},
+{
+"t": "Use a cold pack (frozen peas in a tea towel) for up to 20 minutes 3 times a day, or a hot water bottle wrapped in a tea towel for up to 20 minutes 2 to 3 times a day.",
+"src": "NHS – Shoulder pain",
+"url": "https://www.nhs.uk/conditions/shoulder-pain/"
+},
+{
+"t": "Stand up straight with your shoulders down and gently back. Sit with a cushion behind your lower back and rest your arm on a cushion in your lap. Do not slouch.",
+"src": "NHS – Shoulder pain",
+"url": "https://www.nhs.uk/conditions/shoulder-pain/"
+}
+],
+"Day 5": [
+{
+"t": "Keep going with shoulder exercises for 6 to 8 weeks to stop the pain coming back.",
+"src": "NHS – Shoulder pain",
+"url": "https://www.nhs.uk/conditions/shoulder-pain/"
+}
+]
+},
+"physioReview": true,
+"longTerm": false
+},
+"ac": {
+"region": "shoulder",
+"days": {
+"Days 1–5": [
+{
+"t": "Stay active and move your shoulder gently. Do not stop using it completely.",
+"src": "NHS – Shoulder pain",
+"url": "https://www.nhs.uk/conditions/shoulder-pain/"
+},
+{
+"t": "Do not do things that seem to make it worse, and do not make up your own hard exercises or use heavy gym equipment.",
+"src": "NHS – Shoulder pain",
+"url": "https://www.nhs.uk/conditions/shoulder-pain/"
+},
+{
+"t": "Use a cold pack (frozen peas in a tea towel) for up to 20 minutes 3 times a day, or a hot water bottle wrapped in a tea towel for up to 20 minutes 2 to 3 times a day.",
+"src": "NHS – Shoulder pain",
+"url": "https://www.nhs.uk/conditions/shoulder-pain/"
+},
+{
+"t": "Stand up straight with your shoulders down and gently back. Sit with a cushion behind your lower back and rest your arm on a cushion in your lap. Do not slouch.",
+"src": "NHS – Shoulder pain",
+"url": "https://www.nhs.uk/conditions/shoulder-pain/"
+}
+],
+"Day 5": [
+{
+"t": "Keep going with shoulder exercises for 6 to 8 weeks to stop the pain coming back.",
+"src": "NHS – Shoulder pain",
+"url": "https://www.nhs.uk/conditions/shoulder-pain/"
+}
+]
+},
+"physioReview": true,
+"longTerm": false
+},
+"frozen": {
+"region": "shoulder",
+"days": {
+"Days 1–5": [
+{
+"t": "Move your shoulder gently – keeping it still makes the pain worse – but avoid movements that cause pain.",
+"src": "NHS – Frozen shoulder",
+"url": "https://www.nhs.uk/conditions/frozen-shoulder/"
+},
+{
+"t": "Put a heat pack or hot water bottle wrapped in a tea towel on your shoulder for up to 20 minutes at a time.",
+"src": "NHS – Frozen shoulder",
+"url": "https://www.nhs.uk/conditions/frozen-shoulder/"
+},
+{
+"t": "Do not make up your own hard exercises; gym equipment can make it worse.",
+"src": "NHS – Frozen shoulder",
+"url": "https://www.nhs.uk/conditions/frozen-shoulder/"
+}
+]
+},
+"physioReview": false,
+"longTerm": true,
+"note": "NHS says to see a doctor about this."
+},
+"lat_elbow": {
+"region": "elbow",
+"days": {
+"Days 1–2": [
+{
+"t": "Put a heat pack or frozen peas wrapped in a tea towel on your arm for 10 to 15 minutes every few hours.",
+"src": "NHS – Elbow and arm pain",
+"url": "https://www.nhs.uk/conditions/elbow-and-arm-pain/"
+},
+{
+"t": "Raise your arm if it is swollen.",
+"src": "NHS – Elbow and arm pain",
+"url": "https://www.nhs.uk/conditions/elbow-and-arm-pain/"
+}
+],
+"Days 1–5": [
+{
+"t": "Avoid or cut down activities that make it worse.",
+"src": "NHS – Tennis elbow",
+"url": "https://www.nhs.uk/conditions/tennis-elbow/"
+}
+],
+"Days 3–4": [
+{
+"t": "Try simple exercises, such as bending and straightening your arm.",
+"src": "NHS – Tennis elbow",
+"url": "https://www.nhs.uk/conditions/tennis-elbow/"
+}
+]
+},
+"physioReview": false,
+"longTerm": false
+},
+"med_elbow": {
+"region": "elbow",
+"days": {
+"Days 1–2": [
+{
+"t": "Put a heat pack or frozen peas wrapped in a tea towel on your arm for 10 to 15 minutes every few hours.",
+"src": "NHS – Elbow and arm pain",
+"url": "https://www.nhs.uk/conditions/elbow-and-arm-pain/"
+},
+{
+"t": "Raise your arm if it is swollen.",
+"src": "NHS – Elbow and arm pain",
+"url": "https://www.nhs.uk/conditions/elbow-and-arm-pain/"
+}
+],
+"Days 1–5": [
+{
+"t": "Avoid or cut down activities that make it worse.",
+"src": "NHS – Tennis elbow",
+"url": "https://www.nhs.uk/conditions/tennis-elbow/"
+}
+],
+"Days 3–4": [
+{
+"t": "Try simple exercises, such as bending and straightening your arm.",
+"src": "NHS – Tennis elbow",
+"url": "https://www.nhs.uk/conditions/tennis-elbow/"
+}
+]
+},
+"physioReview": true,
+"longTerm": false
+},
+"biceps": {
+"region": "elbow",
+"days": {
+"Days 1–2": [
+{
+"t": "Put a heat pack or frozen peas wrapped in a tea towel on your arm for 10 to 15 minutes every few hours.",
+"src": "NHS – Elbow and arm pain",
+"url": "https://www.nhs.uk/conditions/elbow-and-arm-pain/"
+},
+{
+"t": "Raise your arm if it is swollen.",
+"src": "NHS – Elbow and arm pain",
+"url": "https://www.nhs.uk/conditions/elbow-and-arm-pain/"
+}
+],
+"Days 1–5": [
+{
+"t": "Avoid or cut down activities that make it worse.",
+"src": "NHS – Tennis elbow",
+"url": "https://www.nhs.uk/conditions/tennis-elbow/"
+}
+],
+"Days 3–4": [
+{
+"t": "Try simple exercises, such as bending and straightening your arm.",
+"src": "NHS – Tennis elbow",
+"url": "https://www.nhs.uk/conditions/tennis-elbow/"
+}
+]
+},
+"physioReview": true,
+"longTerm": false
+},
+"ulnar": {
+"region": "elbow",
+"days": {
+"Days 1–2": [
+{
+"t": "Put a heat pack or frozen peas wrapped in a tea towel on your arm for 10 to 15 minutes every few hours.",
+"src": "NHS – Elbow and arm pain",
+"url": "https://www.nhs.uk/conditions/elbow-and-arm-pain/"
+},
+{
+"t": "Raise your arm if it is swollen.",
+"src": "NHS – Elbow and arm pain",
+"url": "https://www.nhs.uk/conditions/elbow-and-arm-pain/"
+}
+],
+"Days 1–5": [
+{
+"t": "Avoid or cut down activities that make it worse.",
+"src": "NHS – Tennis elbow",
+"url": "https://www.nhs.uk/conditions/tennis-elbow/"
+}
+],
+"Days 3–4": [
+{
+"t": "Try simple exercises, such as bending and straightening your arm.",
+"src": "NHS – Tennis elbow",
+"url": "https://www.nhs.uk/conditions/tennis-elbow/"
+}
+]
+},
+"physioReview": true,
+"longTerm": false
+},
+"olec": {
+"region": "elbow",
+"days": {
+"Days 1–2": [
+{
+"t": "Rest the joint – try not to move it too much and avoid leaning on it.",
+"src": "NHS – Bursitis",
+"url": "https://www.nhs.uk/conditions/bursitis/"
+},
+{
+"t": "Hold an ice pack wrapped in a tea towel on it for around 10 minutes at a time, every few hours.",
+"src": "NHS – Bursitis",
+"url": "https://www.nhs.uk/conditions/bursitis/"
+}
+],
+"Days 1–5": [
+{
+"t": "Put extra cushions around the joint while you sleep to protect it.",
+"src": "NHS – Bursitis",
+"url": "https://www.nhs.uk/conditions/bursitis/"
+}
+]
+},
+"physioReview": false,
+"longTerm": false
+},
+"carpal": {
+"region": "wrist_hand",
+"days": {
+"Days 1–2": [
+{
+"t": "Rest your wrist or thumb when you can.",
+"src": "NHS – Wrist pain",
+"url": "https://www.nhs.uk/conditions/hand-pain/wrist-pain/"
+},
+{
+"t": "Put an ice pack (or frozen peas) in a towel on it for up to 20 minutes every 2 to 3 hours.",
+"src": "NHS – Wrist pain",
+"url": "https://www.nhs.uk/conditions/hand-pain/wrist-pain/"
+},
+{
+"t": "Do not use heat packs or have hot baths for the first 2 to 3 days after an injury or if it is swollen.",
+"src": "NHS – Wrist pain",
+"url": "https://www.nhs.uk/conditions/hand-pain/wrist-pain/"
+}
+],
+"Days 1–5": [
+{
+"t": "Stop or cut down things that cause the pain, such as typing, vibrating tools or playing an instrument. Do not lift heavy things or grip too tightly.",
+"src": "NHS – Wrist pain",
+"url": "https://www.nhs.uk/conditions/hand-pain/wrist-pain/"
+},
+{
+"t": "For pins and needles in the hand: cut down on anything that makes you bend your wrist a lot or grip hard.",
+"src": "NHS – Carpal tunnel syndrome",
+"url": "https://www.nhs.uk/conditions/carpal-tunnel-syndrome/"
+}
+],
+"Days 3–4": [
+{
+"t": "Keep your hands and wrists moving with gentle exercises.",
+"src": "NHS – Wrist pain",
+"url": "https://www.nhs.uk/conditions/hand-pain/wrist-pain/"
+}
+],
+"Day 5": [
+{
+"t": "Use gadgets to make hard tasks easier, for example to open jars or chop vegetables.",
+"src": "NHS – Wrist pain",
+"url": "https://www.nhs.uk/conditions/hand-pain/wrist-pain/"
+}
+]
+},
+"physioReview": false,
+"longTerm": true,
+"note": "NHS says to see a doctor about this."
+},
+"dequervain": {
+"region": "wrist_hand",
+"days": {
+"Days 1–2": [
+{
+"t": "Rest your wrist or thumb when you can.",
+"src": "NHS – Wrist pain",
+"url": "https://www.nhs.uk/conditions/hand-pain/wrist-pain/"
+},
+{
+"t": "Put an ice pack (or frozen peas) in a towel on it for up to 20 minutes every 2 to 3 hours.",
+"src": "NHS – Wrist pain",
+"url": "https://www.nhs.uk/conditions/hand-pain/wrist-pain/"
+},
+{
+"t": "Do not use heat packs or have hot baths for the first 2 to 3 days after an injury or if it is swollen.",
+"src": "NHS – Wrist pain",
+"url": "https://www.nhs.uk/conditions/hand-pain/wrist-pain/"
+}
+],
+"Days 1–5": [
+{
+"t": "Stop or cut down things that cause the pain, such as typing, vibrating tools or playing an instrument. Do not lift heavy things or grip too tightly.",
+"src": "NHS – Wrist pain",
+"url": "https://www.nhs.uk/conditions/hand-pain/wrist-pain/"
+},
+{
+"t": "For pins and needles in the hand: cut down on anything that makes you bend your wrist a lot or grip hard.",
+"src": "NHS – Carpal tunnel syndrome",
+"url": "https://www.nhs.uk/conditions/carpal-tunnel-syndrome/"
+}
+],
+"Days 3–4": [
+{
+"t": "Keep your hands and wrists moving with gentle exercises.",
+"src": "NHS – Wrist pain",
+"url": "https://www.nhs.uk/conditions/hand-pain/wrist-pain/"
+}
+],
+"Day 5": [
+{
+"t": "Use gadgets to make hard tasks easier, for example to open jars or chop vegetables.",
+"src": "NHS – Wrist pain",
+"url": "https://www.nhs.uk/conditions/hand-pain/wrist-pain/"
+}
+]
+},
+"physioReview": true,
+"longTerm": false
+},
+"hand_oa": {
+"region": "wrist_hand",
+"days": {
+"Days 1–2": [
+{
+"t": "Rest your wrist or thumb when you can.",
+"src": "NHS – Wrist pain",
+"url": "https://www.nhs.uk/conditions/hand-pain/wrist-pain/"
+},
+{
+"t": "Put an ice pack (or frozen peas) in a towel on it for up to 20 minutes every 2 to 3 hours.",
+"src": "NHS – Wrist pain",
+"url": "https://www.nhs.uk/conditions/hand-pain/wrist-pain/"
+},
+{
+"t": "Do not use heat packs or have hot baths for the first 2 to 3 days after an injury or if it is swollen.",
+"src": "NHS – Wrist pain",
+"url": "https://www.nhs.uk/conditions/hand-pain/wrist-pain/"
+}
+],
+"Days 1–5": [
+{
+"t": "Stop or cut down things that cause the pain, such as typing, vibrating tools or playing an instrument. Do not lift heavy things or grip too tightly.",
+"src": "NHS – Wrist pain",
+"url": "https://www.nhs.uk/conditions/hand-pain/wrist-pain/"
+},
+{
+"t": "For pins and needles in the hand: cut down on anything that makes you bend your wrist a lot or grip hard.",
+"src": "NHS – Carpal tunnel syndrome",
+"url": "https://www.nhs.uk/conditions/carpal-tunnel-syndrome/"
+}
+],
+"Days 3–4": [
+{
+"t": "Keep your hands and wrists moving with gentle exercises.",
+"src": "NHS – Wrist pain",
+"url": "https://www.nhs.uk/conditions/hand-pain/wrist-pain/"
+}
+],
+"Day 5": [
+{
+"t": "Use gadgets to make hard tasks easier, for example to open jars or chop vegetables.",
+"src": "NHS – Wrist pain",
+"url": "https://www.nhs.uk/conditions/hand-pain/wrist-pain/"
+}
+]
+},
+"physioReview": true,
+"longTerm": false
+},
+"ganglion": {
+"region": "wrist_hand",
+"days": {
+"Days 1–2": [
+{
+"t": "Rest your wrist or thumb when you can.",
+"src": "NHS – Wrist pain",
+"url": "https://www.nhs.uk/conditions/hand-pain/wrist-pain/"
+},
+{
+"t": "Put an ice pack (or frozen peas) in a towel on it for up to 20 minutes every 2 to 3 hours.",
+"src": "NHS – Wrist pain",
+"url": "https://www.nhs.uk/conditions/hand-pain/wrist-pain/"
+},
+{
+"t": "Do not use heat packs or have hot baths for the first 2 to 3 days after an injury or if it is swollen.",
+"src": "NHS – Wrist pain",
+"url": "https://www.nhs.uk/conditions/hand-pain/wrist-pain/"
+}
+],
+"Days 1–5": [
+{
+"t": "Stop or cut down things that cause the pain, such as typing, vibrating tools or playing an instrument. Do not lift heavy things or grip too tightly.",
+"src": "NHS – Wrist pain",
+"url": "https://www.nhs.uk/conditions/hand-pain/wrist-pain/"
+},
+{
+"t": "For pins and needles in the hand: cut down on anything that makes you bend your wrist a lot or grip hard.",
+"src": "NHS – Carpal tunnel syndrome",
+"url": "https://www.nhs.uk/conditions/carpal-tunnel-syndrome/"
+}
+],
+"Days 3–4": [
+{
+"t": "Keep your hands and wrists moving with gentle exercises.",
+"src": "NHS – Wrist pain",
+"url": "https://www.nhs.uk/conditions/hand-pain/wrist-pain/"
+}
+],
+"Day 5": [
+{
+"t": "Use gadgets to make hard tasks easier, for example to open jars or chop vegetables.",
+"src": "NHS – Wrist pain",
+"url": "https://www.nhs.uk/conditions/hand-pain/wrist-pain/"
+}
+]
+},
+"physioReview": true,
+"longTerm": true,
+"note": "NHS says to see a doctor about this."
+},
+"trigger": {
+"region": "wrist_hand",
+"days": {
+"Days 1–5": [
+{
+"t": "Avoid or cut down activities that make it worse until it improves.",
+"src": "NHS – Trigger finger",
+"url": "https://www.nhs.uk/conditions/trigger-finger/"
+}
+]
+},
+"physioReview": false,
+"longTerm": false
+},
+"lbp": {
+"region": "lower_back",
+"days": {
+"Days 1–5": [
+{
+"t": "Stay active and try to carry on with your daily activities. Do not stay in bed for long periods.",
+"src": "NHS – Back pain",
+"url": "https://www.nhs.uk/conditions/back-pain/"
+}
+],
+"Days 1–2": [
+{
+"t": "Use an ice pack (or frozen peas) wrapped in a tea towel to ease pain and swelling.",
+"src": "NHS – Back pain",
+"url": "https://www.nhs.uk/conditions/back-pain/"
+},
+{
+"t": "Use a heat pack or hot water bottle wrapped in a tea towel for stiffness or muscle spasms.",
+"src": "NHS – Back pain",
+"url": "https://www.nhs.uk/conditions/back-pain/"
+}
+],
+"Days 3–4": [
+{
+"t": "Try exercises and stretches for back pain; stop if the pain gets worse.",
+"src": "NHS – Back pain",
+"url": "https://www.nhs.uk/conditions/back-pain/"
+}
+],
+"Day 5": [
+{
+"t": "Walking, swimming, yoga and pilates may help.",
+"src": "NHS – Back pain",
+"url": "https://www.nhs.uk/conditions/back-pain/"
+}
+]
+},
+"physioReview": true,
+"longTerm": false
+},
+"sij": {
+"region": "lower_back",
+"days": {
+"Days 1–5": [
+{
+"t": "Stay active and try to carry on with your daily activities. Do not stay in bed for long periods.",
+"src": "NHS – Back pain",
+"url": "https://www.nhs.uk/conditions/back-pain/"
+}
+],
+"Days 1–2": [
+{
+"t": "Use an ice pack (or frozen peas) wrapped in a tea towel to ease pain and swelling.",
+"src": "NHS – Back pain",
+"url": "https://www.nhs.uk/conditions/back-pain/"
+},
+{
+"t": "Use a heat pack or hot water bottle wrapped in a tea towel for stiffness or muscle spasms.",
+"src": "NHS – Back pain",
+"url": "https://www.nhs.uk/conditions/back-pain/"
+}
+],
+"Days 3–4": [
+{
+"t": "Try exercises and stretches for back pain; stop if the pain gets worse.",
+"src": "NHS – Back pain",
+"url": "https://www.nhs.uk/conditions/back-pain/"
+}
+],
+"Day 5": [
+{
+"t": "Walking, swimming, yoga and pilates may help.",
+"src": "NHS – Back pain",
+"url": "https://www.nhs.uk/conditions/back-pain/"
+}
+]
+},
+"physioReview": true,
+"longTerm": false
+},
+"stenosis": {
+"region": "lower_back",
+"days": {
+"Days 1–5": [
+{
+"t": "Stay active and try to carry on with your daily activities. Do not stay in bed for long periods.",
+"src": "NHS – Back pain",
+"url": "https://www.nhs.uk/conditions/back-pain/"
+}
+],
+"Days 1–2": [
+{
+"t": "Use an ice pack (or frozen peas) wrapped in a tea towel to ease pain and swelling.",
+"src": "NHS – Back pain",
+"url": "https://www.nhs.uk/conditions/back-pain/"
+},
+{
+"t": "Use a heat pack or hot water bottle wrapped in a tea towel for stiffness or muscle spasms.",
+"src": "NHS – Back pain",
+"url": "https://www.nhs.uk/conditions/back-pain/"
+}
+],
+"Days 3–4": [
+{
+"t": "Try exercises and stretches for back pain; stop if the pain gets worse.",
+"src": "NHS – Back pain",
+"url": "https://www.nhs.uk/conditions/back-pain/"
+}
+],
+"Day 5": [
+{
+"t": "Walking, swimming, yoga and pilates may help.",
+"src": "NHS – Back pain",
+"url": "https://www.nhs.uk/conditions/back-pain/"
+}
+]
+},
+"physioReview": true,
+"longTerm": false
+},
+"sciatica": {
+"region": "lower_back",
+"days": {
+"Days 1–5": [
+{
+"t": "Carry on with your normal activities as much as you can. Do not sit or lie down for long – moving may hurt but it is not harmful.",
+"src": "NHS – Sciatica",
+"url": "https://www.nhs.uk/conditions/sciatica/"
+}
+],
+"Days 1–2": [
+{
+"t": "Hold heat packs on the painful areas.",
+"src": "NHS – Sciatica",
+"url": "https://www.nhs.uk/conditions/sciatica/"
+}
+],
+"Days 3–4": [
+{
+"t": "Start gentle exercise as soon as you can, and try regular exercises for sciatica.",
+"src": "NHS – Sciatica",
+"url": "https://www.nhs.uk/conditions/sciatica/"
+}
+],
+"Day 5": [
+{
+"t": "Keep good posture when sitting and standing, sit correctly at a computer, and use a safe technique to lift.",
+"src": "NHS – Sciatica",
+"url": "https://www.nhs.uk/conditions/sciatica/"
+}
+]
+},
+"physioReview": false,
+"longTerm": false
+},
+"hip_oa": {
+"region": "hip_groin",
+"days": {
+"Days 1–5": [
+{
+"t": "Keep moving if you can but do not overdo it; avoid putting too much strain on your hip.",
+"src": "NHS – Hip pain",
+"url": "https://www.nhs.uk/conditions/hip-pain/"
+},
+{
+"t": "Do not carry heavy things or sit in low chairs.",
+"src": "NHS – Hip pain",
+"url": "https://www.nhs.uk/conditions/hip-pain/"
+}
+],
+"Days 1–2": [
+{
+"t": "Put an ice pack (or frozen peas) in a towel on the painful area for up to 20 minutes every 2 to 3 hours.",
+"src": "NHS – Hip pain",
+"url": "https://www.nhs.uk/conditions/hip-pain/"
+}
+],
+"Days 3–4": [
+{
+"t": "Try gentle hip stretching exercises.",
+"src": "NHS – Hip pain",
+"url": "https://www.nhs.uk/conditions/hip-pain/"
+}
+]
+},
+"physioReview": true,
+"longTerm": false
+},
+"fai": {
+"region": "hip_groin",
+"days": {
+"Days 1–5": [
+{
+"t": "Keep moving if you can but do not overdo it; avoid putting too much strain on your hip.",
+"src": "NHS – Hip pain",
+"url": "https://www.nhs.uk/conditions/hip-pain/"
+},
+{
+"t": "Do not carry heavy things or sit in low chairs.",
+"src": "NHS – Hip pain",
+"url": "https://www.nhs.uk/conditions/hip-pain/"
+}
+],
+"Days 1–2": [
+{
+"t": "Put an ice pack (or frozen peas) in a towel on the painful area for up to 20 minutes every 2 to 3 hours.",
+"src": "NHS – Hip pain",
+"url": "https://www.nhs.uk/conditions/hip-pain/"
+}
+],
+"Days 3–4": [
+{
+"t": "Try gentle hip stretching exercises.",
+"src": "NHS – Hip pain",
+"url": "https://www.nhs.uk/conditions/hip-pain/"
+}
+]
+},
+"physioReview": true,
+"longTerm": false
+},
+"gtps": {
+"region": "hip_groin",
+"days": {
+"Days 1–5": [
+{
+"t": "Keep moving if you can but do not overdo it; avoid putting too much strain on your hip.",
+"src": "NHS – Hip pain",
+"url": "https://www.nhs.uk/conditions/hip-pain/"
+},
+{
+"t": "Do not carry heavy things or sit in low chairs.",
+"src": "NHS – Hip pain",
+"url": "https://www.nhs.uk/conditions/hip-pain/"
+}
+],
+"Days 1–2": [
+{
+"t": "Put an ice pack (or frozen peas) in a towel on the painful area for up to 20 minutes every 2 to 3 hours.",
+"src": "NHS – Hip pain",
+"url": "https://www.nhs.uk/conditions/hip-pain/"
+}
+],
+"Days 3–4": [
+{
+"t": "Try gentle hip stretching exercises.",
+"src": "NHS – Hip pain",
+"url": "https://www.nhs.uk/conditions/hip-pain/"
+}
+]
+},
+"physioReview": true,
+"longTerm": false
+},
+"hip_referred": {
+"region": "hip_groin",
+"days": {
+"Days 1–5": [
+{
+"t": "Keep moving if you can but do not overdo it; avoid putting too much strain on your hip.",
+"src": "NHS – Hip pain",
+"url": "https://www.nhs.uk/conditions/hip-pain/"
+},
+{
+"t": "Do not carry heavy things or sit in low chairs.",
+"src": "NHS – Hip pain",
+"url": "https://www.nhs.uk/conditions/hip-pain/"
+}
+],
+"Days 1–2": [
+{
+"t": "Put an ice pack (or frozen peas) in a towel on the painful area for up to 20 minutes every 2 to 3 hours.",
+"src": "NHS – Hip pain",
+"url": "https://www.nhs.uk/conditions/hip-pain/"
+}
+],
+"Days 3–4": [
+{
+"t": "Try gentle hip stretching exercises.",
+"src": "NHS – Hip pain",
+"url": "https://www.nhs.uk/conditions/hip-pain/"
+}
+]
+},
+"physioReview": true,
+"longTerm": false
+},
+"adductor_groin": {
+"region": "hip_groin",
+"days": {
+"Days 1–2": [
+{
+"t": "Protect the injured area and stop the exercise or activity that caused it. Try not to put weight on it.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+},
+{
+"t": "Hold an ice pack (or a bag of frozen vegetables) wrapped in a tea towel on the area for up to 20 minutes every 2 to 3 hours.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+},
+{
+"t": "Keep it raised on a pillow as much as you can.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+},
+{
+"t": "Avoid heat (hot baths, heat packs) and massage for the first 2 to 3 days.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+],
+"Days 3–4": [
+{
+"t": "Once you can move it without pain stopping you, keep moving it gently so it does not get stiff.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+],
+"Day 5": [
+{
+"t": "Avoid hard exercise such as running for up to 8 weeks – most sprains and strains feel better after about 2 weeks.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+]
+},
+"physioReview": false,
+"longTerm": false
+},
+"quad_strain": {
+"region": "thigh_front",
+"days": {
+"Days 1–2": [
+{
+"t": "Protect the injured area and stop the exercise or activity that caused it. Try not to put weight on it.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+},
+{
+"t": "Hold an ice pack (or a bag of frozen vegetables) wrapped in a tea towel on the area for up to 20 minutes every 2 to 3 hours.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+},
+{
+"t": "Keep it raised on a pillow as much as you can.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+},
+{
+"t": "Avoid heat (hot baths, heat packs) and massage for the first 2 to 3 days.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+],
+"Days 3–4": [
+{
+"t": "Once you can move it without pain stopping you, keep moving it gently so it does not get stiff.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+],
+"Day 5": [
+{
+"t": "Avoid hard exercise such as running for up to 8 weeks – most sprains and strains feel better after about 2 weeks.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+]
+},
+"physioReview": false,
+"longTerm": false
+},
+"quad_contusion": {
+"region": "thigh_front",
+"days": {
+"Days 1–2": [
+{
+"t": "Protect the injured area and stop the exercise or activity that caused it. Try not to put weight on it.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+},
+{
+"t": "Hold an ice pack (or a bag of frozen vegetables) wrapped in a tea towel on the area for up to 20 minutes every 2 to 3 hours.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+},
+{
+"t": "Keep it raised on a pillow as much as you can.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+},
+{
+"t": "Avoid heat (hot baths, heat packs) and massage for the first 2 to 3 days.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+],
+"Days 3–4": [
+{
+"t": "Once you can move it without pain stopping you, keep moving it gently so it does not get stiff.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+],
+"Day 5": [
+{
+"t": "Avoid hard exercise such as running for up to 8 weeks – most sprains and strains feel better after about 2 weeks.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+]
+},
+"physioReview": true,
+"longTerm": false
+},
+"ham_sprint": {
+"region": "thigh_back",
+"days": {
+"Days 1–2": [
+{
+"t": "Protect your leg and stop any exercise. Try not to put weight on it.",
+"src": "NHS – Hamstring injury",
+"url": "https://www.nhs.uk/conditions/hamstring-injury/"
+},
+{
+"t": "Put an ice pack wrapped in a tea towel on it for up to 20 minutes every 2 to 3 hours.",
+"src": "NHS – Hamstring injury",
+"url": "https://www.nhs.uk/conditions/hamstring-injury/"
+},
+{
+"t": "Keep your leg raised on a pillow as much as you can.",
+"src": "NHS – Hamstring injury",
+"url": "https://www.nhs.uk/conditions/hamstring-injury/"
+},
+{
+"t": "Avoid heat (hot baths, heat packs) and massage for the first 3 days.",
+"src": "NHS – Hamstring injury",
+"url": "https://www.nhs.uk/conditions/hamstring-injury/"
+}
+],
+"Days 3–4": [
+{
+"t": "When you can move your leg without pain stopping you, keep it moving so it does not get stiff.",
+"src": "NHS – Hamstring injury",
+"url": "https://www.nhs.uk/conditions/hamstring-injury/"
+}
+],
+"Day 5": [
+{
+"t": "Build fitness back up slowly, warm up before exercise, and stop if you feel hamstring pain. Do not exercise when tired.",
+"src": "NHS – Hamstring injury",
+"url": "https://www.nhs.uk/conditions/hamstring-injury/"
+}
+]
+},
+"physioReview": false,
+"longTerm": false
+},
+"ham_stretch": {
+"region": "thigh_back",
+"days": {
+"Days 1–2": [
+{
+"t": "Protect your leg and stop any exercise. Try not to put weight on it.",
+"src": "NHS – Hamstring injury",
+"url": "https://www.nhs.uk/conditions/hamstring-injury/"
+},
+{
+"t": "Put an ice pack wrapped in a tea towel on it for up to 20 minutes every 2 to 3 hours.",
+"src": "NHS – Hamstring injury",
+"url": "https://www.nhs.uk/conditions/hamstring-injury/"
+},
+{
+"t": "Keep your leg raised on a pillow as much as you can.",
+"src": "NHS – Hamstring injury",
+"url": "https://www.nhs.uk/conditions/hamstring-injury/"
+},
+{
+"t": "Avoid heat (hot baths, heat packs) and massage for the first 3 days.",
+"src": "NHS – Hamstring injury",
+"url": "https://www.nhs.uk/conditions/hamstring-injury/"
+}
+],
+"Days 3–4": [
+{
+"t": "When you can move your leg without pain stopping you, keep it moving so it does not get stiff.",
+"src": "NHS – Hamstring injury",
+"url": "https://www.nhs.uk/conditions/hamstring-injury/"
+}
+],
+"Day 5": [
+{
+"t": "Build fitness back up slowly, warm up before exercise, and stop if you feel hamstring pain. Do not exercise when tired.",
+"src": "NHS – Hamstring injury",
+"url": "https://www.nhs.uk/conditions/hamstring-injury/"
+}
+]
+},
+"physioReview": false,
+"longTerm": false
+},
+"add_strain": {
+"region": "thigh_inner",
+"days": {
+"Days 1–2": [
+{
+"t": "Protect the injured area and stop the exercise or activity that caused it. Try not to put weight on it.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+},
+{
+"t": "Hold an ice pack (or a bag of frozen vegetables) wrapped in a tea towel on the area for up to 20 minutes every 2 to 3 hours.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+},
+{
+"t": "Keep it raised on a pillow as much as you can.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+},
+{
+"t": "Avoid heat (hot baths, heat packs) and massage for the first 2 to 3 days.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+],
+"Days 3–4": [
+{
+"t": "Once you can move it without pain stopping you, keep moving it gently so it does not get stiff.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+],
+"Day 5": [
+{
+"t": "Avoid hard exercise such as running for up to 8 weeks – most sprains and strains feel better after about 2 weeks.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+]
+},
+"physioReview": false,
+"longTerm": false
+},
+"meniscus": {
+"region": "knee",
+"days": {
+"Days 1–2": [
+{
+"t": "Put as little weight as you can on your knee – for example, avoid standing for a long time.",
+"src": "NHS – Knee pain",
+"url": "https://www.nhs.uk/conditions/knee-pain/"
+},
+{
+"t": "Use an ice pack (or frozen peas) wrapped in a tea towel for up to 20 minutes every 2 to 3 hours.",
+"src": "NHS – Knee pain",
+"url": "https://www.nhs.uk/conditions/knee-pain/"
+}
+],
+"Days 3–4": [
+{
+"t": "Once you can move it without pain stopping you, keep moving it gently so it does not get stiff.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+],
+"Day 5": [
+{
+"t": "Avoid hard exercise such as running for up to 8 weeks – most sprains and strains feel better after about 2 weeks.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+]
+},
+"physioReview": true,
+"longTerm": false
+},
+"ligament": {
+"region": "knee",
+"days": {
+"Days 1–2": [
+{
+"t": "Put as little weight as you can on your knee – for example, avoid standing for a long time.",
+"src": "NHS – Knee pain",
+"url": "https://www.nhs.uk/conditions/knee-pain/"
+},
+{
+"t": "Use an ice pack (or frozen peas) wrapped in a tea towel for up to 20 minutes every 2 to 3 hours.",
+"src": "NHS – Knee pain",
+"url": "https://www.nhs.uk/conditions/knee-pain/"
+}
+],
+"Days 3–4": [
+{
+"t": "Once you can move it without pain stopping you, keep moving it gently so it does not get stiff.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+],
+"Day 5": [
+{
+"t": "Avoid hard exercise such as running for up to 8 weeks – most sprains and strains feel better after about 2 weeks.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+]
+},
+"physioReview": false,
+"longTerm": false
+},
+"pat_tendon": {
+"region": "knee",
+"days": {
+"Days 1–2": [
+{
+"t": "Put as little weight as you can on your knee – for example, avoid standing for a long time.",
+"src": "NHS – Knee pain",
+"url": "https://www.nhs.uk/conditions/knee-pain/"
+},
+{
+"t": "Use an ice pack (or frozen peas) wrapped in a tea towel for up to 20 minutes every 2 to 3 hours.",
+"src": "NHS – Knee pain",
+"url": "https://www.nhs.uk/conditions/knee-pain/"
+}
+],
+"Days 3–4": [
+{
+"t": "Once you can move it without pain stopping you, keep moving it gently so it does not get stiff.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+],
+"Day 5": [
+{
+"t": "Avoid hard exercise such as running for up to 8 weeks – most sprains and strains feel better after about 2 weeks.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+]
+},
+"physioReview": true,
+"longTerm": false
+},
+"pfp": {
+"region": "knee",
+"days": {
+"Days 1–2": [
+{
+"t": "Put as little weight as you can on your knee – for example, avoid standing for a long time.",
+"src": "NHS – Knee pain",
+"url": "https://www.nhs.uk/conditions/knee-pain/"
+},
+{
+"t": "Use an ice pack (or frozen peas) wrapped in a tea towel for up to 20 minutes every 2 to 3 hours.",
+"src": "NHS – Knee pain",
+"url": "https://www.nhs.uk/conditions/knee-pain/"
+}
+],
+"Days 3–4": [
+{
+"t": "Once you can move it without pain stopping you, keep moving it gently so it does not get stiff.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+],
+"Day 5": [
+{
+"t": "Avoid hard exercise such as running for up to 8 weeks – most sprains and strains feel better after about 2 weeks.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+]
+},
+"physioReview": true,
+"longTerm": false
+},
+"osgood": {
+"region": "knee",
+"days": {
+"Days 1–2": [
+{
+"t": "Put as little weight as you can on your knee – for example, avoid standing for a long time.",
+"src": "NHS – Knee pain",
+"url": "https://www.nhs.uk/conditions/knee-pain/"
+},
+{
+"t": "Use an ice pack (or frozen peas) wrapped in a tea towel for up to 20 minutes every 2 to 3 hours.",
+"src": "NHS – Knee pain",
+"url": "https://www.nhs.uk/conditions/knee-pain/"
+}
+],
+"Days 3–4": [
+{
+"t": "Once you can move it without pain stopping you, keep moving it gently so it does not get stiff.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+],
+"Day 5": [
+{
+"t": "Avoid hard exercise such as running for up to 8 weeks – most sprains and strains feel better after about 2 weeks.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+]
+},
+"physioReview": true,
+"longTerm": false
+},
+"knee_oa": {
+"region": "knee",
+"days": {
+"Days 1–2": [
+{
+"t": "Put as little weight as you can on your knee – for example, avoid standing for a long time.",
+"src": "NHS – Knee pain",
+"url": "https://www.nhs.uk/conditions/knee-pain/"
+},
+{
+"t": "Use an ice pack (or frozen peas) wrapped in a tea towel for up to 20 minutes every 2 to 3 hours.",
+"src": "NHS – Knee pain",
+"url": "https://www.nhs.uk/conditions/knee-pain/"
+}
+],
+"Days 3–4": [
+{
+"t": "Once you can move it without pain stopping you, keep moving it gently so it does not get stiff.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+],
+"Day 5": [
+{
+"t": "Avoid hard exercise such as running for up to 8 weeks – most sprains and strains feel better after about 2 weeks.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+]
+},
+"physioReview": true,
+"longTerm": false
+},
+"prepatellar": {
+"region": "knee",
+"days": {
+"Days 1–2": [
+{
+"t": "Rest your knee and raise your leg on a pillow.",
+"src": "NHS – Bakers cyst",
+"url": "https://www.nhs.uk/conditions/bakers-cyst/"
+},
+{
+"t": "Gently apply an ice pack wrapped in a tea towel for around 10 minutes at a time, every few hours.",
+"src": "NHS – Bakers cyst",
+"url": "https://www.nhs.uk/conditions/bakers-cyst/"
+}
+],
+"Day 5": [
+{
+"t": "Use padding and take regular breaks when kneeling.",
+"src": "NHS – Bursitis",
+"url": "https://www.nhs.uk/conditions/bursitis/"
+}
+]
+},
+"physioReview": false,
+"longTerm": false
+},
+"baker": {
+"region": "knee",
+"days": {
+"Days 1–2": [
+{
+"t": "Rest your knee and raise your leg on a pillow.",
+"src": "NHS – Bakers cyst",
+"url": "https://www.nhs.uk/conditions/bakers-cyst/"
+},
+{
+"t": "Gently apply an ice pack wrapped in a tea towel for around 10 minutes at a time, every few hours.",
+"src": "NHS – Bakers cyst",
+"url": "https://www.nhs.uk/conditions/bakers-cyst/"
+}
+],
+"Day 5": [
+{
+"t": "Use padding and take regular breaks when kneeling.",
+"src": "NHS – Bursitis",
+"url": "https://www.nhs.uk/conditions/bursitis/"
+}
+]
+},
+"physioReview": false,
+"longTerm": true,
+"note": "NHS says to see a doctor about this."
+},
+"mtss": {
+"region": "shin_calf",
+"days": {
+"Days 1–2": [
+{
+"t": "Stop the exercise that caused it.",
+"src": "NHS – Shin splints",
+"url": "https://www.nhs.uk/conditions/shin-splints/"
+},
+{
+"t": "Put an ice pack in a towel on your shin for up to 20 minutes every 2 to 3 hours.",
+"src": "NHS – Shin splints",
+"url": "https://www.nhs.uk/conditions/shin-splints/"
+}
+],
+"Days 3–4": [
+{
+"t": "Switch to gentle exercise such as yoga or swimming while it heals.",
+"src": "NHS – Shin splints",
+"url": "https://www.nhs.uk/conditions/shin-splints/"
+}
+],
+"Day 5": [
+{
+"t": "Build exercise back up slowly, on soft ground if you can. Warm up before and stretch after.",
+"src": "NHS – Shin splints",
+"url": "https://www.nhs.uk/conditions/shin-splints/"
+}
+]
+},
+"physioReview": false,
+"longTerm": false
+},
+"calf_strain": {
+"region": "shin_calf",
+"days": {
+"Days 1–2": [
+{
+"t": "Protect the injured area and stop the exercise or activity that caused it. Try not to put weight on it.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+},
+{
+"t": "Hold an ice pack (or a bag of frozen vegetables) wrapped in a tea towel on the area for up to 20 minutes every 2 to 3 hours.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+},
+{
+"t": "Keep it raised on a pillow as much as you can.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+},
+{
+"t": "Avoid heat (hot baths, heat packs) and massage for the first 2 to 3 days.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+],
+"Days 3–4": [
+{
+"t": "Once you can move it without pain stopping you, keep moving it gently so it does not get stiff.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+],
+"Day 5": [
+{
+"t": "Avoid hard exercise such as running for up to 8 weeks – most sprains and strains feel better after about 2 weeks.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+]
+},
+"physioReview": false,
+"longTerm": false
+},
+"ankle_sprain": {
+"region": "ankle_achilles",
+"days": {
+"Days 1–2": [
+{
+"t": "Protect the injured area and stop the exercise or activity that caused it. Try not to put weight on it.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+},
+{
+"t": "Hold an ice pack (or a bag of frozen vegetables) wrapped in a tea towel on the area for up to 20 minutes every 2 to 3 hours.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+},
+{
+"t": "Keep it raised on a pillow as much as you can.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+},
+{
+"t": "Avoid heat (hot baths, heat packs) and massage for the first 2 to 3 days.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+],
+"Days 3–4": [
+{
+"t": "Once you can move it without pain stopping you, keep moving it gently so it does not get stiff.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+],
+"Day 5": [
+{
+"t": "Avoid hard exercise such as running for up to 8 weeks – most sprains and strains feel better after about 2 weeks.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+]
+},
+"physioReview": false,
+"longTerm": false
+},
+"peroneal": {
+"region": "ankle_achilles",
+"days": {
+"Days 1–2": [
+{
+"t": "Protect the injured area and stop the exercise or activity that caused it. Try not to put weight on it.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+},
+{
+"t": "Hold an ice pack (or a bag of frozen vegetables) wrapped in a tea towel on the area for up to 20 minutes every 2 to 3 hours.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+},
+{
+"t": "Keep it raised on a pillow as much as you can.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+},
+{
+"t": "Avoid heat (hot baths, heat packs) and massage for the first 2 to 3 days.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+],
+"Days 3–4": [
+{
+"t": "Once you can move it without pain stopping you, keep moving it gently so it does not get stiff.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+],
+"Day 5": [
+{
+"t": "Avoid hard exercise such as running for up to 8 weeks – most sprains and strains feel better after about 2 weeks.",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+]
+},
+"physioReview": true,
+"longTerm": false
+},
+"ach_mid": {
+"region": "ankle_achilles",
+"days": {
+"Days 1–2": [
+{
+"t": "Rest and raise your ankle when you can.",
+"src": "NHS – Ankle pain",
+"url": "https://www.nhs.uk/conditions/foot-pain/ankle-pain/"
+},
+{
+"t": "Put an ice pack (or frozen peas) wrapped in a towel on your ankle for up to 20 minutes every 2 to 3 hours.",
+"src": "NHS – Ankle pain",
+"url": "https://www.nhs.uk/conditions/foot-pain/ankle-pain/"
+}
+],
+"Days 1–5": [
+{
+"t": "Do not walk or stand for long periods.",
+"src": "NHS – Ankle pain",
+"url": "https://www.nhs.uk/conditions/foot-pain/ankle-pain/"
+}
+],
+"Days 3–4": [
+{
+"t": "Try regular gentle stretching exercises.",
+"src": "NHS – Ankle pain",
+"url": "https://www.nhs.uk/conditions/foot-pain/ankle-pain/"
+}
+]
+},
+"physioReview": true,
+"longTerm": false
+},
+"ach_ins": {
+"region": "ankle_achilles",
+"days": {
+"Days 1–2": [
+{
+"t": "Rest and raise your ankle when you can.",
+"src": "NHS – Ankle pain",
+"url": "https://www.nhs.uk/conditions/foot-pain/ankle-pain/"
+},
+{
+"t": "Put an ice pack (or frozen peas) wrapped in a towel on your ankle for up to 20 minutes every 2 to 3 hours.",
+"src": "NHS – Ankle pain",
+"url": "https://www.nhs.uk/conditions/foot-pain/ankle-pain/"
+}
+],
+"Days 1–5": [
+{
+"t": "Do not walk or stand for long periods.",
+"src": "NHS – Ankle pain",
+"url": "https://www.nhs.uk/conditions/foot-pain/ankle-pain/"
+}
+],
+"Days 3–4": [
+{
+"t": "Try regular gentle stretching exercises.",
+"src": "NHS – Ankle pain",
+"url": "https://www.nhs.uk/conditions/foot-pain/ankle-pain/"
+}
+]
+},
+"physioReview": true,
+"longTerm": false
+},
+"ankle_oa": {
+"region": "ankle_achilles",
+"days": {
+"Days 1–2": [
+{
+"t": "Rest and raise your ankle when you can.",
+"src": "NHS – Ankle pain",
+"url": "https://www.nhs.uk/conditions/foot-pain/ankle-pain/"
+},
+{
+"t": "Put an ice pack (or frozen peas) wrapped in a towel on your ankle for up to 20 minutes every 2 to 3 hours.",
+"src": "NHS – Ankle pain",
+"url": "https://www.nhs.uk/conditions/foot-pain/ankle-pain/"
+}
+],
+"Days 1–5": [
+{
+"t": "Do not walk or stand for long periods.",
+"src": "NHS – Ankle pain",
+"url": "https://www.nhs.uk/conditions/foot-pain/ankle-pain/"
+}
+],
+"Days 3–4": [
+{
+"t": "Try regular gentle stretching exercises.",
+"src": "NHS – Ankle pain",
+"url": "https://www.nhs.uk/conditions/foot-pain/ankle-pain/"
+}
+]
+},
+"physioReview": true,
+"longTerm": false
+},
+"plantar": {
+"region": "foot",
+"days": {
+"Days 1–2": [
+{
+"t": "Rest and raise your foot on a stool when you can.",
+"src": "NHS – Plantar fasciitis",
+"url": "https://www.nhs.uk/conditions/plantar-fasciitis/"
+},
+{
+"t": "Put an ice pack (or frozen peas) in a towel on it for up to 20 minutes every 2 to 3 hours.",
+"src": "NHS – Plantar fasciitis",
+"url": "https://www.nhs.uk/conditions/plantar-fasciitis/"
+}
+],
+"Days 1–5": [
+{
+"t": "Do not walk or stand for long periods, and try not to walk barefoot on hard surfaces.",
+"src": "NHS – Plantar fasciitis",
+"url": "https://www.nhs.uk/conditions/plantar-fasciitis/"
+}
+],
+"Days 3–4": [
+{
+"t": "Do regular gentle stretches for the sole of your foot and your heel.",
+"src": "NHS – Plantar fasciitis",
+"url": "https://www.nhs.uk/conditions/plantar-fasciitis/"
+}
+],
+"Day 5": [
+{
+"t": "Choose exercise that does not press on your feet, such as swimming.",
+"src": "NHS – Plantar fasciitis",
+"url": "https://www.nhs.uk/conditions/plantar-fasciitis/"
+}
+]
+},
+"physioReview": false,
+"longTerm": false
+},
+"morton": {
+"region": "foot",
+"days": {
+"Days 1–5": [
+{
+"t": "Rest and raise your foot when you can.",
+"src": "NHS – Mortons neuroma",
+"url": "https://www.nhs.uk/conditions/mortons-neuroma/"
+},
+{
+"t": "Avoid or cut down impact activities such as running and jumping.",
+"src": "NHS – Mortons neuroma",
+"url": "https://www.nhs.uk/conditions/mortons-neuroma/"
+}
+],
+"Days 3–4": [
+{
+"t": "Try regular gentle foot and ankle stretches.",
+"src": "NHS – Pain in the ball of the foot",
+"url": "https://www.nhs.uk/conditions/foot-pain/pain-in-the-ball-of-the-foot/"
+}
+]
+},
+"physioReview": false,
+"longTerm": false
+},
+"tarsal": {
+"region": "foot",
+"days": {
+"Days 1–5": [
+{
+"t": "Rest and raise your foot when you can.",
+"src": "NHS – Mortons neuroma",
+"url": "https://www.nhs.uk/conditions/mortons-neuroma/"
+},
+{
+"t": "Avoid or cut down impact activities such as running and jumping.",
+"src": "NHS – Mortons neuroma",
+"url": "https://www.nhs.uk/conditions/mortons-neuroma/"
+}
+],
+"Days 3–4": [
+{
+"t": "Try regular gentle foot and ankle stretches.",
+"src": "NHS – Pain in the ball of the foot",
+"url": "https://www.nhs.uk/conditions/foot-pain/pain-in-the-ball-of-the-foot/"
+}
+]
+},
+"physioReview": true,
+"longTerm": false
+},
+"bunion": {
+"region": "foot",
+"days": {
+"Days 1–5": [
+{
+"t": "Hold an ice pack wrapped in a tea towel on the painful joint for up to 5 minutes at a time.",
+"src": "NHS – Bunions",
+"url": "https://www.nhs.uk/conditions/bunions/"
+},
+{
+"t": "Rest and raise your foot when you can; do not walk or stand for long periods.",
+"src": "NHS – Toe pain",
+"url": "https://www.nhs.uk/conditions/foot-pain/toe-pain/"
+}
+],
+"Days 3–4": [
+{
+"t": "Try regular gentle stretching exercises.",
+"src": "NHS – Toe pain",
+"url": "https://www.nhs.uk/conditions/foot-pain/toe-pain/"
+}
+]
+},
+"physioReview": false,
+"longTerm": true,
+"note": "NHS says to see a doctor about this."
+},
+"hallux": {
+"region": "foot",
+"days": {
+"Days 1–5": [
+{
+"t": "Hold an ice pack wrapped in a tea towel on the painful joint for up to 5 minutes at a time.",
+"src": "NHS – Bunions",
+"url": "https://www.nhs.uk/conditions/bunions/"
+},
+{
+"t": "Rest and raise your foot when you can; do not walk or stand for long periods.",
+"src": "NHS – Toe pain",
+"url": "https://www.nhs.uk/conditions/foot-pain/toe-pain/"
+}
+],
+"Days 3–4": [
+{
+"t": "Try regular gentle stretching exercises.",
+"src": "NHS – Toe pain",
+"url": "https://www.nhs.uk/conditions/foot-pain/toe-pain/"
+}
+]
+},
+"physioReview": true,
+"longTerm": false
+}
+},
+"sooner": {
+"neck": [
+{
+"t": "tingling or pins and needles on one or both sides of your body, or a cold arm",
+"src": "NHS – Whiplash",
+"url": "https://www.nhs.uk/conditions/whiplash/"
+},
+{
+"t": "weak hands, arms or legs, or trouble walking or sitting upright",
+"src": "NHS – Whiplash",
+"url": "https://www.nhs.uk/conditions/whiplash/"
+},
+{
+"t": "a sudden 'electric shock' feeling in your neck and back that may go into your arms and legs",
+"src": "NHS – Whiplash",
+"url": "https://www.nhs.uk/conditions/whiplash/"
+},
+{
+"t": "you are worried about the pain",
+"src": "NHS – Neck pain",
+"url": "https://www.nhs.uk/conditions/neck-pain/"
+}
+],
+"shoulder": [
+{
+"t": "sudden or very bad shoulder pain, or you cannot move your arm",
+"src": "NHS – Shoulder pain",
+"url": "https://www.nhs.uk/conditions/shoulder-pain/"
+},
+{
+"t": "your arm or shoulder has changed shape or is badly swollen",
+"src": "NHS – Shoulder pain",
+"url": "https://www.nhs.uk/conditions/shoulder-pain/"
+},
+{
+"t": "pins and needles that do not go away, or no feeling in your arm or shoulder",
+"src": "NHS – Shoulder pain",
+"url": "https://www.nhs.uk/conditions/shoulder-pain/"
+},
+{
+"t": "your arm or shoulder is hot or cold to touch, or you feel feverish or unwell",
+"src": "NHS – Shoulder pain",
+"url": "https://www.nhs.uk/conditions/shoulder-pain/"
+},
+{
+"t": "the pain started after a fall or accident, or you have severe pain in both shoulders",
+"src": "NHS – Shoulder pain",
+"url": "https://www.nhs.uk/conditions/shoulder-pain/"
+}
+],
+"elbow": [
+{
+"t": "severe pain and the arm is hard to move, or it changed shape or you heard a snap",
+"src": "NHS – Elbow and arm pain",
+"url": "https://www.nhs.uk/conditions/elbow-and-arm-pain/"
+},
+{
+"t": "your arm tingles or feels numb",
+"src": "NHS – Elbow and arm pain",
+"url": "https://www.nhs.uk/conditions/elbow-and-arm-pain/"
+},
+{
+"t": "swelling with a high temperature, or you feel hot, cold or shivery",
+"src": "NHS – Elbow and arm pain",
+"url": "https://www.nhs.uk/conditions/elbow-and-arm-pain/"
+},
+{
+"t": "the joint is very painful with sharp or shooting pains, or you cannot move it",
+"src": "NHS – Bursitis",
+"url": "https://www.nhs.uk/conditions/bursitis/"
+}
+],
+"wrist_hand": [
+{
+"t": "severe pain, or you heard a snap, grinding or popping at the time of injury",
+"src": "NHS – Wrist pain",
+"url": "https://www.nhs.uk/conditions/hand-pain/wrist-pain/"
+},
+{
+"t": "you cannot move your wrist or hold things, or it has changed shape or colour",
+"src": "NHS – Wrist pain",
+"url": "https://www.nhs.uk/conditions/hand-pain/wrist-pain/"
+},
+{
+"t": "a lump that is very painful, hot or red",
+"src": "NHS – Wrist pain",
+"url": "https://www.nhs.uk/conditions/hand-pain/wrist-pain/"
+},
+{
+"t": "you feel unwell, hot, cold or shivery, or your wrist is painful, warm, swollen and stiff",
+"src": "NHS – Wrist pain",
+"url": "https://www.nhs.uk/conditions/hand-pain/wrist-pain/"
+},
+{
+"t": "tingling or loss of feeling in your hand",
+"src": "NHS – Wrist pain",
+"url": "https://www.nhs.uk/conditions/hand-pain/wrist-pain/"
+}
+],
+"upper_back": [
+{
+"t": "chest pain that started suddenly or spreads to your arm, neck or jaw, or your chest feels tight – call 999",
+"src": "NHS – Costochondritis",
+"url": "https://www.nhs.uk/conditions/costochondritis/"
+},
+{
+"t": "chest pain with difficulty breathing or a fast heartbeat – call 999",
+"src": "NHS – Costochondritis",
+"url": "https://www.nhs.uk/conditions/costochondritis/"
+},
+{
+"t": "you feel hot, cold, shivery or unwell",
+"src": "NHS – Back pain",
+"url": "https://www.nhs.uk/conditions/back-pain/"
+},
+{
+"t": "you have lost weight without trying, or the pain is worse at night",
+"src": "NHS – Back pain",
+"url": "https://www.nhs.uk/conditions/back-pain/"
+}
+],
+"lower_back": [
+{
+"t": "pain, tingling, weakness or numbness in both legs, or sciatica on both sides – call 999",
+"src": "NHS – Back pain",
+"url": "https://www.nhs.uk/conditions/back-pain/"
+},
+{
+"t": "numbness around your genitals or bottom – call 999",
+"src": "NHS – Back pain",
+"url": "https://www.nhs.uk/conditions/back-pain/"
+},
+{
+"t": "new problems peeing or pooing, or controlling them – call 999",
+"src": "NHS – Back pain",
+"url": "https://www.nhs.uk/conditions/back-pain/"
+},
+{
+"t": "you feel hot, cold, shivery or unwell, or severe pain that came on suddenly or is quickly getting worse",
+"src": "NHS – Back pain",
+"url": "https://www.nhs.uk/conditions/back-pain/"
+},
+{
+"t": "pain worse at night, weight loss without trying, or a lump or change in shape of your back",
+"src": "NHS – Back pain",
+"url": "https://www.nhs.uk/conditions/back-pain/"
+}
+],
+"hip_groin": [
+{
+"t": "severe pain after a fall or injury, or you cannot walk or put weight on your leg – call 999",
+"src": "NHS – Hip pain",
+"url": "https://www.nhs.uk/conditions/hip-pain/"
+},
+{
+"t": "tingling or loss of feeling in your hip or leg after an injury",
+"src": "NHS – Hip pain",
+"url": "https://www.nhs.uk/conditions/hip-pain/"
+},
+{
+"t": "severe hip pain that started suddenly without an injury",
+"src": "NHS – Hip pain",
+"url": "https://www.nhs.uk/conditions/hip-pain/"
+},
+{
+"t": "your hip is swollen and hot, or you feel unwell with a high temperature",
+"src": "NHS – Hip pain",
+"url": "https://www.nhs.uk/conditions/hip-pain/"
+},
+{
+"t": "stiffness for more than 30 minutes after waking",
+"src": "NHS – Hip pain",
+"url": "https://www.nhs.uk/conditions/hip-pain/"
+}
+],
+"thigh_front": [
+{
+"t": "it is very painful or getting worse, or swelling or bruising is large or getting worse",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+},
+{
+"t": "you cannot put weight on it or walk more than a few steps",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+},
+{
+"t": "you heard a crack, it changed shape, or it is numb, tingling, blue/grey or cold – go to A&E",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+},
+{
+"t": "you have a very high temperature or feel hot, cold or shivery",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+],
+"thigh_back": [
+{
+"t": "it is very painful or getting worse",
+"src": "NHS – Hamstring injury",
+"url": "https://www.nhs.uk/conditions/hamstring-injury/"
+},
+{
+"t": "large or worsening swelling or bruising",
+"src": "NHS – Hamstring injury",
+"url": "https://www.nhs.uk/conditions/hamstring-injury/"
+},
+{
+"t": "it hurts to walk or stand on that leg, or it is very stiff",
+"src": "NHS – Hamstring injury",
+"url": "https://www.nhs.uk/conditions/hamstring-injury/"
+},
+{
+"t": "a very high temperature, or you feel hot, cold and shivery",
+"src": "NHS – Hamstring injury",
+"url": "https://www.nhs.uk/conditions/hamstring-injury/"
+}
+],
+"thigh_inner": [
+{
+"t": "it is very painful or getting worse, or swelling or bruising is large or getting worse",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+},
+{
+"t": "you cannot put weight on it or walk more than a few steps",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+},
+{
+"t": "you heard a crack, it changed shape, or it is numb, tingling, blue/grey or cold – go to A&E",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+},
+{
+"t": "you have a very high temperature or feel hot, cold or shivery",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+],
+"knee": [
+{
+"t": "your knee is very painful, or you cannot move it or put weight on it",
+"src": "NHS – Knee pain",
+"url": "https://www.nhs.uk/conditions/knee-pain/"
+},
+{
+"t": "it is badly swollen or has changed shape",
+"src": "NHS – Knee pain",
+"url": "https://www.nhs.uk/conditions/knee-pain/"
+},
+{
+"t": "it locks, gives way or clicks painfully",
+"src": "NHS – Knee pain",
+"url": "https://www.nhs.uk/conditions/knee-pain/"
+},
+{
+"t": "a very high temperature with redness or heat around the knee",
+"src": "NHS – Knee pain",
+"url": "https://www.nhs.uk/conditions/knee-pain/"
+},
+{
+"t": "sudden worse pain or swelling in your leg, warm skin, or red or darkened skin – could be a clot",
+"src": "NHS – Bakers cyst",
+"url": "https://www.nhs.uk/conditions/bakers-cyst/"
+}
+],
+"shin_calf": [
+{
+"t": "severe pain, or you have injured your shin",
+"src": "NHS – Shin splints",
+"url": "https://www.nhs.uk/conditions/shin-splints/"
+},
+{
+"t": "you cannot put weight on it or walk more than a few steps",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+},
+{
+"t": "it is numb, tingling, blue/grey or cold, or it changed shape – go to A&E",
+"src": "NHS – Sprains and strains",
+"url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+}
+],
+"ankle_achilles": [
+{
+"t": "severe pain, or you feel faint, dizzy or sick from the pain",
+"src": "NHS – Ankle pain",
+"url": "https://www.nhs.uk/conditions/foot-pain/ankle-pain/"
+},
+{
+"t": "your ankle or foot has changed shape, or you heard a snap or pop",
+"src": "NHS – Ankle pain",
+"url": "https://www.nhs.uk/conditions/foot-pain/ankle-pain/"
+},
+{
+"t": "you cannot walk, walk on tiptoes or climb stairs, or the calf and ankle are swollen and bruised",
+"src": "NHS – Heel pain",
+"url": "https://www.nhs.uk/conditions/heel-pain/"
+},
+{
+"t": "tingling or loss of feeling in your foot",
+"src": "NHS – Ankle pain",
+"url": "https://www.nhs.uk/conditions/foot-pain/ankle-pain/"
+}
+],
+"foot": [
+{
+"t": "severe pain after an injury, or you feel faint, dizzy or sick",
+"src": "NHS – Heel pain",
+"url": "https://www.nhs.uk/conditions/heel-pain/"
+},
+{
+"t": "the foot has changed shape, or you heard a snap or pop",
+"src": "NHS – Heel pain",
+"url": "https://www.nhs.uk/conditions/heel-pain/"
+},
+{
+"t": "you cannot walk",
+"src": "NHS – Heel pain",
+"url": "https://www.nhs.uk/conditions/heel-pain/"
+},
+{
+"t": "tingling, weakness or numbness in your foot",
+"src": "NHS – Mortons neuroma",
+"url": "https://www.nhs.uk/conditions/mortons-neuroma/"
+},
+{
+"t": "you have diabetes and foot pain",
+"src": "NHS – Plantar fasciitis",
+"url": "https://www.nhs.uk/conditions/plantar-fasciitis/"
+}
+]
+},
+"noPlan": {
+"itb": "physio",
+"meralgia": "physio",
+"pht": "physio",
+"cecs": "physio",
+"thoracic": "doctor",
+"costo": "doctor-warn"
+},
+"source": "evidence/self-care-5day.json"
+};
+
 /* ===== APP ===== */
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -746,7 +2969,7 @@ async function fillSlot(el,reg){const R=REGIONS[reg];el.innerHTML='<p class="mut
  // v5 (P1-08): ART_SIDE says which side each drawing shows; mirror when the person's side differs. 'Both' shows the right.
  const want=S.side==='left'?'left':'right',drawn=(typeof ART_SIDE!=='undefined'&&ART_SIDE[R.art])||'right';const mir=!!t&&!R.noSide&&want!==drawn;const shown=R.noSide||!t?'':want;
  el.innerHTML=`<div class="drawwrap">${t||placeholder(reg)}</div>${shown?`<p class="mirrorcap">Shown for your ${shown} side</p>`:''}`;el.dataset.src=t?`art/zoom/${R.art}.svg`:'placeholder';el.dataset.mirror=mir?'mirrored':'none';el.dataset.side=shown||'none';el.classList.toggle('mirror',mir);
- const svg=el.querySelector('svg');if(svg){svg.removeAttribute('width');svg.removeAttribute('height');svg.classList.add('zoomsvg');labelMuscles(svg)}return svg}
+ const svg=el.querySelector('svg');if(svg){svg.removeAttribute('width');svg.removeAttribute('height');svg.classList.add('zoomsvg');if(!svg.querySelector('.labels'))labelMuscles(svg)}return svg}
 function thighRows(){return `<fieldset><legend>Which part?</legend><div class="chips">${THIGH.parts.map(([v,l])=>`<button type="button" class="chip" data-tp="${v}" aria-pressed="${S.thigh.p===v}">${l}</button>`).join('')}</div></fieldset>
  <fieldset><legend>How high?</legend><div class="chips">${THIGH.heights.map(([v,l])=>`<button type="button" class="chip" data-th="${v}" aria-pressed="${S.thigh.h===v}">${l}</button>`).join('')}</div></fieldset>`}
 async function renderZoom(){const zs=$('#zoomSlot');
@@ -864,7 +3087,7 @@ function fuHtml(open){const fu=S.fu||{};return `<details class="card fu" id="fuB
  <p>Not sure you picked the right spot? <button type="button" class="linkbtn" id="fuSpot">Choose the exact spot again</button></p>
  <button type="button" class="btn" id="fuGo">Update my result</button></details>`}
 function fuNotes(){const fu=S.fu||{};return FOLLOWUPS.filter(f=>f.note&&f.note[fu[f.id]]).map(f=>`<div class="rcard amber" data-fu-note="${f.id}"><p>${esc(f.note[fu[f.id]])}</p><p class="src">Based on: ${srcLinks(f.noteRefs||[])}</p></div>`).join('')}
-function limitsHtml(){return `<div class="note limits" data-limits><span class="hand">Limits of this check</span><p>This is based only on what you told us and on a list of common muscle, joint and tendon problems. It cannot examine you, so it can miss things, and pain can have causes that are not on our list. Possible area, not a diagnosis.</p></div>`}
+function limitsHtml(doc){return `<div class="note limits" data-limits><span class="hand">Limits of this check</span><p>This is based only on what you told us and on a list of common muscle, joint and tendon problems. It cannot examine you, so it can miss things, and pain can have causes that are not on our list.${doc?'':' Possible area, not a diagnosis.'}</p></div>`}
 function nextHtml(link){const L=NEXT;return `<section class="card nextsteps" data-next-steps><h2>What to do next</h2>
  <h3 class="ns-sameday">See a doctor today</h3><ul>${L.sameday.map(li).join('')}</ul>
  <h3 class="ns-physio">See a physiotherapist or doctor</h3><ul>${L.physio.map(li).join('')}</ul>${link?`<div class="row"><a class="btn secondary" id="physioLink" href="${PHYSIO_MAPS_URL}" target="_blank" rel="noopener noreferrer">Find a physio near me</a></div>`:''}
@@ -919,24 +3142,47 @@ async function renderResult(){let r=S.result;const R=REGIONS[S.region];
  const words=S.text?`<div class="note"><span class="hand">In your words</span><p>“${esc(S.text)}”</p></div>`:'';
  const two='<p class="twoweek"><strong>If it isn\'t improving within about 2 weeks, or it gets worse, see a physiotherapist.</strong></p>';
  const so0=(R.subs.find(x=>x[0]===S.sub)||[])[3]||{};let h='',link=true;
- const tail=()=>ageNote+mentioned()+multiHtml()+limitsHtml()+nextHtml(false);
+ let rest='',after='';const tail=()=>ageNote+mentioned()+multiHtml()+limitsHtml(r.status==='routed')+nextHtml(false);
  if(r.status==='routed'){const top=LVL_ORDER.find(l=>items.some(x=>x.level===l));link=false;
   h=`<div class="card needsdoc" data-outcome="routed"><h2 id="resH">This needs a doctor</h2><p data-reason>${esc(routedReason(items,top))}</p>${words}</div>`+tail()}
  else if(r.status==='deadend'&&so0.g20&&ROUTING.deadEndCards){const dc=so0.deadEndCard;link=false;
-  h=`<div class="card g20card" data-outcome="deadend" data-deadend-card="${S.sub}"><span class="result-label g20chip">We can't narrow this one down yet</span><h2 id="resH">${esc(dc.head||'Please see a physio')}</h2><p>${esc(dc.text)}</p><p class="src">Based on: ${srcLinks(dc.refs)}</p>${dc.noPhysioLink?'':`<div class="row"><a class="btn" id="physioLink" href="${PHYSIO_MAPS_URL}" target="_blank" rel="noopener noreferrer">Find a physio near me</a></div>`}<p><a href="#" class="startlink" data-restart-link>Start again</a></p>${words}</div>${amb}${stiffNote}`+tail()}
- else if(r.status==='deadend'){h=`<div class="card neutral" data-outcome="deadend"><span class="result-label">Not a diagnosis</span><h2 id="resH">Please see a physio</h2>${deadEndBody(r,R)}${words}${two}</div>${amb}${stiffNote}`+fuHtml(false)+tail()}
+  h=`<div class="card g20card" data-outcome="deadend" data-deadend-card="${S.sub}"><span class="result-label g20chip">Possible area, not a diagnosis</span>${tappedArea()}<h2 id="resH">${esc(dc.head||'Please see a physio')}</h2><p>${esc(dc.text)}</p><p class="src">Based on: ${srcLinks(dc.refs)}</p>${dc.noPhysioLink?'':`<div class="row"><a class="btn" id="physioLink" href="${PHYSIO_MAPS_URL}" target="_blank" rel="noopener noreferrer">Find a physio near me</a></div>`}<p><a href="#" class="startlink" data-restart-link>Start again</a></p>${words}</div>${amb}${stiffNote}`+tail()}
+ else if(r.status==='deadend'){h=`<div class="card neutral" data-outcome="deadend"><span class="result-label">Possible area, not a diagnosis</span>${tappedArea()}<h2 id="resH">Please see a physio</h2>${deadEndBody(r,R)}${words}${two}</div>${amb}${stiffNote}`+fuHtml(false)+tail()}
  else if(r.status==='uncertain'){h=`<div class="card neutral" data-outcome="uncertain"><span class="result-label">Possible area, not a diagnosis</span><h2 id="resH">We need a bit more information</h2>
   <p>Your answers don't point clearly to one thing yet${r.possibles.length?'. These are possibilities for this spot, not a diagnosis:':'. A physiotherapist or doctor can examine it properly.'}</p>${words}</div>
   ${r.possibles.map((t,i)=>condCard(t,i,r,'uncertain')).join('')}${amb}${stiffNote}${fuHtml(true)}${two}`+tail()}
- else{h=r.top.map((t,i)=>condCard(t,i,r,'match')).join('')+`${words}${R.note?`<p class="muted">${R.note}</p>`:''}${amb}${stiffNote}
-   <button type="button" class="btn steps" id="stepsBtn" aria-expanded="false" aria-controls="plans">See safe first steps</button><div id="plans" hidden><h3>Safe first steps</h3>${plansHtml(r.top[0].id)}</div>${two}`+fuHtml(false)+tail()}
- const hl=r.top.length?r.top:r.possibles;const artOn=hl.some(t=>!CONDITIONS[t.id].noArt)&&r.status!=='deadend'&&r.status!=='routed';
- h=`<div class="resgrid${artOn?'':' plain'}" data-art="${artOn?'on':'off'}">${artOn?`<div><div id="resArt" class="zoomslot"></div><p class="muted cap">${hl.length>1?'Orange: first possible area. Yellow: next.':'Possible area shown in orange.'}</p>${overviewHtml()}</div>`:''}<div>${h}</div></div>`;
- h+=beforeYouGo(items);$('#resBody').innerHTML=h;const pl=$('#physioSlot');if(pl)pl.innerHTML=link&&r.status!=='routed'?`<a class="btn secondary" id="physioLink" href="${PHYSIO_MAPS_URL}" target="_blank" rel="noopener noreferrer">Find a physio near me</a>`:'';$('#resH')&&$('#resH').focus();
+ else{h=`<p class="couldbe" data-could-be>This could be…</p>`+r.top.map((t,i)=>condCard(t,i,r,'match')).join('');const pl=planBlock(r.top[0].id);after=pl.html;rest=`${words}${R.note?`<p class="muted">${R.note}</p>`:''}${amb}${stiffNote}
+   <button type="button" class="btn steps" id="stepsBtn" aria-expanded="false" aria-controls="plans">See safe first steps</button><div id="plans" hidden><h3>Safe first steps</h3>${plansHtml(r.top[0].id)}</div>${pl.keepTwo?two:''}`+fuHtml(false)+tail()}
+ const hl=r.top.length?r.top:r.possibles;const deArt=r.status==='deadend';const artOn=deArt||(hl.some(t=>!CONDITIONS[t.id].noArt)&&r.status!=='routed');
+ h=`<div class="resgrid${artOn?'':' plain'}" data-art="${artOn?'on':'off'}">${artOn?`<div><div id="resArt" class="zoomslot"></div><p class="muted cap" ${deArt?'data-tapped-caption':''}>${deArt?esc(tappedLabel()):hl.length>1?'Orange: first possible area. Yellow: next.':'Possible area shown in orange.'}</p>${overviewHtml()}</div>`:''}<div>${h}</div></div>`;
+ h=h.replace('class="resgrid','class="resgrid'+(after?' v61':''))+after+rest;h+=beforeYouGo(items);$('#resBody').innerHTML=h;const pl=$('#physioSlot');if(pl)pl.innerHTML=link&&r.status!=='routed'?`<a class="btn secondary" id="physioLink" href="${PHYSIO_MAPS_URL}" target="_blank" rel="noopener noreferrer">Find a physio near me</a>`:'';$('#resH')&&$('#resH').focus();
  const sb=$('#stepsBtn');if(sb)sb.onclick=()=>{const p=$('#plans');p.hidden=!p.hidden;sb.setAttribute('aria-expanded',!p.hidden)};
- if(artOn&&$('#resArt')){const svg=await fillSlot($('#resArt'),S.region,true);if(svg){svg.classList.add('has-hot');hl.forEach((t,i)=>{if(CONDITIONS[t.id].noArt)return;const aa=[].concat(condArea(t.id));const els=aa.map(a=>svg.querySelector(`.strand[data-strand="${a}"]`)||svg.querySelector(`[data-muscle-id="${a}"],[data-strand="${a}"],[data-sub="${a}"]`)).filter(Boolean);const el=els[0];if(el){els.forEach(e=>{e.classList.add(i?'hot2':'hot');e.parentNode.appendChild(e)})}else if(!(CONDITIONS[t.id].areaBySub&&CONDITIONS[t.id].areaBySub[S.sub])){const g=svg.querySelector(`[data-sub="${S.sub}"]`);g&&g.classList.add(i?'hot2':'hot')}})}}}
+ if(artOn&&$('#resArt')){const svg=await fillSlot($('#resArt'),S.region,true);if(svg&&deArt){const g=svg.querySelector(`[data-sub="${S.sub}"]`);if(g){svg.classList.add('has-hot');g.classList.add('hot')}}
+ if(svg&&!deArt){svg.classList.add('has-hot');hl.forEach((t,i)=>{if(CONDITIONS[t.id].noArt)return;const aa=[].concat(condArea(t.id));const els=aa.map(a=>svg.querySelector(`.strand[data-strand="${a}"]`)||svg.querySelector(`[data-muscle-id="${a}"],[data-strand="${a}"],[data-sub="${a}"]`)).filter(Boolean);const el=els[0];if(el){els.forEach(e=>{e.classList.add(i?'hot2':'hot');e.parentNode.appendChild(e)})}else if(!(CONDITIONS[t.id].areaBySub&&CONDITIONS[t.id].areaBySub[S.sub])){const g=svg.querySelector(`[data-sub="${S.sub}"]`);g&&g.classList.add(i?'hot2':'hot')}})}}}
+
+/* v6.1: 5-day self-care plan from EA's evidence/self-care-5day.json (display only; matching unchanged).
+   Shown only for a clear muscle/joint result: routed, out-of-scope, same-day, 112 and under-16 never get here. No medicines in the data. */
+const DOCTOR_MAPS_URL='https://www.google.com/maps/search/?api=1&query=doctor%20near%20me';
+function nextStepCard(kind,line){const doc=`<a class="btn" data-find="doctor" href="${DOCTOR_MAPS_URL}" target="_blank" rel="noopener noreferrer">Find a doctor near me</a>`,phy=`<a class="btn${kind==='both'?' secondary':''}" data-find="physio" href="${PHYSIO_MAPS_URL}" target="_blank" rel="noopener noreferrer">Find a physio near me</a>`;
+ return `<section class="card nextstep" data-next-step="${kind}"><h2>Your next best step</h2><p>${esc(line)}</p><div class="row">${kind==='physio'?phy:kind==='doctor'?doc:doc+phy}</div></section>`}
+function soonerHtml(list,title){return list&&list.length?`<div class="sooner" data-sooner><h3>${esc(title||'See a doctor sooner if…')}</h3><ul>${list.map(i=>`<li>${esc(i.t)} <a class="ref" href="${i.url}" target="_blank" rel="noopener noreferrer">(${esc(i.src)})</a></li>`).join('')}</ul></div>`:''}
+function planBlock(id){const np=SELFCARE.noPlan[id];const reg=S.region;const sooner=[...(SELFCARE.sooner[id]||[]),...(SELFCARE.sooner[reg]||[])];
+ if(np==='physio')return {html:nextStepCard('physio','Okay, the next best step is to see a physiotherapist.')};
+ if(np==='doctor')return {html:nextStepCard('doctor','Okay, the next best step is to see a doctor.')};
+ if(np==='doctor-warn')return {html:soonerHtml(sooner,'Get medical help if…')+nextStepCard('doctor','Okay, the next best step is to see a doctor.')};
+ const p=SELFCARE.plans[id];if(!p)return {html:'',keepTwo:true};
+ const urls=[];const ref=u=>{let n=urls.indexOf(u);if(n<0){urls.push(u);n=urls.length-1}return n+1};
+ const order=['Days 1–2','Days 3–4','Day 5','Days 1–5'].filter(d=>p.days[d]);
+ const rows=order.map(d=>`<div class="prow" data-day="${d}"><span class="daypill">${d}</span><ul>${p.days[d].map(i=>`<li>${esc(i.t)}<sup><a class="ref" href="${i.url}" target="_blank" rel="noopener noreferrer" title="${esc(i.src)}">[${ref(i.url)}]</a></sup></li>`).join('')}</ul></div>`).join('');
+ const line=id==='whiplash'?"Okay, see a doctor if it isn't better after a week.":"After 5 days, if it isn't clearly better, see a doctor or a physiotherapist.";
+ return {html:`<section class="card plan" data-plan="${id}"${p.physioReview?' data-physio-review':''}><h2>${p.longTerm?'Comfort tips for the next 5 days':'Your 5-day self-care plan'}</h2>
+  <p class="psub">Only if none of the warnings below apply. Stop and see a doctor sooner if it gets worse.</p>${rows}${p.note?`<p class="pnote" data-nhs-note>${esc(p.note)}</p>`:''}
+  ${soonerHtml(sooner)}<p class="src">Sources: ${urls.map((u,i)=>`<a href="${u}" target="_blank" rel="noopener noreferrer">[${i+1}] ${esc(u.replace('https://www.',''))}</a>`).join(' ')}</p></section>`+nextStepCard(id==='whiplash'?'doctor':'both',line)}}
 // Engineer ruling: fixed URL, query only. Never add the spot, region or answers.
 const PHYSIO_MAPS_URL='https://www.google.com/maps/search/?api=1&query=physiotherapist%20near%20me';
+// Designer (31 Oct): dead-end cards name the spot the person tapped, matching the drawing's label.
+function tappedLabel(){const R=REGIONS[S.region];const s=R.subs.find(x=>x[0]===S.sub);return `Your ${R.noSide||!['left','right'].includes(S.side)?'':S.side+' '}${R.name.toLowerCase()}: ${s?s[1].toLowerCase():''}`}
+function tappedArea(){return `<p class="tapped" data-tapped-area>The area you tapped: <strong>${esc(tappedLabel().replace(/^Your /,'your '))}</strong></p>`}
 function deadEndBody(r,R){const so=(R.subs.find(x=>x[0]===S.sub)[3])||{};const dc=ROUTING.deadEndCards&&so.deadEndCard;
  if(r.deadEnd&&dc)return `<p data-deadend-card="${S.sub}">${esc(dc.text)}</p>${dc.refs.length?`<p class="src">Based on: ${srcLinks(dc.refs)}</p>`:''}${dc.offer.length?`<div class="row">${dc.offer.map(g=>`<button type="button" class="btn secondary" data-offer="${g}">Try the ${esc(REGIONS[g].name.toLowerCase())} path</button>`).join('')}</div>`:''}`;
  return `<p>We don't have enough on pain in this exact spot (${esc(R.subs.find(x=>x[0]===S.sub)[1].toLowerCase())}) to suggest a possible area. A doctor or physiotherapist can examine it properly. If the spot is near another area, you can choose a different spot.</p>`}
